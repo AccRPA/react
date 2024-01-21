@@ -1,0 +1,32 @@
+header {
+    padding: 1rem;
+}
+nav {
+    display: flex;
+    justify-content: space-between;
+}
+nav ul {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 1.5rem;
+    flex: 1;
+}
+nav ul li {
+    list-style-type: none;
+}
+nav ul li a {
+    padding: 10px 20px;
+    font-size: 1rem;
+    background-color: var(--bg-color);
+    background: linear-gradient(to left, transparent 50%, var(--bg-color) 50%) right;
+    background-size: 215%;
+    transition: .5s ease-out;
+}
+nav ul li a:hover
+{
+    background-position: left;
+}
+nav ul li a.active {
+    background-color: var(--bg-color);
+}
