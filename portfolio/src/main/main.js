@@ -1,7 +1,8 @@
+import Home from '../home/home.js';
 import './main.css';
 
 function Main(){
-    return <div>Main Content</div>;
+    return <Home></Home>;
 }
 
 export default Main;

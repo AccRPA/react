@@ -1,0 +1,43 @@
+.home {
+    max-width: 500px;
+    font-size: clamp(12px, 2rem, 40px);
+    position: absolute;
+    left: 50%;
+    top: 40%;
+    transform: translate(-50%, -40%);
+}
+
+.home > div {
+    text-align: center;
+    margin-top: 5px;
+    overflow: hidden;
+    height: 50px;
+}
+
+.arrow {
+    border: solid black;
+    border-width: 0 1.5px 1.5px 0;
+    display: inline-block;
+    padding: 10px;
+    animation: arrowDown 2s ease-in-out 0s infinite;
+    cursor: pointer;
+}
+
+.down {
+    transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+}
+
+@keyframes arrowDown {
+    0% {
+        opacity: 0;
+        margin-top:-20px;
+    }
+    50% {
+        opacity: 1; 
+    }
+    100%{
+        margin-top: 20px;
+        opacity: 0;
+    }
+}
