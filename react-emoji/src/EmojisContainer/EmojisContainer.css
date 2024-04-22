@@ -1,0 +1,8 @@
+.emojisContainer{
+    display: flex;
+    justify-content: flex-start;
+    gap: 2rem;
+    flex-wrap: wrap;
+    padding: 50px 50px;
+    flex-direction: row;
+}

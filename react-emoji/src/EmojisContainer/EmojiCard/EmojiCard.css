@@ -1,0 +1,11 @@
+.emojiCard{
+    background-color: white;
+    padding: 25px;
+    border: 1px solid grey;
+    border-radius: 5px;
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+    align-items: center;
+    flex-basis: 300px;
+}
