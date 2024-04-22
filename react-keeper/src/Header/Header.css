@@ -1,0 +1,15 @@
+header{
+    display: flex;
+    align-items: center;
+    height: 80px;
+    background-color: gold;
+    color: white;
+    font-size: 1.2rem;
+    -webkit-box-shadow: 0px 2px 4px 0px rgba(0,0,0,0.5);
+    -moz-box-shadow: 0px 2px 4px 0px rgba(0,0,0,0.5);
+    box-shadow: 0px 2px 4px 0px rgba(0,0,0,0.5);
+}
+
+header .title {
+    padding: 10px 25px;
+}
