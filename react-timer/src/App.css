@@ -1,3 +1,7 @@
+:root {
+  --front-color: #F7F9F9;
+}
+
 section {
   display: flex;
   align-items: center;
@@ -5,7 +9,7 @@ section {
 }
 
 h1{
-  color: white;
+  color: var(--front-color);
   font-size: 10rem;
 }
 
@@ -18,10 +22,10 @@ h1{
 }
 
 button{
-  color: white;
+  color: var(--front-color);
   outline: none;
   background-color: transparent;
-  border: 1px solid white;
+  border: 1px solid var(--front-color);
   border-radius: 5px;
   padding: 10px 20px;
 }
