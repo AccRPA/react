@@ -1,26 +1,26 @@
 import './App.css';
-import {useState} from 'react';
+import {useState, useRef} from 'react';
 
 function App() {
   const [timer, setTimer] = useState(currentDateString());
-  const [stop, setStop] = useState(false);
+  const stop = useRef(false);
   
-  function startTimer(){ 
-    if (!stop){
-      setTimeout(updateTimer, 1000);
-    }
+  function startTimer(){
+    setTimeout(updateTimer, 1000);
   }
   
   function updateTimer(){
-    setTimer(currentDateString());
+    if (!stop.current){
+      setTimer(currentDateString());
+    }
   }
   
   function stopTimer(){
-    setStop(true);
+    stop.current = true;
   }
   
   function continueTimer(){
-    setStop(false);
+    stop.current = false;
     updateTimer();
   }
 
