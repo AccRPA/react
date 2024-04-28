@@ -4,14 +4,17 @@ import {useState, useRef} from 'react';
 function App() {
   const [timer, setTimer] = useState(currentDateString());
   const stop = useRef(false);
+  const tiemout = useRef(null);
   
   function startTimer(){
-    setTimeout(updateTimer, 1000);
+    tiemout.current = setTimeout(updateTimer, 1000);
   }
   
   function updateTimer(){
     if (!stop.current){
       setTimer(currentDateString());
+    }else{
+      clearTimeout(tiemout.current);
     }
   }
   
