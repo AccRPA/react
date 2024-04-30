@@ -1,5 +1,7 @@
 import './App.css';
 import {useState, useRef} from 'react';
+import Dots from './Dots';
+import {Timer} from './Timer';
 
 function App() {
   const [timer, setTimer] = useState(currentDateString());
@@ -36,6 +38,7 @@ function App() {
   return (
     <section>
       <h1>{timer}</h1>
+      <Dots></Dots><Timer></Timer>
       <div className="button-group">
         <button onClick={stopTimer}>Stop</button>
         <button onClick={continueTimer}>Continue</button>
