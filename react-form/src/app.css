@@ -1,0 +1,14 @@
+button {
+    padding: 10px 15px;
+    border-radius: 5px;
+    border: 1px dotted black;
+}
+.normal {
+    color: aquamarine;
+    background-color: white;
+}
+.visited {
+    color: white;
+    background-color: black;
+}
+
