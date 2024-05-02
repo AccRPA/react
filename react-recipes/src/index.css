@@ -1,0 +1,26 @@
+:root {
+    --main-color: #58D68D;
+    --font-color: #FDFEFE;
+    --font-color-2: #AEB6BF;
+    --background-color:#FBFCFC;
+    --border-color: #F7F9F9;
+    --green-1: #A9DFBF;
+    --green-2: #A3E4D7;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Montserrat", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: normal;
+    font-style: normal;
+    width: 100vw;
+    height: 100vh;
+    padding: 0;
+    margin: 0;
+    background-color: var(--main-color);
+    overflow-x: hidden;
+}

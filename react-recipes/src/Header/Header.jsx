@@ -1,4 +1,5 @@
 import {useState} from 'react';
+import './Header.css';
 
 function Header({searchChange}){
     const [inputValue, setInputValue] = useState('');
@@ -7,12 +8,25 @@ function Header({searchChange}){
         setInputValue(event.target.value);
     }
 
+    function onEnter(event){
+        if (event.key === 'Enter' || event.keyCode === 13) {
+            searchChange(inputValue);
+            event.preventDefault();
+        }
+    }
+
     return (
-        <div>
-            <h3>Search recipes by names or ingredientes separated by comma</h3>
-            <input type="text" placeholder="type name or ingredients" value={inputValue} onChange={handleChange}></input>
-            <button onClick={() => searchChange(inputValue)}>Search</button>
-        </div>
+        <header>
+            <h1>Find recipes</h1>
+            <div className='input-group'>
+                <input type="text" 
+                placeholder="type ingredient" 
+                value={inputValue} 
+                onChange={handleChange}
+                onKeyUp={onEnter}></input>
+                <button onClick={() => searchChange(inputValue)}>Search</button>
+            </div>
+        </header>
     );
 }
 
