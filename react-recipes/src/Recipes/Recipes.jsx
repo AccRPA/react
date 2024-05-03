@@ -2,15 +2,18 @@ import {useState, useEffect} from 'react';
 import RecipeItem from '../RecipeItem/RecipeItem';
 import './Recipes.css';
 
-function Recipes({input}){
+function Recipes({input, openDetails}){
     const [recipes, setRecipes] = useState([]);
-    const url = 'https://www.themealdb.com/api/json/v1/1/filter.php?i=' + (input || 'chicken');
+    const ingredients=['chicken', 'egg', 'beef', 'lamb', 'tomato', 'salmon'];
+    const url = 'https://www.themealdb.com/api/json/v1/1/filter.php?i=';
     
     useEffect(() => {
-        fetch(url)
+        const randomIngredient = ingredients[getRandomInt(ingredients.length)];
+        const urlCall = !input ? `${url}${randomIngredient}` : `${url}${input}`;        
+        fetch(urlCall)
         .then(response => response.json())
         .then(data => {
-            setRecipes(data?.meals);
+            setRecipes(!input ? data?.meals.slice(0, 4) : data?.meals);
         });
     }, [input]);
 
@@ -23,11 +26,15 @@ function Recipes({input}){
         }
     }
 
+    function getRandomInt(max) {
+        return Math.floor(Math.random() * max);
+    }
+
     return (
         <div className='content'>
             <div className='items-found'>{getElementsFound()}</div>
             <div className="recipes-container">
-                { recipes?.map(item => <RecipeItem recipe={item} key={item.idMeal}></RecipeItem>) }
+                { recipes?.map(item => <RecipeItem recipe={item} key={item.idMeal} selectedId={openDetails}></RecipeItem>) }
             </div>
         </div>
     );

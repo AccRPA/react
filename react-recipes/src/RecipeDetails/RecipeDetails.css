@@ -1,0 +1,36 @@
+.recipe-details-container {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90%;
+    height: 90%;
+    background-color: white;
+    border-radius: 20px;
+    padding: 15px 15px;
+}
+
+.top {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.top h2 {
+    padding: 0;
+    margin: 0;
+}
+
+.close {
+    cursor: pointer;
+    color: red;
+    font-size: 1.2rem;
+    position: absolute;
+    right: -5px;
+    top: -5px;
+    width: 25px;
+    text-align: center;
+    border: 1px solid red;
+    border-radius: 5px;
+    background-color: white;
+}

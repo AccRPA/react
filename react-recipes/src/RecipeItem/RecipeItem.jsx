@@ -1,9 +1,14 @@
 import './RecipeItem.css';
 
-function RecipeItem({recipe}){
-    const {strMeal, strMealThumb} = recipe;
+function RecipeItem({recipe, selectedId}){
+    const {idMeal, strMeal, strMealThumb} = recipe;
+
+    function handleClick(){
+        selectedId(idMeal);
+    }
+
     return (
-        <div className='recipe-item'>
+        <div className='recipe-item' onClick={handleClick}>
             <div className='title'>
                 <p>{strMeal}</p>
             </div>
