@@ -1,4 +1,6 @@
 import { useState, useEffect, useRef } from "react";
+import RecipeLine from "../RecipeLine/RecipeLine";
+import RecipeIngredients from "../RecipeIngredients/RecipeIngredients";
 import './RecipeDetails.css';
 
 function RecipeDetails({recipeId, closeDetailsModal}){
@@ -18,73 +20,34 @@ function RecipeDetails({recipeId, closeDetailsModal}){
     function closeDetails(){
         detailsModalRef.current.classList.remove('openModal');
         detailsModalRef.current.classList.add('closeModal');
+        // delay according to the close animation
         setTimeout(() => closeDetailsModal(), 500);
     }
-
-    // "idMeal": "52772",
-    // "strMeal": "Teriyaki Chicken Casserole",
-    // "strDrinkAlternate": null,
-    // "strCategory": "Chicken",
-    // "strArea": "Japanese",
-    // "strInstructions":"",
-    // "strMealThumb": "https://www.themealdb.com/images/media/meals/wvpsxx1468256321.jpg",
-    //   "strTags": "Meat,Casserole",
-    //   "strYoutube": "https://www.youtube.com/watch?v=4aZr5hZXP_s",
-    //   "strIngredient1": "soy sauce",
-    //   "strIngredient2": "water",
-    //   "strIngredient3": "brown sugar",
-    //   "strIngredient4": "ground ginger",
-    //   "strIngredient5": "minced garlic",
-    //   "strIngredient6": "cornstarch",
-    //   "strIngredient7": "chicken breasts",
-    //   "strIngredient8": "stir-fry vegetables",
-    //   "strIngredient9": "brown rice",
-    //   "strIngredient10": "",
-    //   "strIngredient11": "",
-    //   "strIngredient12": "",
-    //   "strIngredient13": "",
-    //   "strIngredient14": "",
-    //   "strIngredient15": "",
-    //   "strIngredient16": null,
-    //   "strIngredient17": null,
-    //   "strIngredient18": null,
-    //   "strIngredient19": null,
-    //   "strIngredient20": null,
-    //   "strMeasure1": "3/4 cup",
-    //   "strMeasure2": "1/2 cup",
-    //   "strMeasure3": "1/4 cup",
-    //   "strMeasure4": "1/2 teaspoon",
-    //   "strMeasure5": "1/2 teaspoon",
-    //   "strMeasure6": "4 Tablespoons",
-    //   "strMeasure7": "2",
-    //   "strMeasure8": "1 (12 oz.)",
-    //   "strMeasure9": "3 cups",
-    //   "strMeasure10": "",
-    //   "strMeasure11": "",
-    //   "strMeasure12": "",
-    //   "strMeasure13": "",
-    //   "strMeasure14": "",
-    //   "strMeasure15": "",
-    //   "strMeasure16": null,
-    //   "strMeasure17": null,
-    //   "strMeasure18": null,
-    //   "strMeasure19": null,
-    //   "strMeasure20": null,
-    //   "strSource": null,
-    //   "strImageSource": null,
-    //   "strCreativeCommonsConfirmed": null,
-    //   "dateModified": null
-
-    // animate detail window when opening and close
-    // layout the content
-
-
+    
+    //   "strYoutube": "https://www.youtube.com/watch?v=4aZr5hZXP_s",    
     return (
         <div className="recipe-detail-back">
             <div ref={detailsModalRef} className="recipe-details-container">
                 <span className="close" onClick={closeDetails}>X</span>
                 <div className="top">
                     <h2>{recipeData?.strMeal}</h2>
+                </div>
+                <div className="recipe-details">
+                    <img src={recipeData?.strMealThumb}></img>
+                    <div>
+                        <RecipeLine title="Category" content={recipeData?.strCategory}></RecipeLine>
+                        <RecipeLine title="Area" content={recipeData?.strArea}></RecipeLine>
+                        <RecipeLine title="Tags" content={recipeData?.strTags}></RecipeLine>
+                        <RecipeLine title="Drink" content={recipeData?.strDrinkAlternate}></RecipeLine>
+                        <RecipeLine title="Instructions" content={recipeData?.strInstructions}></RecipeLine>
+                    </div>
+                    { !!recipeData?.strYoutube && 
+                    <div>
+                        <iframe className="recipe-video" src={recipeData?.strYoutube} title="Recipe video" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerPolicy="strict-origin-when-cross-origin" allowFullScreen></iframe>
+                    </div>
+                    }
+
+                    <RecipeIngredients recipeData={recipeData}></RecipeIngredients>
                 </div>
             </div>
         </div>
