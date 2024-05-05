@@ -1,14 +1,15 @@
 function RecipeIngredients({recipeData}){
-    const dictionary = new Map();
-    let arrayIngredients;
+    const arrayIngredients = [];
 
     if (!!recipeData){
         for(let i = 1; i<= 20; i++){
             if (!!recipeData['strIngredient'+i]){
-                dictionary.set(recipeData['strIngredient'+i], recipeData['strMeasure'+i]);
+                arrayIngredients.push({
+                    key: recipeData['strIngredient'+i],
+                    value: recipeData['strMeasure'+i]
+                })
             }
         }
-        arrayIngredients = Array.from(dictionary, ([key, value]) => ({ key, value }));
     }
     
     return (
