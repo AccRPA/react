@@ -23,6 +23,10 @@ function RecipeDetails({recipeId, closeDetailsModal}){
         // delay according to the close animation
         setTimeout(() => closeDetailsModal(), 500);
     }
+
+    function getYoutubeEmbedURL(url){
+        return url?.replace('watch?v=', 'embed/');
+    }
     
     //   "strYoutube": "https://www.youtube.com/watch?v=4aZr5hZXP_s",    
     return (
@@ -48,7 +52,7 @@ function RecipeDetails({recipeId, closeDetailsModal}){
                     </div>
                     { !!recipeData?.strYoutube && 
                     <div>
-                        <iframe className="recipe-video" src={recipeData?.strYoutube} title="Recipe video" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerPolicy="strict-origin-when-cross-origin" allowFullScreen></iframe>
+                        <iframe className="recipe-video" src={getYoutubeEmbedURL(recipeData?.strYoutube)} title="Recipe video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerPolicy="strict-origin-when-cross-origin" allowFullScreen></iframe>
                     </div>
                     }
                 </div>
