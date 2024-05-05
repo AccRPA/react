@@ -38,6 +38,7 @@
     padding: 0;
     margin: 0;
     height: 50px;
+    font-size: clamp(0.7rem, 4vw, 1.5rem);
 }
 
 .close {
@@ -74,12 +75,20 @@
 
 .top-section{
     display: flex;
-    gap: 2rem;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.video-container{
+    display: flex;
+    justify-content: center;
 }
 
 .recipe-video{
     width: 100%;
-    height: 450px;
+    height: calc(100vw - 170px);
+    max-width: 600px;
+    max-height: 400px;
 }
 
 @keyframes openDetails {

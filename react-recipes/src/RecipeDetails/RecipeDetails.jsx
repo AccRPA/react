@@ -27,8 +27,7 @@ function RecipeDetails({recipeId, closeDetailsModal}){
     function getYoutubeEmbedURL(url){
         return url?.replace('watch?v=', 'embed/');
     }
-    
-    //   "strYoutube": "https://www.youtube.com/watch?v=4aZr5hZXP_s",    
+
     return (
         <div className="recipe-detail-back">
             <div ref={detailsModalRef} className="recipe-details-container">
@@ -51,8 +50,8 @@ function RecipeDetails({recipeId, closeDetailsModal}){
                         <RecipeLine title="Instructions" content={recipeData?.strInstructions}></RecipeLine>
                     </div>
                     { !!recipeData?.strYoutube && 
-                    <div>
-                        <iframe className="recipe-video" src={getYoutubeEmbedURL(recipeData?.strYoutube)} title="Recipe video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerPolicy="strict-origin-when-cross-origin" allowFullScreen></iframe>
+                    <div className="video-container">
+                        <iframe className="recipe-video" src={getYoutubeEmbedURL(recipeData?.strYoutube)} title="Recipe video" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerPolicy="strict-origin-when-cross-origin" allowFullScreen></iframe>
                     </div>
                     }
                 </div>
