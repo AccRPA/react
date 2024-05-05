@@ -29,16 +29,21 @@ function RecipeDetails({recipeId, closeDetailsModal}){
         <div className="recipe-detail-back">
             <div ref={detailsModalRef} className="recipe-details-container">
                 <span className="close" onClick={closeDetails}>X</span>
-                <div className="top">
+                <div className="title">
                     <h2>{recipeData?.strMeal}</h2>
                 </div>
                 <div className="recipe-details">
-                    <img src={recipeData?.strMealThumb}></img>
+                    <div className="top-section">
+                        <img src={recipeData?.strMealThumb}></img>
+                        <div>
+                            <RecipeLine title="Category" content={recipeData?.strCategory}></RecipeLine>
+                            <RecipeLine title="Area" content={recipeData?.strArea}></RecipeLine>
+                            <RecipeLine title="Tags" content={recipeData?.strTags}></RecipeLine>
+                            <RecipeLine title="Drink" content={recipeData?.strDrinkAlternate}></RecipeLine>
+                        </div>
+                    </div>
+                    <RecipeIngredients recipeData={recipeData}></RecipeIngredients>
                     <div>
-                        <RecipeLine title="Category" content={recipeData?.strCategory}></RecipeLine>
-                        <RecipeLine title="Area" content={recipeData?.strArea}></RecipeLine>
-                        <RecipeLine title="Tags" content={recipeData?.strTags}></RecipeLine>
-                        <RecipeLine title="Drink" content={recipeData?.strDrinkAlternate}></RecipeLine>
                         <RecipeLine title="Instructions" content={recipeData?.strInstructions}></RecipeLine>
                     </div>
                     { !!recipeData?.strYoutube && 
@@ -46,8 +51,6 @@ function RecipeDetails({recipeId, closeDetailsModal}){
                         <iframe className="recipe-video" src={recipeData?.strYoutube} title="Recipe video" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerPolicy="strict-origin-when-cross-origin" allowFullScreen></iframe>
                     </div>
                     }
-
-                    <RecipeIngredients recipeData={recipeData}></RecipeIngredients>
                 </div>
             </div>
         </div>

@@ -1,3 +1,5 @@
+import './RecipeIngredients.css';
+
 function RecipeIngredients({recipeData}){
     const arrayIngredients = [];
 
@@ -13,7 +15,7 @@ function RecipeIngredients({recipeData}){
     }
     
     return (
-        <>
+        <div className='ingredients-container'>            
             { !!arrayIngredients && arrayIngredients.map((ing) => {
                 return (
                     <dl key={ing.key}>
@@ -26,7 +28,7 @@ function RecipeIngredients({recipeData}){
                     </dl>
                 )
             })}
-        </> 
+        </div> 
     );
 }
 

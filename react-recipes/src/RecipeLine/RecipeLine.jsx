@@ -1,3 +1,5 @@
+import './RecipeLine.css';
+
 function RecipeLine({title, content}){
     return (
         !!content &&
