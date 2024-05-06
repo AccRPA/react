@@ -48,9 +48,15 @@
 .recipe-item .title p{
     display: none;
     padding: 6px;
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
 }
 
 .recipe-item .title:hover p{
     display: block;
     padding: 3px;
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
 }

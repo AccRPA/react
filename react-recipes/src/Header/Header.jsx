@@ -15,9 +15,14 @@ function Header({searchChange}){
         }
     }
 
+    function goHome(){
+        setInputValue('');
+        searchChange('');
+    }
+
     return (
         <header>
-            <h1>Find recipes</h1>
+            <h1 onClick={goHome}>Find recipes</h1>
             <div className='input-group'>
                 <input type="text" 
                 placeholder="type ingredient" 

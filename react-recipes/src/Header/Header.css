@@ -8,6 +8,7 @@ header {
 header h1 {
     color: var(--font-color);
     font-size: clamp(1rem, 10vw, 3rem);
+    cursor: pointer;
 }
 
 header .input-group {
