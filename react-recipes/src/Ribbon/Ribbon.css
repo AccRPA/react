@@ -1,0 +1,17 @@
+.ribbon {
+    width: 200px;
+    padding: 16px;
+    position: absolute;
+    text-align: center;
+    color: #f0f0f0;
+    position: fixed;
+    top: 15px; 
+    left: -60px; 
+    transform: rotate(-45deg);
+    background-color: var(--green-1);
+    font-size: 9px;
+    color: var(--font-color);
+}
+.ribbon span {
+    color: red;
+}
