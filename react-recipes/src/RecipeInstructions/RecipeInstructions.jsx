@@ -1,9 +1,9 @@
-import './RecipeLine.css';
+import './RecipeInstructions.css';
 
-function RecipeLine({title, content}){
+function RecipeInstructions({title, content}){
     return (
         !!content &&
-        <div className='recipe-line'>
+        <div className='recipe-instructions'>
             <div className='title'>
                 {title}
             </div>
@@ -14,4 +14,4 @@ function RecipeLine({title, content}){
     );
 }
 
-export default RecipeLine;
+export default RecipeInstructions;

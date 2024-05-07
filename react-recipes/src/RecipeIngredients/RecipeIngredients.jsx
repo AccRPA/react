@@ -15,7 +15,7 @@ function RecipeIngredients({recipeData}){
     }
     
     return (
-        <div className='ingredients-container'>            
+        <div className='ingredients-container'>
             { !!arrayIngredients && arrayIngredients.map((ing) => {
                 return (
                     <dl key={ing.key}>

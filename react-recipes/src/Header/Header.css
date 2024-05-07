@@ -9,6 +9,9 @@ header h1 {
     color: var(--font-color);
     font-size: clamp(1rem, 10vw, 3rem);
     cursor: pointer;
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
 }
 
 header .input-group {

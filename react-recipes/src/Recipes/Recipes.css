@@ -1,4 +1,4 @@
-.content {
+.recipes-content {
     padding: clamp(1rem, 2vw, 50px);
     display: flex;
     flex-direction: column;

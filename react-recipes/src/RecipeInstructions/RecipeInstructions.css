@@ -1,15 +1,14 @@
-.recipe-line {
+.recipe-instructions {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
 }
 
-.recipe-line .title {
+.recipe-instructions .title {
     color: var(--main-color);
     font-weight: bold;
     padding-bottom: 5px;
-    width: 100px;
 }
 
-.recipe-line .content {
+.recipe-instructions .content {
     text-align: justify;
 }

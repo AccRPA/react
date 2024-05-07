@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import RecipeLine from "../RecipeLine/RecipeLine";
 import RecipeIngredients from "../RecipeIngredients/RecipeIngredients";
+import RecipeInstructions from "../RecipeInstructions/RecipeInstructions";
 import './RecipeDetails.css';
 
 function RecipeDetails({recipeId, closeDetailsModal}){
@@ -47,7 +48,7 @@ function RecipeDetails({recipeId, closeDetailsModal}){
                     </div>
                     <RecipeIngredients recipeData={recipeData}></RecipeIngredients>
                     <div>
-                        <RecipeLine title="Instructions" content={recipeData?.strInstructions}></RecipeLine>
+                        <RecipeInstructions title="Instructions" content={recipeData?.strInstructions}></RecipeInstructions>
                     </div>
                     { !!recipeData?.strYoutube && 
                     <div className="video-container">

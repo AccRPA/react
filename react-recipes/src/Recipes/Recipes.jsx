@@ -31,7 +31,7 @@ function Recipes({input, openDetails}){
     }
 
     return (
-        <div className='content'>
+        <div className='recipes-content'>
             <div className='items-found'>{getElementsFound()}</div>
             <div className="recipes-container">
                 { recipes?.map(item => <RecipeItem recipe={item} key={item.idMeal} selectedId={openDetails}></RecipeItem>) }
