@@ -1,6 +1,7 @@
 .recipe-line {
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
 }
 
 .recipe-line .title {

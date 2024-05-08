@@ -136,3 +136,9 @@
         height: 0%;
     }
 }
+
+@media (max-width: 576px) {
+    .top-section {
+        justify-content: center;
+    }
+}
