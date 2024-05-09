@@ -11,6 +11,7 @@
     background-color: var(--green-1);
     font-size: 9px;
     color: var(--font-color);
+    z-index: -1;
 }
 .ribbon span {
     color: red;
