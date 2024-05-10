@@ -1,7 +1,10 @@
 ## REACT RECIPES project
 
 - useEffect, useState, useRef
-- css animations
+- css animations (vanilla js)
+- fetch data from public API
+- responsive design
+- mouse events
 
 Deployment in firebase:
 1. npm run build
