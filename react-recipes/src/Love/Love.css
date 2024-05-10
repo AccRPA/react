@@ -1,0 +1,9 @@
+.love {
+    text-align: center;
+    font-size: 9px;
+    color: var(--font-color);
+}
+
+.love span {
+    color: red;
+}

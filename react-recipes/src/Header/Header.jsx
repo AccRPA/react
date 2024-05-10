@@ -1,3 +1,4 @@
+import Love from '../Love/Love';
 import './Header.css';
 
 function Header({searchChange}){
@@ -8,6 +9,7 @@ function Header({searchChange}){
     return (
         <header>
             <h1 onClick={goHome}>Find recipes</h1>
+            <Love></Love>
         </header>
     );
 }

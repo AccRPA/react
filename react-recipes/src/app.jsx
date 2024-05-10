@@ -1,9 +1,8 @@
 import Header from './Header/Header';
 import Recipes from './Recipes/Recipes';
 import RecipeDetails from './RecipeDetails/RecipeDetails';
-import Ribbon from './Ribbon/Ribbon';
-import {useState} from 'react';
 import Search from './Search/Search';
+import {useState} from 'react';
 
 function App(){
     const [finalSearch, setFinalSearch] = useState();
@@ -25,7 +24,6 @@ function App(){
     
     return (
         <div>
-            <Ribbon></Ribbon>
             <Header searchChange={(value) => searchChanged(value)}></Header>
             <Search input={inputSearch} inputSearch={(value) => setInputSearch(value)} searchChange={(value) => searchChanged(value)}></Search>
             <Recipes input={finalSearch} openDetails={(id) => openDetails(id)}></Recipes>

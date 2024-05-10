@@ -1,24 +1,32 @@
+import { useRef } from 'react';
 import './Search.css';
 
 function Search({input, inputSearch, searchChange}){
+    const inputRef = useRef();
+
     function handleChange(event){
         inputSearch(event.target.value);
     }
 
     function onEnter(event){
         if (event.key === 'Enter' || event.keyCode === 13) {
-            searchChange(input);
+            handleDone(input);
             event.preventDefault();
         }
     }
 
+    function handleDone(){
+        inputRef.current.blur();
+        searchChange(input);
+    }
+
     return <div className='search input-group'>
-                <input type="text" 
+                <input ref={inputRef} type="text" 
                 placeholder="type ingredient" 
                 value={input} 
                 onChange={handleChange}
                 onKeyUp={onEnter}></input>
-                <button onClick={() => searchChange(input)}>Search</button>
+                <button onClick={() => handleDone(input)}>Search</button>
             </div>;
 }
 
