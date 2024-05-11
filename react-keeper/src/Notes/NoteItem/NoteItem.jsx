@@ -12,7 +12,7 @@ function NoteItem(props){
                 <h4>{props.id}. {props.title}</h4>
                 <p>{props.description}</p>
                 <div className="group-button">
-                    <button className="action" onClick={removeNote}>X</button>
+                    <button className="action" title="Delete" onClick={removeNote}>X</button>
                 </div>
             </div>
         </Zoom>);

@@ -43,3 +43,8 @@ button.discard {
 button.action {    
   background-color: gold;
 }
+
+.dark button.action {
+  background-color: darkslateblue;
+}
+

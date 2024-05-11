@@ -24,3 +24,7 @@ header .title {
 header .icon {
     font-size: 2.2rem;
 }
+
+.dark header {
+    background-color: darkslateblue;
+}

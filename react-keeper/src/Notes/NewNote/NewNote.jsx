@@ -70,12 +70,14 @@ function NewNote({onAddNote}){
                 <div className="group-button">
                     <Grow in={createNote}>
                         <button className="discard" style={{ display: createNote ? 'block' : 'none' }} 
+                            title="Discard"
                             onClick={discard}>
                                 <CloseIcon></CloseIcon>
                         </button>
                     </Grow>
                     <Grow in={createNote}>
                         <button className="action" style={{ display: createNote ? 'block' : 'none' }} 
+                            title="Add"
                             onClick={addNote} 
                             disabled={disableAddButton()}>
                                 <AddIcon></AddIcon>
