@@ -1,0 +1,11 @@
+{
+  "hosting": {
+    "site": "simple-note-keeper",
+    "public": "build",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ]
+  }
+}
