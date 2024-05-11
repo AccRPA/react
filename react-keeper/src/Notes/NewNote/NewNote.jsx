@@ -1,5 +1,8 @@
 import { useState } from 'react';
 import './NewNote.css';
+import CloseIcon from '@mui/icons-material/Close';
+import AddIcon from '@mui/icons-material/Add';
+import { Grow } from '@mui/material';
 
 function NewNote({onAddNote}){
     const defaultNote = {
@@ -65,11 +68,19 @@ function NewNote({onAddNote}){
                     value={note.description}
                     onChange={changeDescription}></textarea>
                 <div className="group-button">
-                    <button className="discard" style={{ display: createNote ? 'block' : 'none' }} 
-                        onClick={discard}>X</button>
-                    <button className="action" style={{ display: createNote ? 'block' : 'none' }} 
-                        onClick={addNote} 
-                        disabled={disableAddButton()}>Add</button>
+                    <Grow in={createNote}>
+                        <button className="discard" style={{ display: createNote ? 'block' : 'none' }} 
+                            onClick={discard}>
+                                <CloseIcon></CloseIcon>
+                        </button>
+                    </Grow>
+                    <Grow in={createNote}>
+                        <button className="action" style={{ display: createNote ? 'block' : 'none' }} 
+                            onClick={addNote} 
+                            disabled={disableAddButton()}>
+                                <AddIcon></AddIcon>
+                        </button>
+                    </Grow>
                 </div>
             </div>
         </div>

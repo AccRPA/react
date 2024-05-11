@@ -1,18 +1,21 @@
 import './NoteItem.css';
+import { Zoom } from '@mui/material';
 
 function NoteItem(props){
     function removeNote(){
         props.delete(props.id);
     }
 
-    return (<div className="note">
-        <h4>{props.title}</h4>
-        <p>{props.description}</p>
-        <p>{props.id}</p>
-        <div className="group-button">
-            <button className="action" onClick={removeNote}>X</button>
-        </div>
-    </div>);
+    return (
+        <Zoom in={true}>
+            <div className="note">
+                <h4>{props.id}. {props.title}</h4>
+                <p>{props.description}</p>
+                <div className="group-button">
+                    <button className="action" onClick={removeNote}>X</button>
+                </div>
+            </div>
+        </Zoom>);
 }
 
 export default NoteItem;

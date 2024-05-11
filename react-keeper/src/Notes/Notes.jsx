@@ -3,7 +3,6 @@ import NoteItem from './NoteItem/NoteItem';
 import NewNote from './NewNote/NewNote';
 import { useState } from 'react';
 
-
 function Notes(){
     const [arrayNotes, setArrayNotes] = useState([]);
     
@@ -19,7 +18,7 @@ function Notes(){
     }
 
     function createNote(card){
-        return <NoteItem key={card.id} id={card.id} title={card.title} description={card.description} delete={(id) => deleteNote(id)}/>
+        return <NoteItem key={card.id} id={card.id} title={card.title} description={card.description} delete={(id) => deleteNote(id)}></NoteItem>;
     }
     
     function deleteNote(id){
