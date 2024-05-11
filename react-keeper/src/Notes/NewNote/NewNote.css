@@ -1,0 +1,44 @@
+.newnote-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 50px;
+}
+.newnote-centered{
+    width: 90%;
+    max-width: 350px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+.newnote-container input{
+    font-size: 1.2rem;
+    padding: 15px;
+    outline: none;    
+    border: 1px solid grey;
+}
+
+.newnote-container textarea{
+    resize: none;
+    font-size: 1.2rem;
+    padding: 15px;
+    outline: none;    
+    border: 1px solid grey;
+    border-top: 0;
+}
+
+.newnote-container button {
+    width: 40px;
+    height: 40px;
+    position: absolute;
+    bottom: -20px;
+    right: 10px;
+    background-color: gold;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    -webkit-box-shadow: 0px 1px 4px 0px rgba(0,0,0,0.5);
+    -moz-box-shadow: 0px 1px 4px 0px rgba(0,0,0,0.5);
+    box-shadow: 0px 1px 4px 0px rgba(0,0,0,0.5);
+    cursor: pointer;
+}

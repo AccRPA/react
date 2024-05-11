@@ -1,34 +1,32 @@
 import './Notes.css';
-import NoteItem from './Note-Item/Note-Item';
+import NoteItem from './NoteItem/NoteItem';
+import NewNote from './NewNote/NewNote';
+import { useState } from 'react';
 
 function createNote(card){
     return <NoteItem key={card.id} id={card.id} title={card.title} content={card.content}/>
 }
 
 function Notes(){
-    const notesArray = [{
-        id: 1,
-        title: 'Card 1',
-        content: 'This is card 1'
-    },
-    {
-        id: 2,
-        title: 'Card 2',
-        content: 'This is card 2'
-    },
-    {
-        id: 3,
-        title: 'Card 3',
-        content: 'This is card 3'
-    },
-    {
-        id: 4,
-        title: 'Card 4',
-        content: 'This is card 4'
-    },];
-    return (<section className="notes-container">
-        {notesArray.map(createNote)}
-    </section>);
+    const [arrayNotes, setArrayNotes] = useState([]);
+    
+    function addNote({title, description}){
+        setArrayNotes((previous) => {
+            const newNote = {
+                id: previous.length + 1,
+                title: title,
+                content: description
+            };
+            return [...previous, newNote];
+        });
+    }
+    
+    return (<section className="content-container">
+                <NewNote onAddNote={(note) => addNote(note)}></NewNote>
+                <div className="notes-container">
+                    {arrayNotes.map(createNote)}
+                </div>
+            </section>);
 }
 
 export default Notes;
