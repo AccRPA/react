@@ -1,5 +1,8 @@
 .note{
     max-width: 250px;
+    min-width: 150px;
+    flex-grow: 1;
+    flex-shrink: 0;
     border: 1px solid grey;
     padding: 15px;
     -webkit-box-shadow: 0px 1px 4px 0px rgba(0,0,0,0.5);
@@ -7,5 +10,8 @@
     box-shadow: 0px 1px 4px 0px rgba(0,0,0,0.5);
     background-color: white;
     position: relative;
-    flex: 1;
+}
+
+.note p {
+    word-break: break-word;
 }

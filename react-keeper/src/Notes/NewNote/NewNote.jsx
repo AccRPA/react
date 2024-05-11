@@ -42,7 +42,7 @@ function NewNote({onAddNote}){
 
     function addNote(){
         onAddNote(note);
-        discard();
+        setNote(defaultNote);
     }
 
     function disableAddButton(){
