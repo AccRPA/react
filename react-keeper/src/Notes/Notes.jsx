@@ -3,9 +3,6 @@ import NoteItem from './NoteItem/NoteItem';
 import NewNote from './NewNote/NewNote';
 import { useState } from 'react';
 
-function createNote(card){
-    return <NoteItem key={card.id} id={card.id} title={card.title} content={card.content}/>
-}
 
 function Notes(){
     const [arrayNotes, setArrayNotes] = useState([]);
@@ -15,12 +12,22 @@ function Notes(){
             const newNote = {
                 id: previous.length + 1,
                 title: title,
-                content: description
+                description: description
             };
             return [...previous, newNote];
         });
     }
+
+    function createNote(card){
+        return <NoteItem key={card.id} id={card.id} title={card.title} description={card.description} delete={(id) => deleteNote(id)}/>
+    }
     
+    function deleteNote(id){
+        setArrayNotes((previous) => {
+            return previous.filter(notes => notes.id !== id);
+        });
+    }
+
     return (<section className="content-container">
                 <NewNote onAddNote={(note) => addNote(note)}></NewNote>
                 <div className="notes-container">

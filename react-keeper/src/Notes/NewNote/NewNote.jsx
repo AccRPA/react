@@ -39,6 +39,14 @@ function NewNote({onAddNote}){
 
     function addNote(){
         onAddNote(note);
+        discard();
+    }
+
+    function disableAddButton(){
+        return Boolean(!note.title?.trim() || !note.description?.trim());
+    }
+
+    function discard(){
         setCreateNote(false);
         setNote(defaultNote);
     }
@@ -56,7 +64,13 @@ function NewNote({onAddNote}){
                     rows='3'
                     value={note.description}
                     onChange={changeDescription}></textarea>
-                <button style={{ display: createNote ? 'block' : 'none' }} onClick={addNote}>Add</button>
+                <div className="group-button">
+                    <button className="discard" style={{ display: createNote ? 'block' : 'none' }} 
+                        onClick={discard}>X</button>
+                    <button className="action" style={{ display: createNote ? 'block' : 'none' }} 
+                        onClick={addNote} 
+                        disabled={disableAddButton()}>Add</button>
+                </div>
             </div>
         </div>
     );
