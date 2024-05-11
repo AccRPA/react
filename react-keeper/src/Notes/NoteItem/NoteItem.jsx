@@ -1,5 +1,6 @@
 import './NoteItem.css';
 import { Zoom } from '@mui/material';
+import DeleteIcon from '@mui/icons-material/Delete';
 
 function NoteItem(props){
     function removeNote(){
@@ -12,7 +13,9 @@ function NoteItem(props){
                 <h4>{props.id}. {props.title}</h4>
                 <p>{props.description}</p>
                 <div className="group-button">
-                    <button className="action" title="Delete" onClick={removeNote}>X</button>
+                    <button className="action" title="Delete" onClick={removeNote}>
+                        <DeleteIcon></DeleteIcon>
+                    </button>
                 </div>
             </div>
         </Zoom>);
