@@ -1,5 +1,4 @@
 .content-container{
-    height: calc(100vh - 80px - 40px);
     padding: 25px;
 }
 
@@ -10,4 +9,5 @@
     align-content: flex-start;
     flex-flow: wrap;
     gap: 2rem;
+    padding-bottom: 10px;
 }
