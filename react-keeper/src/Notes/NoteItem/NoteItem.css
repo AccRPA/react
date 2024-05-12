@@ -25,26 +25,18 @@
 }
 
 /* Use this for Chrome and Safari */
-.multiline-ellipsis-cs {
+.multiline-ellipsis-description {
     display: -webkit-box;
-    -webkit-line-clamp: 6; /* Number of lines to display */
+    -webkit-line-clamp: 6;
     -webkit-box-orient: vertical;
     overflow: hidden;
     text-overflow: ellipsis;
 }
 
-.multiline-ellipsis-title-cs{
+.multiline-ellipsis-title {
     display: -webkit-box;
-    -webkit-line-clamp: 1; /* Number of lines to display */
+    -webkit-line-clamp: 1;
     -webkit-box-orient: vertical;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-
-/* Use this for Firefox */
-.multiline-ellipsis-ff {
-    display: -moz-box;
-    -moz-box-orient: vertical;
     overflow: hidden;
     text-overflow: ellipsis;
 }
