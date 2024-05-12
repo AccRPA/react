@@ -1,6 +1,7 @@
 .note{
-    min-width: 250px;
-    max-width: 450px;
+    height: 200px;
+    min-width: 200px;
+    max-width: 350px;
     flex: 1;
     border-radius: 10px;
     padding: 25px 15px;
@@ -9,14 +10,41 @@
     box-shadow: 0px 1px 4px 0px rgba(0,0,0,0.5);
     background-color: white;
     position: relative;
-    flex-basis: 250px;
-    height: 150px;
 }
 
 .note h4 {
+    height: 20px;
     margin-bottom: 10px;
 }
 
 .note p {
     word-break: break-word;
+    height: 125px;
+    padding: 5px 0 15px 0;
+    line-height: 20px;
+}
+
+/* Use this for Chrome and Safari */
+.multiline-ellipsis-cs {
+    display: -webkit-box;
+    -webkit-line-clamp: 6; /* Number of lines to display */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.multiline-ellipsis-title-cs{
+    display: -webkit-box;
+    -webkit-line-clamp: 1; /* Number of lines to display */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* Use this for Firefox */
+.multiline-ellipsis-ff {
+    display: -moz-box;
+    -moz-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
