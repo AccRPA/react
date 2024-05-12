@@ -7,11 +7,15 @@ function NoteItem(props){
         props.delete(props.id);
     }
 
+    function cutText(text, length){
+        const hasToBeCut = text.length > length;
+        return hasToBeCut ? text.substring(0, length) + '...' : text;
+    }
     return (
         <Zoom in={true}>
             <div className="note">
-                <h4>{props.id}. {props.title}</h4>
-                <p>{props.description}</p>
+                <h4>{ props.id }. { cutText(props.title, 20) }</h4>
+                <p>{ cutText(props.description, 50) }</p>
                 <div className="group-button">
                     <button className="action" title="Delete" onClick={removeNote}>
                         <DeleteIcon></DeleteIcon>

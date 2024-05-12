@@ -24,6 +24,7 @@ body{
 button {
   width: 40px;
   height: 40px;
+  line-height: 0;
   color: white;
   border: none;
   border-radius: 50%;
