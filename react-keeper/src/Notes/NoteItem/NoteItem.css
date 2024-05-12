@@ -19,7 +19,7 @@
 
 .note p {
     word-break: break-word;
-    height: 125px;
+    height: 105px;
     padding: 5px 0 15px 0;
     line-height: 20px;
 }
@@ -27,7 +27,7 @@
 /* Use this for Chrome and Safari */
 .multiline-ellipsis-description {
     display: -webkit-box;
-    -webkit-line-clamp: 6;
+    -webkit-line-clamp: 5;
     -webkit-box-orient: vertical;
     overflow: hidden;
     text-overflow: ellipsis;

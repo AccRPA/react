@@ -47,7 +47,10 @@ button.action {
   background-color: gold;
 }
 
-.dark button.action {
+.dark button.action, .dark .details .title {
   background-color: darkslateblue;
 }
 
+.dark .details .title {
+  color: white
+}

@@ -1,0 +1,38 @@
+.details {
+    background-color: white;
+    color: black;
+    width: 85%;
+    max-width: 500px;
+    position: relative;
+}
+
+.details .title {
+    padding-bottom: 10px;
+    line-height: 20px;
+    font-weight: bold;
+    border-bottom: 1px solid lightgray;
+    text-align: justify;
+    background-color: gold;
+    padding: 25px;
+}
+
+.details .body {
+    padding-top: 10px;
+    line-height: 20px;
+    text-align: justify;
+    padding: 25px;
+    overflow: auto;
+    height: 70vh;
+}
+
+.details .footer {
+    font-size: 0.6rem;
+    text-align: right;
+    padding: 25px;
+}
+
+.details .discard {
+    position: absolute;
+    top: -15px;
+    right: -15px;
+}
