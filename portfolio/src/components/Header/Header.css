@@ -1,5 +1,10 @@
 header {
     padding: 1rem;
+    height: 50px;
+    position: fixed;
+    background: var(--main-color);
+    width: 100%;
+    z-index: 1;
 }
 nav {
     display: flex;

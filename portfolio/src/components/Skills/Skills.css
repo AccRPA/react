@@ -1,0 +1,4 @@
+.skills{
+    font-size: clamp(12px, 2rem, 40px);
+    padding: 1rem;
+}

@@ -1,10 +1,7 @@
-.home {
+.home{
     max-width: 500px;
     font-size: clamp(12px, 2rem, 40px);
-    position: absolute;
-    left: 50%;
-    top: 40%;
-    transform: translate(-50%, -40%);
+    padding: 1rem;
 }
 
 .home > div {

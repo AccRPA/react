@@ -7,13 +7,18 @@
 * {
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
   font-family: 'Josefin Slab', 'Helvetica Neue', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: var(--main-color);  
+  background-color: var(--main-color); 
 }
 
 code {
@@ -24,4 +29,12 @@ code {
 a {
   text-decoration: none;
   color: var(--font-color);
+}
+
+.section-container{
+  height: calc(100vh - 50px);
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
