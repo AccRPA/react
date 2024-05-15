@@ -1,13 +1,26 @@
+import { useContext } from 'react';
+import { MenuContext } from '../../MenuContext';
 import './Header.css';
+import { MenuOptions } from '../../MenuOptions';
 
 function Header(){
+    const menuContext = useContext(MenuContext);
+
+    function setMenu(event){
+        menuContext.setMenuSelected(event.target.name);
+    }
+
     return (<header>
         <nav>
             <ul>
-                <li><a href="#home" className="active">Home</a></li>
-                <li><a href="#skills">Skills</a></li>
-                <li><a href="#projects">Projects</a></li>
-                <li><a href="#about">About</a></li>
+                {MenuOptions.map((option, index) => {
+                    return <li key={index}>
+                                <a onClick={setMenu} name={option} href={`#${option}`} 
+                                    className={menuContext.menuSelected === option ? 'active' : ''}>
+                                    {option}
+                                </a>
+                            </li>;
+                })}
             </ul>
         </nav>
     </header>);
