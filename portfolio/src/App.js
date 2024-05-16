@@ -17,7 +17,7 @@ function App() {
       const offTop = document.getElementById(option).offsetTop;
       accumulator.push({
         option,
-        offTop
+        offTop: offTop - (Math.floor(window.innerHeight / 2))
       });
       return accumulator;
     }, []);
