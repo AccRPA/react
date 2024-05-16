@@ -17,6 +17,7 @@ function App() {
       const offTop = document.getElementById(option).offsetTop;
       accumulator.push({
         option,
+        // minus, the midle of the screen to activate the menu whe the srcoll reaches the middle
         offTop: offTop - (Math.floor(window.innerHeight / 2))
       });
       return accumulator;

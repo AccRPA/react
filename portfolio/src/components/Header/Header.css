@@ -28,6 +28,7 @@ nav ul li a {
     background-size: 215%;
     transition: .5s ease-out;
     text-transform: capitalize;
+    border-radius: 5px;
 }
 nav ul li a:hover
 {
