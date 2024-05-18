@@ -20,7 +20,8 @@ function Skills(){
                     Technologies I have been working with recently
                 </div>
                 <div className="tech-stack">
-                    <img src={Html} alt="Html"></img>
+                {/* this with an array? */}
+                    <img src={Html} alt="Html" title='Html'></img>
                     <img src={Css} alt="Css"></img>
                     <img src={Js} alt="Js"></img>
                     <img src={ReactIcon} alt="ReactIcon"></img>

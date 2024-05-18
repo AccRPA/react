@@ -1,6 +1,6 @@
 .skills{
-    font-size: clamp(12px, 2rem, 40px);
-    padding: 1rem;
+    font-size: clamp(12px, 10vw, 40px);
+    padding: 2rem;
     text-align: center;
 }
 
@@ -10,7 +10,7 @@
 }
 
 .skills .subtitle {
-    font-size: clamp(10px, 1.2rem, 30px);
+    font-size: clamp(8px, 6vw, 25px);
     color: var(--color-grey);
 }
 
@@ -19,15 +19,21 @@
     justify-content: center;
     flex-wrap: wrap;
     gap: 2rem;
-    max-width: 1200px;
+    max-width: 600px;
+    margin-top: 3rem;
 }
 
 .skills .tech-stack img {
-    flex-basis: 120px;
-    width: auto;
-    max-height: 120px;
+    width: clamp(20px, 20vw, 75px);
+    max-height: clamp(20px, 20vw, 75px);
     background-color: var(--color-white);
     flex-shrink: 1;
+    margin-bottom: 1rem;
 }
 
+@media (max-width: 581px){
+    .skills {
+        margin-top: 40px;
+    }
+}
 /* Degradado de cada sección y blur en fondo de menu mas espaciado en parrafos de secciones */
