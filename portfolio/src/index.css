@@ -1,7 +1,9 @@
 :root{
-  --main-color: #212F3D;
-  --font-color: #F4F6F7;
-  --bg-color: #5D6D7E;
+  --color-grey: #666666;
+  --color-light-grey: #D5D8DC;
+  --color-dark-blue: #42446E;
+  --color-black: #000000;
+  --color-white: #FFFFFF;
 } 
 
 * {
@@ -15,11 +17,10 @@ html {
 }
 
 body {
-  font-family: 'Josefin Slab', 'Helvetica Neue', sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  background-color: var(--main-color); 
-  color: var(--font-color);
+  font-family: 'Poppins', sans-serif;
+  font-style: normal;
+  background-color: var(--color-white); 
+  color: var(--color-grey);
 }
 
 code {
@@ -29,10 +30,16 @@ code {
 
 a {
   text-decoration: none;
-  color: var(--font-color);
+  color: var(--color-dark-blue);
 }
 
-.section-container{
+section{
+  height: 100vh;
+  width: 100%;
+  display: block;
+}
+
+.container {
   height: 100vh;
   width: 100%;
   display: flex;

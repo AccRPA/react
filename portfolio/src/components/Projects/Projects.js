@@ -2,11 +2,13 @@ import React from 'react';
 import './Projects.css';
 
 const Projects = () => (
-  <div className='section-container' id="projects">
-    <div className='projects'>
-      Projects Component
-    </div>
-  </div>
+  <section id="projects">
+      <div className="container">
+          <div className="projects">
+            Projects Component
+          </div>
+      </div>
+  </section>
 );
 
 export default Projects;

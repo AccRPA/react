@@ -2,9 +2,10 @@ header {
     padding: 1rem;
     height: 50px;
     position: fixed;
-    background: var(--main-color);
+    background: var(--color-white);
     width: 100%;
     z-index: 1;
+    font-family: 'DM Sans', sans-serif;
 }
 nav {
     display: flex;
@@ -23,17 +24,14 @@ nav ul li {
 nav ul li a {
     padding: 10px 20px;
     font-size: 1rem;
-    background-color: var(--bg-color);
-    background: linear-gradient(to left, transparent 50%, var(--bg-color) 50%) right;
-    background-size: 215%;
+    color: var(--color-grey);
+    background-color: var(--color-white);
     transition: .5s ease-out;
     text-transform: capitalize;
     border-radius: 5px;
 }
 nav ul li a:hover
 {
-    background-position: left;
-}
-nav ul li a.active {
-    background-color: var(--bg-color);
+    background-color: var(--color-dark-blue);
+    color: var(--color-white);
 }
