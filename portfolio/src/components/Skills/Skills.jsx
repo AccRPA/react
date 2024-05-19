@@ -22,15 +22,15 @@ function Skills(){
                 <div className="tech-stack">
                 {/* this with an array? */}
                     <img src={Html} alt="Html" title='Html'></img>
-                    <img src={Css} alt="Css"></img>
-                    <img src={Js} alt="Js"></img>
-                    <img src={ReactIcon} alt="ReactIcon"></img>
-                    <img src={Bootstrap} alt="Bootstrap"></img>
-                    <img src={Sass} alt="Sass"></img>
-                    <img src={Git} alt="Git"></img>
-                    <img src={Sourcetree} alt="Sourcetree"></img>
-                    <img src={VSCode} alt="VSCode"></img>
-                    <img src={AzureDevOps} alt="AzureDevOps"></img>
+                    <img src={Css} alt="Css" title='Css'></img>
+                    <img src={Js} alt="Js" title='Js'></img>
+                    <img src={ReactIcon} alt="ReactIcon" title='React'></img>
+                    <img src={Bootstrap} alt="Bootstrap" title='Bootstrap'></img>
+                    <img src={Sass} alt="Sass" title='Sass'></img>
+                    <img src={Git} alt="Git" title='Git'></img>
+                    <img src={Sourcetree} alt="Sourcetree" title='Sourcetree'></img>
+                    <img src={VSCode} alt="VSCode" title='Visual Studio code'></img>
+                    <img src={AzureDevOps} alt="AzureDevOps" title='Azure DevOps'></img>
 
                 </div>
             </div>
