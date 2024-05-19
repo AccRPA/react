@@ -1,7 +1,5 @@
 .home{
-    max-width: 600px;
-    font-size: clamp(12px, 10vw, 40px);
-    padding: 2rem;
+    max-width: 620px;
     color: var(--color-dark-blue);
     font-weight: bold;
 }

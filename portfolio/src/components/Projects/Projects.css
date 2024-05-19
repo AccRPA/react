@@ -1,10 +1,18 @@
 .projects {
+    text-align: center;
+}
+
+.items{
     font-size: clamp(14px, 4vw, 16px);
-    padding: 2rem;
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
-    gap: 2rem;
-    max-width: 600px;
+    gap: 2rem; 
     margin-top: 3rem;
+}
+
+.items > div {
+    flex-basis: 200px;
+    height: 300px;
+    border: 1px solid grey;
 }

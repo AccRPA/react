@@ -46,4 +46,16 @@ section{
   display: flex;
   justify-content: center;
   align-items: center;
+  font-size: clamp(12px, 10vw, 35px);
+  padding: 2rem;
+}
+
+.title {
+  font-weight: bold;
+  color: var(--color-dark-blue);
+}
+
+.subtitle {
+  font-size: clamp(8px, 5vw, 20px);
+  color: var(--color-grey);
 }

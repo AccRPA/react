@@ -1,17 +1,5 @@
 .skills{
-    font-size: clamp(12px, 10vw, 40px);
-    padding: 2rem;
     text-align: center;
-}
-
-.skills .title {
-    font-weight: bold;
-    color: var(--color-dark-blue);
-}
-
-.skills .subtitle {
-    font-size: clamp(8px, 6vw, 25px);
-    color: var(--color-grey);
 }
 
 .skills .tech-stack {

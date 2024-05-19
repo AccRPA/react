@@ -5,7 +5,9 @@ function Home(){
     <section id="home">
         <div className="container">
             <div className="home">
-                <p>Hi &#128075;! I am Jose. Frontend developer. Take a look at my portfolio!</p>
+                <p>Hi &#128075;! My name is Jose. </p>
+                <p>I am a Frontend developer. </p>
+                <p>Take a look at my portfolio!</p>
                 <div>
                     <a href="#skills">
                         <i className="arrow down"></i>
