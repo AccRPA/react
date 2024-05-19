@@ -1,14 +1,14 @@
 import './Skills.css';
-import Html from '../../assets/html.png';
-import Css from '../../assets/css.png';
-import Js from '../../assets/javascript.png';
-import ReactIcon from '../../assets/react.png';
-import Bootstrap from '../../assets/bootstrap.png';
-import Sass from '../../assets/sass.png';
-import Git from '../../assets/git.png';
-import Sourcetree from '../../assets/sourcetree.png';
-import VSCode from '../../assets/vscode.png';
-import AzureDevOps from '../../assets/azure_devops.png';
+import Html from '../../assets/tech-icons/html.png';
+import Css from '../../assets/tech-icons/css.png';
+import Js from '../../assets/tech-icons/javascript.png';
+import ReactIcon from '../../assets/tech-icons/react.png';
+import Bootstrap from '../../assets/tech-icons/bootstrap.png';
+import Sass from '../../assets/tech-icons/sass.png';
+import Git from '../../assets/tech-icons/git.png';
+import Sourcetree from '../../assets/tech-icons/sourcetree.png';
+import VSCode from '../../assets/tech-icons/vscode.png';
+import AzureDevOps from '../../assets/tech-icons/azure_devops.png';
 
 function Skills(){
     return (

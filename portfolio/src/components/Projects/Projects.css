@@ -12,7 +12,10 @@
 }
 
 .items > div {
-    flex-basis: 200px;
-    height: 300px;
-    border: 1px solid grey;
+    flex-basis: 250px;
+    height: 400px;
+    border-radius: 15px;
+    -webkit-box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.5);
+    -moz-box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.5);
+    box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.5);
 }

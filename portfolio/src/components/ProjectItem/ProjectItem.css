@@ -1,0 +1,34 @@
+.project-item {
+    position: relative;
+}
+
+.project-item .top img {
+    width: 100%;
+    height: auto;
+    border-radius: 15px 15px 0 0;
+}
+
+.project-item .bottom {
+    padding: 1rem;
+}
+
+.project-item .bottom .body {
+    font-size: clamp(10px, 3vw, 12px);
+    text-align: justify;
+    margin: 10px 0px 10px 0px;
+}
+
+.project-item .footer {
+    position: absolute;
+    bottom: 0;
+    font-size: 10px;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    left: 0;
+    padding: 1rem;
+}
+
+.project-item .footer a {
+    cursor: pointer;
+}

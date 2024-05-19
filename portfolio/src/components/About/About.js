@@ -5,7 +5,7 @@ const About = () => (
   <section id="about">
       <div className="container">
           <div className="about">
-            About Component
+            About me
           </div>
       </div>
   </section>
