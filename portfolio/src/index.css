@@ -47,7 +47,7 @@ section{
   justify-content: center;
   align-items: center;
   font-size: clamp(12px, 10vw, 35px);
-  padding: 2rem;
+  padding: 70px 2rem;
 }
 
 .title {

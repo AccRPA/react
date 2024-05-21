@@ -24,9 +24,3 @@
 .skills .tech-stack img.show {
     opacity: 1 !important;
 }
-
-@media (max-width: 581px){
-    .skills {
-        margin-top: 60px;
-    }
-}
