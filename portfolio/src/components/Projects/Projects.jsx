@@ -12,7 +12,7 @@ function Projects(){
     const timeout = 200;
     const showElement = (elem, timeout) => {
         setTimeout(() => {
-            elem.classList.add('popup');                            
+            elem.classList.add('show');                            
         }, timeout);
     }
     const callback = (entries) => {
@@ -42,6 +42,9 @@ function Projects(){
         <div className="container">
             <div className="projects">
               <div className="title">Projects</div>
+              <div className="subtitle">
+                Personal projects I have built for training my skills
+              </div>
               <div className="items" ref={projectsRef}>
                 <ProjectItem 
                   imgUrl={NFL_Logos_Name}

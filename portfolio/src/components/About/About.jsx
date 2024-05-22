@@ -5,7 +5,10 @@ const About = () => (
   <section id="about">
       <div className="container">
           <div className="about">
-            About me
+              <div className="title">About me?</div>
+              <div className="subtitle">
+                Introvert, experienced, responsible, commitment, serious, helpfull, shy
+              </div>            
           </div>
       </div>
   </section>
