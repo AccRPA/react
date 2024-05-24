@@ -1,17 +1,29 @@
 import './Header.css';
+import { useContext } from 'react';
 import { MenuOptions } from '../../MenuOptions';
+import { MenuContext } from '../../MenuContext';
 
 function Header(){
+    const menuContext = useContext(MenuContext);
+    
+    function handleClick(option){
+        menuContext.setMenuActive(option);
+        document.querySelector(`#${option}`).scrollIntoView();
+    }
 
     return (<header>
         <nav>
             <ul>
                 {MenuOptions.map((option, index) => {
-                    return <li key={index}>
-                                <a name={option} href={`#${option}`}>
-                                    {option}
-                                </a>
-                            </li>;
+                    return (
+                        <li key={index}>
+                            <span name={option}
+                                className={menuContext.menuActive === option ? 'active' : ''}
+                                onClick={() => handleClick(option)}>
+                                {option}
+                            </span>
+                        </li>
+                    );
                 })}
             </ul>
         </nav>

@@ -59,3 +59,12 @@ section{
   font-size: clamp(8px, 5vw, 20px);
   color: var(--color-grey);
 }
+
+.item-fade  {
+  opacity: 0;
+  transition: all 0.5s;
+}
+
+.item-fade.show {
+  opacity: 1 !important;
+}

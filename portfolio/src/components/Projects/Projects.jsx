@@ -1,42 +1,10 @@
 import './Projects.css';
-import React, { useRef, useEffect } from 'react';
 import ProjectItem from '../ProjectItem/ProjectItem';
 import NFL_Logos_Name from '../../assets/apps/NFL_Logos_Name.png';
 import Recipe_Finder from '../../assets/apps/Recipe_Finder.png';
 import Note_Keeper from '../../assets/apps/Note_Keeper.png';
 
 function Projects(){
-  const projectsRef = useRef();
-
-  useEffect(() => {
-    const timeout = 200;
-    const showElement = (elem, timeout) => {
-        setTimeout(() => {
-            elem.classList.add('show');                            
-        }, timeout);
-    }
-    const callback = (entries) => {
-        const parent = entries[0];
-        if (parent.isIntersecting){                
-            let elem = parent.target;
-            elem.childNodes.forEach((child, index) => {
-                if (!child.classList.contains('show')){
-                    const delay = timeout * (index + 1);
-                    showElement(child, delay);
-                }
-            });
-        }
-    };
-    const options = {
-        rootMargin: '0px',
-        threshold: 0.2,
-    };
-    const observer = new IntersectionObserver(callback, options);
-    observer.observe(projectsRef.current);
-
-    return () => observer.disconnect();
-  }, []);
-
   return (
     <section id="projects">
         <div className="container">
@@ -44,8 +12,8 @@ function Projects(){
               <div className="title">Projects</div>
               <div className="subtitle">
                 Personal projects I have built for training my skills
-              </div>
-              <div className="items" ref={projectsRef}>
+              </div>              
+              <div className="items">
                 <ProjectItem 
                   imgUrl={NFL_Logos_Name}
                   url="https://nfl-teams-logos-game.web.app/"
@@ -60,7 +28,7 @@ function Projects(){
                   githubUrl=""
                   title="Recipe finder"
                   description="Built in React. It uses a public API to get recipes base on one ingredient"
-                  >
+                >
                 </ProjectItem>
                 <ProjectItem 
                   imgUrl={Note_Keeper}

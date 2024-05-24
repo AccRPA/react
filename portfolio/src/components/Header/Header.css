@@ -21,7 +21,7 @@ nav ul {
 nav ul li {
     list-style-type: none;
 }
-nav ul li a {
+nav ul li span {
     padding: 10px clamp(10px, 1vw ,20px);
     font-size: clamp(10px, 3vw, 1rem);
     color: var(--color-grey);
@@ -29,8 +29,9 @@ nav ul li a {
     text-transform: capitalize;
     border-radius: 5px;
     outline: none;
+    cursor: pointer;
 }
-nav ul li a:hover
+nav ul li span:hover, nav ul li span.active
 {
     background-color: var(--color-dark-blue);
     color: var(--color-white);
