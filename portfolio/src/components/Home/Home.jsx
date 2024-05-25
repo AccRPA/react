@@ -10,7 +10,7 @@ function Home(){
                 <p>Take a look at my portfolio!</p>
                 <div>
                     <a href="#skills">
-                        <i className="arrow down"></i>
+                        <i className="arrow down" aria-label='skills'></i>
                     </a>
                 </div>
             </div>

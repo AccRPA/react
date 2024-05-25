@@ -14,8 +14,14 @@ function ProjectItem({imgUrl, title, description, url, githubUrl}){
                     { description }
                 </div>
                 <div className="footer">
-                    <a href={url} target="_blank" rel="noreferrer">Preview</a>
-                    <a href={githubUrl} target="_blank" rel="noreferrer">Github</a>
+                    <a href={url} target="_blank" rel="noreferrer">
+                        <i className="bi bi-eye"></i>
+                        Preview
+                    </a>
+                    <a href={githubUrl} target="_blank" rel="noreferrer">
+                        <i className="bi bi-github"></i>
+                        Github
+                    </a>
                 </div>
             </div>
         </div>

@@ -3,6 +3,8 @@ import Html from '../../assets/tech-icons/html.png';
 import Css from '../../assets/tech-icons/css.png';
 import Js from '../../assets/tech-icons/javascript.png';
 import ReactIcon from '../../assets/tech-icons/react.png';
+import AngularIcon from '../../assets/tech-icons/angular.png';
+import TypescriptIcon from '../../assets/tech-icons/typescript.png';
 import Bootstrap from '../../assets/tech-icons/bootstrap.png';
 import Sass from '../../assets/tech-icons/sass.png';
 import Git from '../../assets/tech-icons/git.png';
@@ -24,6 +26,8 @@ function Skills(){
                     <img id="cssIcon" className="item-fade" src={Css} alt="Css" title='Css'></img>
                     <img id="jsIcon" className="item-fade" src={Js} alt="Js" title='Js'></img>
                     <img id="reactIcon" className="item-fade" src={ReactIcon} alt="ReactIcon" title='React'></img>
+                    <img id="angIcon" className="item-fade" src={AngularIcon} alt="AngularIcon" title='Angular'></img>
+                    <img id="tsIcon" className="item-fade" src={TypescriptIcon} alt="TypescriptIcon" title='Typescript'></img>
                     <img id="btIcon" className="item-fade" src={Bootstrap} alt="Bootstrap" title='Bootstrap'></img>
                     <img id="sassIcon" className="item-fade" src={Sass} alt="Sass" title='Sass'></img>
                     <img id="gitIcon" className="item-fade" src={Git} alt="Git" title='Git'></img>

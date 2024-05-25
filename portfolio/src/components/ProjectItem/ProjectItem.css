@@ -1,5 +1,11 @@
 .project-item {
     position: relative;
+    cursor:pointer;
+    transition: all 0.3 ease-in-out;
+}
+
+.project-item:hover {
+    transform: scale(1.1);
 }
 
 .project-item .top img {
@@ -31,4 +37,8 @@
 
 .project-item .footer a {
     cursor: pointer;
+}
+
+.project-item .footer a i {
+    margin-right: 5px;
 }
