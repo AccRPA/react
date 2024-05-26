@@ -5,7 +5,7 @@ function Home(){
     <section id="home">
         <div className="container">
             <div className="home">
-                <p>Hi &#128075;! My name is Jose. </p>
+                <p>Hi <span className="wave">&#128075;</span> ! My name is Jose. </p>
                 <p>I am a Frontend developer. </p>
                 <p>Take a look at my portfolio!</p>
                 <div>

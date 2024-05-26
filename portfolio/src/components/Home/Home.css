@@ -33,6 +33,12 @@
     -webkit-transform: rotate(45deg);
 }
 
+.wave {
+    display: inline-block;
+    animation: waveHand 2s ease-in-out 0s infinite;
+    transform-origin: right bottom;
+}
+
 @keyframes arrowDown {
     0% {
         opacity: 0;
@@ -44,5 +50,20 @@
     100%{
         margin-top: 30px;
         opacity: 0;
+    }
+}
+
+@keyframes waveHand {
+    20% {
+        transform: rotate(12deg);
+    }
+    40% {
+        transform: rotate(0deg);
+    }
+    60% {
+        transform: rotate(10deg);
+    }
+    80% {
+        transform: rotate(0deg);
     }
 }
