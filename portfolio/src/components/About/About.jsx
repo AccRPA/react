@@ -6,9 +6,14 @@ const About = () => (
       <div className="container">
           <div className="about">
               <div className="title">About me?</div>
-              <div className="subtitle">
-                Introvert, experienced, responsible, commitment, serious, helpfull, shy
-                Hate having lunch in the office, I belive to go home for lunch and work remotly from the afternon
+              <div className="description item-fade">
+                <p>I am an experienced frontend developer looking for creative projects to bring them alive and make them possible.</p> 
+                <p>Checkout my github with all the javascript exercises and personal projects.</p>
+                <p>
+                  <a href="https://github.com/AccRPA" target='_blank' title='github'>
+                    <i className="bi bi-github"></i>
+                  </a>
+                </p>
               </div>            
           </div>
       </div>
