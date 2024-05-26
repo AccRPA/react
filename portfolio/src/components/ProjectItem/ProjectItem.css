@@ -1,11 +1,10 @@
 .project-item {
     position: relative;
-    cursor:pointer;
     transition: all 0.3 ease-in-out;
 }
 
 .project-item:hover {
-    transform: scale(1.1);
+    transform: scale(1.05);
 }
 
 .project-item .top img {
@@ -18,7 +17,7 @@
     padding: 1rem;
 }
 
-.project-item .bottom .body {
+.project-item .body {
     font-size: clamp(10px, 3vw, 12px);
     text-align: justify;
     margin: 10px 0px 10px 0px;
@@ -29,14 +28,26 @@
     bottom: 0;
     font-size: 10px;
     display: flex;
-    justify-content: space-between;
+    gap: 1rem;
+    flex-direction: column;
     width: 100%;
     left: 0;
     padding: 1rem;
 }
 
+.project-item .tech-stack {
+    font-size: clamp(8px, 1vw, 9px);
+    text-align: left;
+}
+
+.project-item .links {
+    display: flex;
+    justify-content: space-between;
+}
+
 .project-item .footer a {
     cursor: pointer;
+    padding: 5px 0px;
 }
 
 .project-item .footer a i {

@@ -1,6 +1,6 @@
 import './ProjectItem.css';
 
-function ProjectItem({imgUrl, title, description, url, githubUrl}){
+function ProjectItem({imgUrl, title, description, url, githubUrl, techStack}){
     return (
         <div className="project-item item-fade">
             <div className="top">
@@ -14,14 +14,19 @@ function ProjectItem({imgUrl, title, description, url, githubUrl}){
                     { description }
                 </div>
                 <div className="footer">
-                    <a href={url} target="_blank" rel="noreferrer">
-                        <i className="bi bi-eye"></i>
-                        Preview
-                    </a>
-                    <a href={githubUrl} target="_blank" rel="noreferrer">
-                        <i className="bi bi-github"></i>
-                        Github
-                    </a>
+                    <div className='tech-stack'>
+                        <strong>Tech stack</strong>: {techStack}
+                    </div>
+                    <div className="links">
+                        <a href={url} target="_blank" rel="noreferrer">
+                            <i className="bi bi-eye"></i>
+                            Preview
+                        </a>
+                        <a href={githubUrl} target="_blank" rel="noreferrer">
+                            <i className="bi bi-github"></i>
+                            Github
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
