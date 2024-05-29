@@ -10,7 +10,7 @@ const About = () => (
                 <p>I am an experienced frontend developer looking for creative projects to bring them alive and make them possible.</p> 
                 <p>Checkout my github with all the javascript exercises and personal projects.</p>
                 <p>
-                  <a href="https://github.com/AccRPA" target='_blank' title='github'>
+                  <a href="https://github.com/AccRPA" target='_blank' title='github' rel='noreferrer'>
                     <i className="bi bi-github"></i>
                   </a>
                 </p>
