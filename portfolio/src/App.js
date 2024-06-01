@@ -23,10 +23,10 @@ function App() {
   }
 
   function callback(entries) {
-    // only set the menu for that section which is intersecting, but if there are more intersecting take the last one
-    // this avoids the blinking effect when two sections are intersecting with the viewport
+    // only set the menu for that section which is intersecting, but if there are more intersecting don't do anything
+    // this avoids the blinking effect when two sections are intersecting within the viewport
     const sectionsIntersecting = entries.filter(entry => entry.isIntersecting);
-    const section = sectionsIntersecting?.length > 1 ? sectionsIntersecting.length[sectionsIntersecting.length - 1] : sectionsIntersecting[0];
+    const section = sectionsIntersecting?.length > 1 ? null : sectionsIntersecting[0];
 
     if (!!section){           
       let elem = section.target;
