@@ -7,6 +7,7 @@ function Header(){
     const menuContext = useContext(MenuContext);
     
     function handleClick(option){
+        menuContext.setMenuClicked(true);
         menuContext.setMenuActive(option);
         document.querySelector(`#${option}`).scrollIntoView();
     }

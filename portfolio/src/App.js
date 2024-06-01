@@ -6,9 +6,10 @@ import Main from './components/Main/Main';
 import { useState, useEffect, useRef } from 'react';
 
 function App() {
-  const [menuActive, setMenuActive] = useState(MenuOptions[0]);
-  const menuContextObj = {menuActive, setMenuActive};
   const observerRef = useRef();
+  const [menuClicked, setMenuClicked] = useState(false);
+  const [menuActive, setMenuActive] = useState(MenuOptions[0]);
+  const menuContextObj = {menuActive, setMenuActive, setMenuClicked};
   const timeout = 150;
   const options = {
     rootMargin: '0px',
@@ -33,18 +34,31 @@ function App() {
           }
         });
 
-        setMenuActive(section.target.id);
+        const currentMenuIstheTarget = menuActive === section.target.id;        
+        if (!menuClicked && !currentMenuIstheTarget){
+          setMenuActive(section.target.id);
+        } else if (currentMenuIstheTarget){
+          setMenuClicked(false);
+        }
       }
     });
   };
   
   useEffect(() => {
     observerRef.current = new IntersectionObserver(callback, options);
-    observerRef.current.observe(document.querySelector('#skills'));
-    observerRef.current.observe(document.querySelector('#projects'));
-    observerRef.current.observe(document.querySelector('#home'));
-    observerRef.current.observe(document.querySelector('#about'));
-  }, []);
+    MenuOptions.forEach((entry) => {
+      observerRef.current.observe(document.querySelector(`#${entry}`));
+    })
+
+    // Clean up observers
+    return () => {
+      MenuOptions.forEach((entry) => {
+        observerRef.current.unobserve(document.querySelector(`#${entry}`));
+      })
+    };
+    // it has to be exected every render so the callback can take the latest value of the menu active
+    // otherwise the menuActive in the callback function will see oinly the first state value
+  }); 
 
   return (
     <MenuContext.Provider value={menuContextObj}>

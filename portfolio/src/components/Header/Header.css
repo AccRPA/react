@@ -31,7 +31,17 @@ nav ul li span {
     outline: none;
     cursor: pointer;
 }
-nav ul li span:hover, nav ul li span.active
+
+nav ul li span:hover,
+nav ul li span:active, 
+nav ul li span:visited,
+nav ul li span:focus,
+nav ul li span:target {
+    background-color: inherit;
+    color: inherit;
+}
+
+nav ul li span.active
 {
     background-color: var(--color-dark-blue);
     color: var(--color-white);
