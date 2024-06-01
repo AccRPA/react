@@ -36,8 +36,8 @@ nav ul li span:active,
 nav ul li span:visited,
 nav ul li span:focus,
 nav ul li span:target {
-    background-color: inherit;
-    color: inherit;
+    background-color: none;
+    color: var(--color-grey);
 }
 
 nav ul li span:hover{
@@ -52,7 +52,7 @@ nav ul li span.selected
 }
 
 /** disable the hover for touch screens */
-@media (hover: none) {
+@media (hover: none){
     nav ul li span:hover {
         background-color: inherit;
         color: inherit;

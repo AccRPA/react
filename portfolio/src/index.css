@@ -25,14 +25,24 @@ body {
   color: var(--color-grey);
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
-}
-
 a {
   text-decoration: none;
   color: var(--color-dark-blue);
+}
+
+/** remove the blue highlight of button on mobile */
+input,
+textarea,
+button,
+span,
+ul,
+li,
+select,
+a {
+    -webkit-tap-highlight-color: transparent;
+    -webkit-user-select: none; /* Safari */
+    -ms-user-select: none; /* IE 10 and IE 11 */
+    user-select: none; /* Standard syntax */
 }
 
 section{
