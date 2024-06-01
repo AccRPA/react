@@ -32,7 +32,6 @@ nav ul li span {
     cursor: pointer;
 }
 
-nav ul li span:hover,
 nav ul li span:active, 
 nav ul li span:visited,
 nav ul li span:focus,
@@ -41,11 +40,25 @@ nav ul li span:target {
     color: inherit;
 }
 
-nav ul li span.active
-{
+nav ul li span:hover{
     background-color: var(--color-dark-blue);
     color: var(--color-white);
 }
+
+nav ul li span.selected
+{
+    background-color: var(--color-dark-blue) !important;
+    color: var(--color-white) !important;
+}
+
+/** disable the hover for touch screens */
+@media (hover: none) {
+    nav ul li span:hover {
+        background-color: inherit;
+        color: inherit;
+    }
+}
+
 @media (max-width: 576px){
     nav {
         justify-content: space-around;

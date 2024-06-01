@@ -19,7 +19,7 @@ function Header(){
                     return (
                         <li key={index}>
                             <span name={option}
-                                className={menuContext.menuActive === option ? 'active' : ''}
+                                className={menuContext.menuActive === option ? 'selected' : ''}
                                 onClick={() => handleClick(option)}>
                                 {option}
                             </span>

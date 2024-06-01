@@ -23,25 +23,28 @@ function App() {
   }
 
   function callback(entries) {
-    entries.forEach((section) => {
-      if (section.isIntersecting){            
-        let elem = section.target;
-        const children = document.querySelectorAll(`#${elem.id} .item-fade`);
-        children?.forEach((child, index) => {
-          if (!child.classList.contains('show')){
-              const delay = timeout * (index + 1);
-              showElement(child, delay);
-          }
-        });
+    // only set the menu for that section which is intersecting, but if there are more intersecting take the last one
+    // this avoids the blinking effect when two sections are intersecting with the viewport
+    const sectionsIntersecting = entries.filter(entry => entry.isIntersecting);
+    const section = sectionsIntersecting?.length > 1 ? sectionsIntersecting.length[sectionsIntersecting.length - 1] : sectionsIntersecting[0];
 
-        const currentMenuIstheTarget = menuActive === section.target.id;        
-        if (!menuClicked && !currentMenuIstheTarget){
-          setMenuActive(section.target.id);
-        } else if (currentMenuIstheTarget){
-          setMenuClicked(false);
+    if (!!section){           
+      let elem = section.target;
+      const children = document.querySelectorAll(`#${elem.id} .item-fade`);
+      children?.forEach((child, index) => {
+        if (!child.classList.contains('show')){
+            const delay = timeout * (index + 1);
+            showElement(child, delay);
         }
+      });
+
+      const currentMenuIstheTarget = menuActive === section.target.id;        
+      if (!menuClicked && !currentMenuIstheTarget){
+        setMenuActive(section.target.id);
+      } else if (currentMenuIstheTarget){
+        setMenuClicked(false);
       }
-    });
+    }
   };
   
   useEffect(() => {
