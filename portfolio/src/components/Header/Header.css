@@ -40,23 +40,10 @@ nav ul li span:target {
     color: var(--color-grey);
 }
 
-nav ul li span:hover{
-    background-color: var(--color-dark-blue);
-    color: var(--color-white);
-}
-
 nav ul li span.selected
 {
     background-color: var(--color-dark-blue) !important;
     color: var(--color-white) !important;
-}
-
-/** disable the hover for touch screens */
-@media (hover: none){
-    nav ul li span:hover {
-        background-color: inherit;
-        color: inherit;
-    }
 }
 
 @media (max-width: 576px){
