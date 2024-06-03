@@ -19,7 +19,7 @@ function ProjectItem({imgUrl, title, description, url, githubUrl, techStack}){
                     </div>
                     <div className="links">
                         <a href={url} target="_blank" rel="noreferrer">
-                            <i class="bi bi-link-45deg"></i>
+                            <i className="bi bi-link-45deg"></i>
                             Website
                         </a>
                         <a href={githubUrl} target="_blank" rel="noreferrer">
