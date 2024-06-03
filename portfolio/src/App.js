@@ -12,8 +12,8 @@ function App() {
   const menuContextObj = {menuActive, setMenuActive, setMenuClicked};
   const timeout = 150;
   const options = {
-    rootMargin: '0px',
-    threshold: 0.3,
+    rootMargin: '-50% 0px -50% 0px',
+    threshold: 0,
   };
 
   function showElement(elem, timeout) {
@@ -51,13 +51,12 @@ function App() {
     observerRef.current = new IntersectionObserver(callback, options);
     MenuOptions.forEach((entry) => {
       observerRef.current.observe(document.querySelector(`#${entry}`));
-    })
-
+    });
     // Clean up observers
     return () => {
       MenuOptions.forEach((entry) => {
         observerRef.current.unobserve(document.querySelector(`#${entry}`));
-      })
+      });
     };
     // it has to be exected every render so the callback can take the latest value of the menu active
     // otherwise the menuActive in the callback function will see oinly the first state value
