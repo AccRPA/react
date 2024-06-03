@@ -48,6 +48,7 @@
 .project-item .footer a {
     cursor: pointer;
     padding: 5px 0px;
+    text-decoration: underline;
 }
 
 .project-item .footer a i {

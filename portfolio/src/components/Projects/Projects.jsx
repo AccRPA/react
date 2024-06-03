@@ -20,7 +20,7 @@ function Projects(){
                   githubUrl="https://github.com/AccRPA/javascript/tree/main/Tests/nfl_teams_logos"
                   title="NFL Logos Game"
                   techStack="HTML, CSS, Javascript"
-                  description="Built in vanilla Javascript, is an application for knowing all the NFL teams names in the 2023 season"
+                  description="Built in vanilla Javascript. It is an application for knowing all the NFL teams names in the 2023 season."
                 >
                 </ProjectItem>
                 <ProjectItem 
@@ -29,7 +29,7 @@ function Projects(){
                   githubUrl="https://github.com/AccRPA/react/tree/main/react-recipes"
                   title="Recipe finder"
                   techStack="HTML, CSS, Javascript, React"
-                  description="Built in React. It uses a public API to get recipes base on one ingredient"
+                  description="My first project built in React. It uses a public API to get recipes base on only one ingredient. No external libraries were used."
                 >
                 </ProjectItem>
                 <ProjectItem 
@@ -38,7 +38,7 @@ function Projects(){
                   githubUrl="https://github.com/AccRPA/react/tree/main/react-keeper"
                   title="Note keeper"
                   techStack="HTML, CSS, Javascript, React"
-                  description="Built in React. It uses useEffect, useContext and useRef to not only handle adding and deleting notes as well as seeing the details but also to change the theme"
+                  description="Built in React. It uses useEffect, useContext and useRef to handle adding, deleting notes and seeing notes details as well as switching the theme between light and dark."
                 >
                 </ProjectItem>
               </div>
