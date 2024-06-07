@@ -1,14 +1,9 @@
 import './App.css';
-import { motion } from 'framer-motion';
+import Intro from './pages/intro/Intro';
 
 function App() {
   return (
-    <motion.div initial={{ opacity: 0, scale: 0.5 }}
-    animate={{ opacity: 1, scale: 1 }}
-    transition={{ duration: 0.5 }}
-    className="App text-sm font-medium text-white sm:text-lg lg:text-xl bg-orange-600">
-      Hi there!   
-    </motion.div>
+    <Intro></Intro>
   );
 }
 
