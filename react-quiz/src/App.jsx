@@ -20,7 +20,7 @@ function App() {
   if(userLoggedIn){
     // go to finding match and countdown to play
     return <>
-        <span>The user exists { userLoggedIn }</span>
+        <span>The user exists { userLoggedIn } </span>
         <button onClick={removeUser}>Click to remove it</button>
     </>
   }else{
