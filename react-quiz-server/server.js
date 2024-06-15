@@ -8,8 +8,13 @@ const server = http.createServer(app);
 // create a server with sockects from node http server
 const io = new Server(server);
 
-io.on('connection', () => console.log('client connected') );
-io.on('disconnection', () => console.log('client disconnected') );
+io.on('connection', (socket) => {
+    console.log('client connected');
+    socket.on('match', (data) => {
+        console.log(data);
+    });
+});
+io.on('disconnection', (socket) => console.log('client disconnected') );
 
 server.listen(4000);
 console.log('listening on port', 4000);

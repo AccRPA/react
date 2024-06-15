@@ -5,7 +5,7 @@
   "description": "Server for the React Quiz Game project",
   "main": "server.js",
   "scripts": {
-    "dev": "nodemon server.js",
+    "dev": "nodemon server.js --ignore react-quiz-game",
     "start": "node server.js"
   },
   "license": "ISC",
