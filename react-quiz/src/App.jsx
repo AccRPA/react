@@ -2,12 +2,9 @@ import { useState } from 'react'
 import './App.css'
 import { socket } from './socket';
 import { useEffect } from 'react';
+import { v4 as uuidv4 } from 'uuid';
 
 function App() {
-  const userStorageKey = 'quizGameUser';
-  const userSaved = window.sessionStorage.getItem(userStorageKey);
-  const [userLoggedIn, setUserLoggedIn] = useState(!!userSaved);
-
   const [isConnected, setIsConnected] = useState(socket.connected);
   
   useEffect(() => {
@@ -18,48 +15,35 @@ function App() {
     function onDisconnect() {
       setIsConnected(false);
     }
-
-    // function onFooEvent(value) {
-    //   setFooEvents(previous => [...previous, value]);
-    // }
-
+    
     socket.on('connect', onConnect);
     socket.on('disconnect', onDisconnect);
-    //socket.on('match', onFooEvent);
 
     return () => {
       socket.off('connect', onConnect);
       socket.off('disconnect', onDisconnect);
-      //socket.off('match', onFooEvent);
     };
   }, []);
   
-  function handleClick(){
-    window.sessionStorage.setItem(userStorageKey, 'User');
+  function connect(){
     socket.connect();
-    setUserLoggedIn(true);
+    socket.emit('newPlayer', uuidv4(), 'test', 'avatar');
   }
 
-  function removeUser(){
-    window.sessionStorage.removeItem(userStorageKey);
+  function disconnect(){
     socket.disconnect();
-    setUserLoggedIn(false);
   }
 
-  if(userLoggedIn){
+  if(isConnected){
     // go to finding match and countdown to play
     return <>
-        <span>{ isConnected ? 'Connected' : 'Disconnected' }</span>
-        <br />
-        <span>The user exists { userLoggedIn }</span>
-        <button onClick={removeUser}>Click to remove it</button>
+        <span>The user is connected</span>
+        <button onClick={disconnect}>Disconnect</button>
     </>
   }else{
     // go to login
     return <>
-      <span>{ isConnected ? 'Connected' : 'Disconnected' }</span>
-      <br />
-      <button onClick={handleClick}>store user</button>
+      <button onClick={connect}>Connect</button>
     </>
   }
 }
