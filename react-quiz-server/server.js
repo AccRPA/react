@@ -10,18 +10,20 @@ const server = http.createServer(app);
 const io = new Server(server);
 
 io.on('connection', (socket) => {
-    console.log('client connected');
-
+    
     let playerId;
     socket.on('newPlayer', (data) => {
         playerId = data[0];
         const [name, avatar] = data;
         Players.addPlayer(playerId, name, avatar);
+        socket.broadcast.emit('users_connected', Players.totalPlayers());
+        socket.emit('users_connected', Players.totalPlayers());
     })
 
-    socket.on("disconnect", (reason) => {
-        console.log(`disconnect reason:  ${reason}`);
+    socket.on("disconnect", () => {
         Players.removePlayer(playerId);
+        socket.broadcast.emit('users_connected', Players.totalPlayers());
+        socket.emit('users_connected', Players.totalPlayers());
     });
     
     socket.on('match', (data) => {

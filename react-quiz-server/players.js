@@ -12,7 +12,6 @@ function Player(id, name, avatar) {
 function addPlayer(id, name, avatar){
     if (!players.has(id)){
         players.set(id, new Player(id, name, avatar));
-        console.log(players.size);
     }
 }
 
@@ -34,9 +33,14 @@ function getDummyPlayer(){
     return new Player(uuidv4(), 'Dummy', 'avatar_dummy');
 }
 
+function totalPlayers(){
+    return players.size;
+}
+
 export let Players = {
     addPlayer,
     removePlayer,
     getPlayer,
-    getRandomFreePlayer
+    getRandomFreePlayer,
+    totalPlayers: totalPlayers
 }
