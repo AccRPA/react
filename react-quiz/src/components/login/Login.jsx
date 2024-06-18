@@ -1,6 +1,5 @@
 import './Login.css';
 import { useContext, useEffect } from 'react';
-import { v4 as uuidv4 } from 'uuid';
 import { socket } from '../../socket';
 import { SocketContext } from '../../SocketContext';
 import { useState } from 'react';
@@ -23,7 +22,7 @@ function Login(){
 
     function connect(){
         socket.connect();
-        socket.emit('newPlayer', uuidv4(), name, 'avatar');
+        socket.emit('newPlayer', name, 'avatar');
     }
     
     function submitHandle(event){
@@ -40,6 +39,7 @@ function Login(){
             <form action="/match">
                 <input placeholder="type player name" value={name} onChange={handleChangeName}></input>
                 
+                <span>{String.fromCodePoint(0x270D)}</span>
                 <span>&#129311;</span>
                 <span>&#129305;</span>
                 <span>&#129304;</span>
@@ -115,7 +115,7 @@ function Login(){
                 <span>&#127774;</span>
                 <span>&#127770;</span>
                 <span>&#127877;</span>
-                
+
                 <button type="submit" onClick={submitHandle}>Play</button>
             </form>
         </div>);

@@ -10,19 +10,17 @@ function Player(id, name, avatar) {
 }
 
 function addPlayer(id, name, avatar){
-    if (!players.has(id)){
-        players.set(id, new Player(id, name, avatar));
-    }
+    players.set(id, new Player(id, name, avatar));
 }
 
 function removePlayer(id){
-    if (players.has(id)){
+    if (!!id && players.has(id)){
         players.delete(id);
     }
 }
 
 function getPlayer(id){
-    return players.get(id);
+    return !!id && players.has(id) && players.get(id);
 }
 
 function getRandomFreePlayer(){

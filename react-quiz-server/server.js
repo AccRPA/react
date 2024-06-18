@@ -2,6 +2,7 @@ import express from 'express';
 import http from 'http';
 import { Server } from 'socket.io';
 import { Players } from './players.js';
+import { v4 as uuidv4 } from 'uuid';
 
 const app = express();
 // create a server that will be handled by express
@@ -13,7 +14,7 @@ io.on('connection', (socket) => {
     
     let playerId;
     socket.on('newPlayer', (data) => {
-        playerId = data[0];
+        playerId = uuidv4();
         const [name, avatar] = data;
         Players.addPlayer(playerId, name, avatar);
         socket.broadcast.emit('users_connected', Players.totalPlayers());

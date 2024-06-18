@@ -1,37 +1,11 @@
-import { useContext, useEffect } from "react";
-import { SocketContext } from "../../SocketContext";
-import { socket } from '../../socket';
+import DisconnectButton from '../disconnect-button/DisconnectButton';
+import ConnectedUsers from '../connected-users/ConnectedUsers';
 
 function Game(){
-    const statusContext = useContext(SocketContext);
-
-    useEffect(() => {
-        function onDisconnect() {
-            statusContext.setIsConnected(false);
-        }
-        
-        function handleUsersConnected(data){
-            console.log('users_connected');
-            statusContext.setUsersConnected(data);
-        }
-    
-        socket.on('disconnect', onDisconnect);
-        socket.on('users_connected', handleUsersConnected);
-        
-        return () => {
-            socket.off('disconnect', onDisconnect);
-            socket.off('users_connected', handleUsersConnected);
-        };
-    }, []);
-
-    const disconnect = () => {
-        socket.disconnect();
-    }
-
     return <div>
             <p>Game!</p>
-            <div>Total users connected: {statusContext.usersConnected}</div>
-            <button onClick={disconnect}>Disconnect</button>
+            <ConnectedUsers></ConnectedUsers>
+            <DisconnectButton></DisconnectButton>
         </div>;
 }
 
