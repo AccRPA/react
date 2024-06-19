@@ -10,11 +10,18 @@ function Game(){
         function onMatchPartner(data){
             setPartner(data);
         }
+
+        function onPartnerDisconnected(){
+            setPartner(null);
+            socket.emit('leave_room');
+        }
     
         socket.on('match_partner', onMatchPartner);
+        socket.on('partner_disconnected', onPartnerDisconnected);
 
         return () => {
             socket.off('match_partner', onMatchPartner);
+            socket.on('partner_disconnected', onPartnerDisconnected);
         };
     }, []);
 

@@ -13,6 +13,7 @@ const io = new Server(server);
 io.on('connection', (socket) => {
     
     let playerId;
+    let roomId;
 
     socket.on('newPlayer', (name, avatar) => {
         playerId = uuidv4();
@@ -27,6 +28,7 @@ io.on('connection', (socket) => {
         if (!!partner){
             // join a room with a free partner
             socket.join(partner.id);
+            roomId = partner.id;
             
             // set both players playing
             Players.setPlayerPlaying(partner.id);
@@ -34,24 +36,44 @@ io.on('connection', (socket) => {
             
             // emit events to the players in the room to update their partners
             socket.emit('match_partner', partner?.name);
-            socket.to(partner.id).emit('match_partner', name);
+            socket.to(roomId).emit('match_partner', name);
         }else{
             // there's no one free, creates a room
-            socket.join(playerId);
+            joinOwnRoom();
         }
     })
 
+    socket.on('leave_room', () => {
+        // leave the room
+        socket.leave(roomId);
+
+        joinOwnRoom();
+
+        // set the player free
+        Players.setPlayerFree(playerId);
+    });
+
     socket.on("disconnect", () => {
-        // if the user is in a room, inform the other members the disconnection, and set them free
         Players.removePlayer(playerId);
+        
+        // leave the room
+        socket.leave(roomId);
+        
+        // inform the room members about the disconnection so they will leave the room as well
+        io.to(roomId).emit('partner_disconnected');
 
-        // inform the room members about the disconnection
-        socket.room.emit('disconnect', playerId);
-
-        // informa about the total amount of users currently connected
+        // inform about the total amount of users currently connected
         socket.broadcast.emit('users_connected', Players.totalPlayers());
         
+        playerId = null;
+        roomId = null;
     });
+
+    function joinOwnRoom(){
+        // join own room
+        socket.join(playerId);
+        roomId = playerId;
+    }
 });
 
 server.listen(4000);

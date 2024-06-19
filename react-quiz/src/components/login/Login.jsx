@@ -37,7 +37,7 @@ function Login(){
     return (
         <div>
             <form action="/match">
-                <input placeholder="type player name" value={name} onChange={handleChangeName}></input>
+                <input placeholder="type player name" name="player" value={name} onChange={handleChangeName}></input>
                 
                 <span>{String.fromCodePoint(0x270D)}</span>
                 <span>&#129311;</span>
