@@ -1,38 +1,52 @@
-import { v4 as uuidv4 } from 'uuid';
+'use strict';
 
-let players = new Map();
-    
+const statusList = {
+    free: 0,
+    playing: 1
+};
+let players = new Array();
+
 function Player(id, name, avatar) {
     this.id = id;
     this.name = name;
     this.avatar = avatar;
-    this.status = 'free';
+    this.status = statusList.free;
 }
 
 function addPlayer(id, name, avatar){
-    players.set(id, new Player(id, name, avatar));
+    players.push(new Player(id, name, avatar));
 }
 
 function removePlayer(id){
-    if (!!id && players.has(id)){
-        players.delete(id);
+    let index = !!id && players.findIndex(p => p.id === id);
+    if (index >= 0){
+        players.splice(index, 1);
     }
 }
 
 function getPlayer(id){
-    return !!id && players.has(id) && players.get(id);
+    return !!id && players.find(p => p.id === id);
 }
 
-function getRandomFreePlayer(){
-    return players.filter((_,v) => v.status === 'free')?.[0] ?? getDummyPlayer();
+function setPlayerPlaying(id){
+    const player = getPlayer(id);
+    (player && (player.status = statusList.playing));
 }
 
-function getDummyPlayer(){
-    return new Player(uuidv4(), 'Dummy', 'avatar_dummy');
+function setPlayerFree(id){
+    const player = getPlayer(id);
+    (player && (player.status = statusList.free));
+}
+
+function getRandomFreePlayer(idToExclude){
+    return players.filter(p => 
+            p.id !== idToExclude && 
+            p.status === statusList.free)
+            ?.[0];
 }
 
 function totalPlayers(){
-    return players.size;
+    return players.length;
 }
 
 export let Players = {
@@ -40,5 +54,7 @@ export let Players = {
     removePlayer,
     getPlayer,
     getRandomFreePlayer,
-    totalPlayers: totalPlayers
+    totalPlayers: totalPlayers,
+    setPlayerPlaying: setPlayerPlaying,
+    setPlayerFree: setPlayerFree,
 }
