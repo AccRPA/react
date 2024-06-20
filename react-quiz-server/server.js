@@ -35,8 +35,8 @@ io.on('connection', (socket) => {
             Players.setPlayerPlaying(playerId);
             
             // emit events to the players in the room to update their partners
-            socket.emit('match_partner', partner?.name);
-            socket.to(roomId).emit('match_partner', name);
+            socket.emit('match_partner', partner?.name, partner?.avatar);
+            socket.to(roomId).emit('match_partner', name, avatar);
         }else{
             // there's no one free, creates a room
             joinOwnRoom();

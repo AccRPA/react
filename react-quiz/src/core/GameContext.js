@@ -9,5 +9,10 @@ export const GameContext = createContext({
         name: '',
         avatar: null,
     },
-    setUserData: () => {}
+    setUserData: () => {},
+    partnerData: {
+        name: '',
+        avatar: null,
+    },
+    setPartnerData: () => {}
 });

@@ -41,10 +41,11 @@ function Login(){
     }    
     
     function handleSelectAvatar(event){
+        console.log(event.target.id);
         gameContext.setUserData(previous => (
             {
                 ...previous,
-                avatar: event.target.name
+                avatar: event.target.id
             }
         ));
     }
@@ -53,13 +54,11 @@ function Login(){
         <div>
             <form>
                 <input placeholder="type player name" name="player" value={gameContext.userData.name} onChange={handleChangeName}></input>
-                
                 <div>
                     {avatars.map((code, index) => 
-                        <span key={index} onClick={handleSelectAvatar} name={code}>{String.fromCodePoint(code)}</span>
+                        <span key={index} onClick={handleSelectAvatar} id={code}>{String.fromCodePoint(code)}</span>
                     )}
                 </div>
-
                 <button type="submit" onClick={submitHandle}>Play</button>
             </form>
         </div>);

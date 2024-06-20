@@ -9,11 +9,13 @@ function App() {
   const [isConnected, setIsConnected] = useState(gameContext.isConnected);
   const [usersConnected, setUsersConnected] = useState(gameContext.usersConnected);
   const [userData, setUserData] = useState(gameContext.userData);
+  const [partnerData, setPartnerData] = useState(gameContext.partnerData);
   
   const gameContextState = {
     isConnected, setIsConnected, 
     usersConnected, setUsersConnected,
-    userData, setUserData
+    userData, setUserData,
+    partnerData, setPartnerData
   };
 
   return <GameContext.Provider value={gameContextState}>

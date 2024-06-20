@@ -1,13 +1,13 @@
 import { useContext } from "react";
 import { GameContext } from "../../core/GameContext";
 import Login from "../login/Login";
-import Game from "../game/Game";
+import Match from "../match/Match";
 
 function Root(){
     const gameContext = useContext(GameContext);
 
     if (gameContext.isConnected){
-        return <Game></Game>
+        return <Match></Match>
     }else{
         return <Login></Login>
     }
