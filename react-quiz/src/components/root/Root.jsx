@@ -1,7 +1,7 @@
 import { useContext } from "react";
-import { GameContext } from "./GameContext";
-import Login from "./components/login/Login";
-import Game from "./components/game/Game";
+import { GameContext } from "../../core/GameContext";
+import Login from "../login/Login";
+import Game from "../game/Game";
 
 function Root(){
     const gameContext = useContext(GameContext);

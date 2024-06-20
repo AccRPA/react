@@ -1,8 +1,8 @@
 import DisconnectButton from '../disconnect-button/DisconnectButton';
 import ConnectedUsers from '../connected-users/ConnectedUsers';
 import { useContext, useEffect, useState } from 'react';
-import { socket } from '../../socket';
-import { GameContext } from '../../GameContext';
+import { socket } from '../../core/socket';
+import { GameContext } from '../../core/GameContext';
 
 function Game(){
     const gameContext = useContext(GameContext);

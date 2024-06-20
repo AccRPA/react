@@ -1,8 +1,8 @@
 import './App.css'
 import { useState } from 'react'
 import { useContext } from 'react';
-import { GameContext } from './GameContext';
-import Root from './Root';
+import { GameContext } from './core/GameContext';
+import Root from './components/root/Root';
 
 function App() {
   const gameContext = useContext(GameContext);

@@ -1,6 +1,6 @@
 import { useContext, useEffect } from "react";
-import { GameContext } from "../../GameContext";
-import { socket } from '../../socket';
+import { GameContext } from "../../core/GameContext";
+import { socket } from '../../core/socket';
 
 function ConnectedUsers(){
     const gameContext = useContext(GameContext);

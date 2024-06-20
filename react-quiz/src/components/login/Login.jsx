@@ -1,8 +1,8 @@
 import './Login.css';
 import { useContext, useEffect } from 'react';
-import { socket } from '../../socket';
-import { GameContext } from '../../GameContext';
-import { avatars } from '../../Avatars';
+import { socket } from '../../core/socket';
+import { GameContext } from '../../core/GameContext';
+import { avatars } from '../../common/Avatars';
 
 function Login(){
     const gameContext = useContext(GameContext);
