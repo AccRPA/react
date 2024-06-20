@@ -1,13 +1,13 @@
 import { useContext, useEffect } from "react";
-import { SocketContext } from "../../SocketContext";
+import { GameContext } from "../../GameContext";
 import { socket } from '../../socket';
 
 function ConnectedUsers(){
-    const statusContext = useContext(SocketContext);
+    const gameContext = useContext(GameContext);
 
     useEffect(() => {
         function handleUsersConnected(data){
-            statusContext.setUsersConnected(data);
+            gameContext.setUsersConnected(data);
         }
     
         socket.on('users_connected', handleUsersConnected);
@@ -17,7 +17,7 @@ function ConnectedUsers(){
         };
     }, []);
 
-    return <div>Total users connected: {statusContext.usersConnected}</div>;
+    return <div>Total users connected: {gameContext.usersConnected}</div>;
 }
 
 export default ConnectedUsers;

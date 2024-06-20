@@ -1,21 +1,24 @@
 import './App.css'
 import { useState } from 'react'
 import { useContext } from 'react';
-import { SocketContext } from './SocketContext';
+import { GameContext } from './GameContext';
 import Root from './Root';
 
 function App() {
-  const socketContext = useContext(SocketContext);
-  const [isConnected, setIsConnected] = useState(socketContext.isConnected);
-  const [usersConnected, setUsersConnected] = useState(socketContext.usersConnected);
-  const socketContextStatus = {
+  const gameContext = useContext(GameContext);
+  const [isConnected, setIsConnected] = useState(gameContext.isConnected);
+  const [usersConnected, setUsersConnected] = useState(gameContext.usersConnected);
+  const [userData, setUserData] = useState(gameContext.userData);
+  
+  const gameContextState = {
     isConnected, setIsConnected, 
-    usersConnected, setUsersConnected
+    usersConnected, setUsersConnected,
+    userData, setUserData
   };
 
-  return <SocketContext.Provider value={socketContextStatus}>
+  return <GameContext.Provider value={gameContextState}>
       <Root></Root>
-    </SocketContext.Provider>
+    </GameContext.Provider>
 }
 
 export default App

@@ -1,9 +1,11 @@
 import DisconnectButton from '../disconnect-button/DisconnectButton';
 import ConnectedUsers from '../connected-users/ConnectedUsers';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { socket } from '../../socket';
+import { GameContext } from '../../GameContext';
 
 function Game(){
+    const gameContext = useContext(GameContext);
     const [partner, setPartner] = useState();
     
     useEffect(() => {
@@ -26,7 +28,7 @@ function Game(){
     }, []);
 
     return <div>
-            <p>Game!</p>
+            <p>Game for {gameContext.userData.name}!</p>
             <p>Match width: {partner}</p>
             <ConnectedUsers></ConnectedUsers>
             <DisconnectButton></DisconnectButton>

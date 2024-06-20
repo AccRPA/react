@@ -1,12 +1,12 @@
 import { useContext } from "react";
-import { SocketContext } from "./SocketContext";
+import { GameContext } from "./GameContext";
 import Login from "./components/login/Login";
 import Game from "./components/game/Game";
 
 function Root(){
-    const socketContext = useContext(SocketContext);
+    const gameContext = useContext(GameContext);
 
-    if (socketContext.isConnected){
+    if (gameContext.isConnected){
         return <Game></Game>
     }else{
         return <Login></Login>

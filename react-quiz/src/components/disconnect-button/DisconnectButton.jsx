@@ -1,13 +1,13 @@
 import { useContext, useEffect } from "react";
-import { SocketContext } from "../../SocketContext";
+import { GameContext } from "../../GameContext";
 import { socket } from '../../socket';
 
 function DisconnectButton(){
-    const statusContext = useContext(SocketContext);
+    const gameContext = useContext(GameContext);
 
     useEffect(() => {
         function onDisconnect() {
-            statusContext.setIsConnected(false);
+            gameContext.setIsConnected(false);
         }
     
         socket.on('disconnect', onDisconnect);

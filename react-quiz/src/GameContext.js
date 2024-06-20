@@ -1,8 +1,13 @@
 import { createContext } from "react";
 
-export const SocketContext = createContext({
+export const GameContext = createContext({
     isConnected: false,
     setIsConnected: () => {},
     usersConnected: 0,
     setUsersConnected: () => {},
+    userData: {
+        name: '',
+        avatar: null,
+    },
+    setUserData: () => {}
 });
