@@ -1,5 +1,6 @@
 import { useContext, useEffect } from "react";
 import { GameContext } from "../../core/GameContext";
+import { GameData } from '../../core/GameData';
 import { socket } from '../../core/socket';
 
 function DisconnectButton(){
@@ -7,7 +8,7 @@ function DisconnectButton(){
 
     useEffect(() => {
         function onDisconnect() {
-            gameContext.setIsConnected(false);
+            gameContext.setGameData(new GameData());
         }
     
         socket.on('disconnect', onDisconnect);

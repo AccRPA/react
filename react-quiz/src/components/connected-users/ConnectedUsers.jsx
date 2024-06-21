@@ -7,7 +7,12 @@ function ConnectedUsers(){
 
     useEffect(() => {
         function handleUsersConnected(data){
-            gameContext.setUsersConnected(data);
+            gameContext.setGameData(previous => {
+                return {
+                    ...previous,
+                    totalUsersConnected: data
+                };
+            });
         }
     
         socket.on('users_connected', handleUsersConnected);
@@ -17,7 +22,7 @@ function ConnectedUsers(){
         };
     }, []);
 
-    return <div>Total users connected: {gameContext.usersConnected}</div>;
+    return <div>Total users connected: {gameContext.gameData.totalUsersConnected}</div>;
 }
 
 export default ConnectedUsers;

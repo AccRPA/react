@@ -6,17 +6,8 @@ import Root from './components/root/Root';
 
 function App() {
   const gameContext = useContext(GameContext);
-  const [isConnected, setIsConnected] = useState(gameContext.isConnected);
-  const [usersConnected, setUsersConnected] = useState(gameContext.usersConnected);
-  const [userData, setUserData] = useState(gameContext.userData);
-  const [partnerData, setPartnerData] = useState(gameContext.partnerData);
-  
-  const gameContextState = {
-    isConnected, setIsConnected, 
-    usersConnected, setUsersConnected,
-    userData, setUserData,
-    partnerData, setPartnerData
-  };
+  const [gameData, setGameData] = useState(gameContext.gameData);  
+  const gameContextState = { gameData, setGameData };
 
   return <GameContext.Provider value={gameContextState}>
       <Root></Root>

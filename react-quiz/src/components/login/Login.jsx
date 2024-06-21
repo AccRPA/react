@@ -9,7 +9,12 @@ function Login(){
 
     useEffect(() => {
         function onConnect() {
-            gameContext.setIsConnected(true);
+            gameContext.setGameData(previous => {
+                return {
+                    ...previous,
+                    userIsConnected: true
+                } 
+            });
         }
         
         socket.on('connect', onConnect);
@@ -22,8 +27,8 @@ function Login(){
     function connect(){
         socket.connect();
         socket.emit('newPlayer', 
-            gameContext.userData.name, 
-            gameContext.userData.avatar);
+            gameContext.gameData.userData.name, 
+            gameContext.gameData.userData.avatar);
     }
     
     function submitHandle(event){
@@ -32,31 +37,46 @@ function Login(){
     }
 
     function handleChangeName(event){
-        gameContext.setUserData(previous => (
-            {
+        gameContext.setGameData(previous => {
+            let userData = getUserData(previous);                
+            userData.name = event.target.value;
+
+            return {
                 ...previous,
-                name: event.target.value
-            }
-        ));
+                userData: userData
+            } 
+        });
     }    
     
     function handleSelectAvatar(event){
-        gameContext.setUserData(previous => (
-            {
+        gameContext.setGameData(previous => {
+            let userData = getUserData(previous);                
+            userData.avatar = event.target.id;
+
+            return {
                 ...previous,
-                avatar: event.target.id
-            }
-        ));
+                userData: userData
+            } 
+        });
+    }
+
+    function getUserData(previous){
+        let userData = {...previous.userData};
+        if (!userData){
+            userData = new Player();
+        }
+
+        return userData;
     }
 
     return (
         <div>
             <form>
-                <input placeholder="type player name" name="player" value={gameContext.userData.name} onChange={handleChangeName}></input>
+                <input placeholder="type player name" name="player" value={gameContext.gameData.userData?.name} onChange={handleChangeName}></input>
                 <button type="submit" onClick={submitHandle}>Play</button>
                 <div className="grid-avatar">
                     {avatars.map((code, index) => 
-                        <span key={index} onClick={handleSelectAvatar} id={code} className={gameContext.userData.avatar === String(code) ? 'selected' : ''}>{String.fromCodePoint(code)}</span>
+                        <span key={index} onClick={handleSelectAvatar} id={code} className={gameContext.gameData.userData?.avatar === String(code) ? 'selected' : ''}>{String.fromCodePoint(code)}</span>
                     )}
                 </div>
             </form>
