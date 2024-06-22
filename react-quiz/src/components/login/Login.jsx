@@ -51,9 +51,8 @@ function Login(){
             socket.off("player_created", onPlayerCreated);
         };
     }, 
-        [gameContext.gameData.userData.name, 
-        gameContext.gameData.userData.avatar]
-    );
+    [gameContext.gameData.userData.name, 
+    gameContext.gameData.userData.avatar]);
 
     function connect(){
         if (!!gameContext.gameData.userData.name &&
