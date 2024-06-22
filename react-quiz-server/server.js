@@ -22,6 +22,7 @@ io.on('connection', (socket) => {
         // inform about the total amount of users connected
         socket.broadcast.emit('users_connected', Players.totalPlayers());
         socket.emit('users_connected', Players.totalPlayers());
+        socket.emit('player_created', true);
         
         // find a free player to play
         const partner = Players.getRandomFreePlayer(playerId);
