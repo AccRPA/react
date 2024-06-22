@@ -14,7 +14,9 @@ function Player(id, name, avatar) {
 }
 
 function addPlayer(id, name, avatar){
-    players.push(new Player(id, name, avatar));
+    const player = new Player(id, name, avatar);
+    players.push(player);
+    return player;
 }
 
 function removePlayer(id){

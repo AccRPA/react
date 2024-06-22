@@ -12,32 +12,36 @@ const io = new Server(server);
 
 io.on('connection', (socket) => {
     
-    let playerId;
+    let player;
     let roomId;
 
     socket.on('newPlayer', (name, avatar) => {
-        playerId = uuidv4();
-        Players.addPlayer(playerId, name, avatar);
+        player = Players.addPlayer(uuidv4(), name, avatar);
+
+        socket.emit('player_created', true); 
+        joinOwnRoom();
 
         // inform about the total amount of users connected
         socket.broadcast.emit('users_connected', Players.totalPlayers());
-        socket.emit('users_connected', Players.totalPlayers());
-        socket.emit('player_created', true);
-        
+        socket.emit('users_connected', Players.totalPlayers());  
+    });
+
+    socket.on('find_match', () => {
         // find a free player to play
-        const partner = Players.getRandomFreePlayer(playerId);
+        const partner = Players.getRandomFreePlayer(player.id);
         if (!!partner){
+            socket.leave(roomId);
             // join a room with a free partner
             socket.join(partner.id);
             roomId = partner.id;
             
             // set both players playing
             Players.setPlayerPlaying(partner.id);
-            Players.setPlayerPlaying(playerId);
-            
+            Players.setPlayerPlaying(player.id);
+
             // emit events to the players in the room to update their partners
             socket.emit('match_partner', partner?.name, partner?.avatar);
-            socket.to(roomId).emit('match_partner', name, avatar);
+            socket.to(roomId).emit('match_partner', player.name, player.avatar);
         }else{
             // there's no one free, creates a room
             joinOwnRoom();
@@ -51,11 +55,11 @@ io.on('connection', (socket) => {
         joinOwnRoom();
 
         // set the player free
-        Players.setPlayerFree(playerId);
+        Players.setPlayerFree(player.id);
     });
 
     socket.on("disconnect", () => {
-        Players.removePlayer(playerId);
+        Players.removePlayer(player?.id);
         
         // leave the room
         socket.leave(roomId);
@@ -66,14 +70,14 @@ io.on('connection', (socket) => {
         // inform about the total amount of users currently connected
         socket.broadcast.emit('users_connected', Players.totalPlayers());
         
-        playerId = null;
+        player = null;
         roomId = null;
     });
 
     function joinOwnRoom(){
         // join own room
-        socket.join(playerId);
-        roomId = playerId;
+        socket.join(player.id);
+        roomId = player.id;
     }
 });
 

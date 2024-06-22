@@ -43,13 +43,23 @@ function Match(){
         };
     }, []);
 
+    function handleFindMatch(){
+        socket.emit('find_match');
+    }
+
     return <div>
-                <p>Match for: </p>
-                <User data={gameContext.gameData.userData}></User>
-                <p>width: </p>
-                <User data={gameContext.gameData.partnerData}></User>
-                <ConnectedUsers></ConnectedUsers>
+                <button onClick={handleFindMatch}>Find match</button>
+                {
+                    !!gameContext.gameData.partnerData && 
+                    <div>
+                        <p>Match for: </p>
+                        <User data={gameContext.gameData.userData}></User>
+                        <p>width: </p>
+                        <User data={gameContext.gameData.partnerData}></User>
+                    </div>
+                }
                 <DisconnectButton></DisconnectButton>
+                <ConnectedUsers></ConnectedUsers>
             </div>;
 }
 

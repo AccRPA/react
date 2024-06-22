@@ -8,5 +8,4 @@ const URL = process.env.NODE_ENV === 'production' ? undefined : '/';
 export const socket = io(URL, {
     autoConnect: false,
     //reconnection: true,
-    timeout: 5000
 });
