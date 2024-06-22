@@ -50,7 +50,10 @@ function Login(){
             socket.off("connect_error", onConnectError);
             socket.off("player_created", onPlayerCreated);
         };
-    }, []);
+    }, 
+        [gameContext.gameData.userData.name, 
+        gameContext.gameData.userData.avatar]
+    );
 
     function connect(){
         if (!!gameContext.gameData.userData.name &&
