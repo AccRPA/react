@@ -28,6 +28,9 @@ io.on('connection', (socket) => {
         // inform about the total amount of users connected
         socket.broadcast.emit('users_connected', Players.totalPlayers());
         socket.emit('users_connected', Players.totalPlayers());  
+
+        // inform about the total amount of users free
+        emitTotalFreePlayers();  
     });
 
     socket.on('find_match', () => {
@@ -37,7 +40,7 @@ io.on('connection', (socket) => {
             
             if (!!partner){
                 socket.leave(roomId);
-                
+
                 printLog(`player ${player.name} LEFT the own room ${roomId}`);
                 
                 // join a room with a free partner
@@ -49,6 +52,8 @@ io.on('connection', (socket) => {
                 // set both players playing
                 Players.setPlayerPlaying(partner.id);
                 Players.setPlayerPlaying(player.id);
+
+                emitTotalFreePlayers();
 
                 // emit events to the players in the room to update their partners
                 socket.emit('match_partner', partner?.name, partner?.avatar);
@@ -75,6 +80,8 @@ io.on('connection', (socket) => {
 
             // set the player free
             Players.setPlayerFree(player.id);
+
+            emitTotalFreePlayers();
         }
     });
 
@@ -92,6 +99,8 @@ io.on('connection', (socket) => {
 
             // inform about the total amount of users currently connected
             socket.broadcast.emit('users_connected', Players.totalPlayers());
+
+            emitTotalFreePlayers();
             
             player = null;
             roomId = null;
@@ -105,6 +114,14 @@ io.on('connection', (socket) => {
             // join own room
             socket.join(player.id);
             roomId = player.id;
+        }
+    }
+
+    function emitTotalFreePlayers(){
+        if (!!player?.id){
+            const playersFree = Players.totalFreePlayers(player.id);
+            socket.broadcast.emit('users_free', playersFree);
+            socket.emit('users_free', playersFree);  
         }
     }
 });

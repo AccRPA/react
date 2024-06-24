@@ -47,6 +47,12 @@ function getRandomFreePlayer(idToExclude){
             ?.[0];
 }
 
+function totalFreePlayers(idToExclude){
+    return players.filter(p => 
+            p.id !== idToExclude && 
+            p.status === statusList.free)?.length;
+}
+
 function totalPlayers(){
     return players.length;
 }
@@ -57,6 +63,7 @@ export let Players = {
     getPlayer,
     getRandomFreePlayer,
     totalPlayers: totalPlayers,
+    totalFreePlayers: totalFreePlayers,
     setPlayerPlaying: setPlayerPlaying,
     setPlayerFree: setPlayerFree,
 }
