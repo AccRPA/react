@@ -99,8 +99,6 @@ io.on('connection', (socket) => {
 
             // inform about the total amount of users currently connected
             socket.broadcast.emit('users_connected', Players.totalPlayers());
-
-            emitTotalFreePlayers();
             
             player = null;
             roomId = null;
