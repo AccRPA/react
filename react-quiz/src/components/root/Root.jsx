@@ -44,14 +44,25 @@ function Root(){
             socket.emit('leave_room');
         }
         
+        function onUsersFree(usersFree){
+            gameContext.setGameData(previous => {
+                return {
+                    ...previous,
+                    totalUsersFree: usersFree
+                }
+            });
+        }
+        
         socket.on('users_connected', handleUsersConnected);
         socket.on('partner_disconnected', onPartnerDisconnected);
         socket.on('match_partner', onMatchPartner);
-
+        socket.on('users_free', onUsersFree);
+        
         return () => {
             socket.off('users_connected', handleUsersConnected);
             socket.off('partner_disconnected', onPartnerDisconnected);
             socket.off('match_partner', onMatchPartner);
+            socket.off('users_free', onUsersFree);
         };
     }, []);
 

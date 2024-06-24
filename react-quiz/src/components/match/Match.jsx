@@ -1,5 +1,5 @@
 import { GameContext } from '../../core/GameContext';
-import { useContext, useEffect, useState } from 'react';
+import { useContext } from 'react';
 import { socket } from '../../core/socket';
 import ConnectedUsers from '../connected-users/ConnectedUsers';
 import DisconnectButton from '../disconnect-button/DisconnectButton';
@@ -7,27 +7,13 @@ import User from '../user/User';
 
 function Match(){
     const gameContext = useContext(GameContext);
-    const [usersFree, setUsersFree] = useState();
-
-    useEffect(() => {
-        // this handle event only makes sense in this view
-        function onUsersFree(userFree){
-            setUsersFree(userFree);
-        }
-
-        socket.on('users_free', onUsersFree);
-
-        return () => {
-            socket.off('users_free', onUsersFree);
-        }
-    }, []);
 
     function handleFindMatch(){
         socket.emit('find_match');
     }
 
     return <div>
-                {usersFree}
+                <p>Currently there are {gameContext.gameData.totalUsersFree} users free. We'll find you a partner automatically or you can play solo.</p>
                 <button onClick={handleFindMatch}>Find match</button>
                 {
                     !!gameContext.gameData.partnerData && 
