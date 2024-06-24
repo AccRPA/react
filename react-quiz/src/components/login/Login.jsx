@@ -15,9 +15,7 @@ function Login(){
          * if not, it will not emit the creation event
          */
         function onConnect() {
-            if (socket.connected){
-                emitNewPlayer();
-            }
+            emitNewPlayer();
         }
 
         /**
@@ -99,9 +97,13 @@ function Login(){
     }
 
     function emitNewPlayer(){
-        socket.emit('newPlayer', 
-                    gameContext.gameData.userData.name, 
-                    gameContext.gameData.userData.avatar);
+        if (!!gameContext.gameData.userData.name && 
+            !!gameContext.gameData.userData.avatar){
+
+            socket.emit('newPlayer', 
+                gameContext.gameData.userData.name, 
+                gameContext.gameData.userData.avatar);
+        }
     }
 
     return (

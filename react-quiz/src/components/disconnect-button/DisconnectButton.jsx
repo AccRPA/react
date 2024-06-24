@@ -10,7 +10,7 @@ function DisconnectButton(){
         function onDisconnect() {
             gameContext.setGameData(new GameData());
         }
-    
+
         socket.on('disconnect', onDisconnect);
         
         return () => {
