@@ -2,6 +2,7 @@ import express from 'express';
 import http from 'http';
 import { Server } from 'socket.io';
 import { Players } from './players.js';
+import { Games } from './games.js';
 import { v4 as uuidv4 } from 'uuid';
 
 const app = express();
@@ -14,6 +15,7 @@ const log = false;
 io.on('connection', (socket) => {
     
     let player;
+    let partner;
     let roomId;
 
     socket.on('newPlayer', (name, avatar) => {
@@ -34,9 +36,9 @@ io.on('connection', (socket) => {
     });
 
     socket.on('find_match', () => {
-        if (!!player?.id){
+        if (!!player?.id && !partner){
             // find a free player to play
-            const partner = Players.getRandomFreePlayer(player.id);
+            partner = Players.getRandomFreePlayer(player.id);
             
             if (!!partner){
                 socket.leave(roomId);
@@ -55,6 +57,8 @@ io.on('connection', (socket) => {
 
                 emitTotalFreePlayers();
 
+                Games.addGame(roomId, player, partner);
+
                 // emit events to the players in the room to update their partners
                 socket.emit('match_partner', partner?.name, partner?.avatar);
                 socket.to(roomId).emit('match_partner', player.name, player.avatar);
@@ -70,19 +74,36 @@ io.on('connection', (socket) => {
     });
 
     socket.on('leave_room', () => {
-        if (!!player?.id){
-            // leave the room
-            socket.leave(roomId);
+        leaveRoom({emitEvents : true});
+    });
 
-            printLog(`leave: player ${player.name} left room ${roomId}`);
+    socket.on('leave_room_due_partner', () => {
+        leaveRoom({emitEvents : false});
+    });
 
-            joinOwnRoom();
+    socket.on('get_total_free_players', () => {
+        emitTotalFreePlayers();
+    });
 
-            // set the player free
-            Players.setPlayerFree(player.id);
+    socket.on('player_ready', () => {
+        const game = Games.getGame(roomId);
+        if (!!game){
+            const player = game.getPlayer(player.id);
+            if (!!player){
+                player.ready = true;
+                socket.to(roomId).emit('partner_ready');
 
-            emitTotalFreePlayers();
+                if (!!game.player1.ready && !!game.player2.ready){
+                    socket.to(roomId).emit('game_data', game);
+                    socket.emit('game_data', game);
+                    //getQuestions(); 
+                }
+            }
         }
+    });
+
+    socket.on('get_response', () => {
+
     });
 
     socket.on("disconnect", () => {
@@ -92,7 +113,7 @@ io.on('connection', (socket) => {
             // leave the room
             socket.leave(roomId);
             
-            printLog(`disconnetc: player ${player.name} left room ${roomId}`);
+            printLog(`disconnect: player ${player.name} left room ${roomId}`);
 
             // inform the room members about the disconnection so they will leave the room as well
             io.to(roomId).emit('partner_disconnected');
@@ -101,12 +122,13 @@ io.on('connection', (socket) => {
             socket.broadcast.emit('users_connected', Players.totalPlayers());
             
             player = null;
+            partner = null;
             roomId = null;
         }
     });
 
     function joinOwnRoom(){
-        if (!!player?.id){
+        if (!!player?.id && !partner){
             printLog(`player ${player.name} join own room ${player.id}`);
 
             // join own room
@@ -122,12 +144,44 @@ io.on('connection', (socket) => {
             socket.emit('users_free', playersFree);  
         }
     }
+
+    function leaveRoom({emitEvents}){
+        if (!!player?.id){
+            partner = null;
+
+            // leave the room
+            socket.leave(roomId);
+            
+            Games.deleteGame(roomId);
+            
+            printLog(`leave: player ${player.name} left room ${roomId}`);
+            
+            // set the player free
+            Players.setPlayerFree(player.id);
+            // assign a new identificator to join its own room
+            player.id = uuidv4();
+                        
+            if (!!emitEvents){
+                socket.to(roomId).emit('partner_disconnected');
+                socket.emit('room_left');
+            }
+            
+            joinOwnRoom();
+        }
+    }
 });
 
 function printLog(message){
     if (log){
         console.log(message);
     }
+}
+
+function getQuestions(){
+    fetch('https://opentdb.com/api.php?amount=10&difficulty=easy&type=multiple')
+    .then(response => response.json())
+    .then(data => console.log(data))
+    .catch(err => console.log(err));
 }
 
 server.listen(4000);

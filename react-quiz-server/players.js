@@ -1,16 +1,16 @@
-'use strict';
-
 const statusList = {
     free: 0,
     playing: 1
 };
-let players = new Array();
+const players = new Array();
 
 function Player(id, name, avatar) {
     this.id = id;
     this.name = name;
     this.avatar = avatar;
     this.status = statusList.free;
+    this.ready = false;
+    this.score = 0
 }
 
 function addPlayer(id, name, avatar){
