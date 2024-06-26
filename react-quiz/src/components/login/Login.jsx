@@ -109,10 +109,10 @@ function Login(){
     return (
         <div>
             <form>
-                <input placeholder="type player name" name="player" value={gameContext.gameData.userData?.name} onChange={handleChangeName}></input>
-                <button type="submit" onClick={submitHandle} disabled={showLoader}>Play</button>
+                <input aria-label="player_name" placeholder="type player name" name="player" value={gameContext.gameData.userData?.name} onChange={handleChangeName}></input>
+                <button aria-label="submit" type="submit" onClick={submitHandle} disabled={showLoader}>Play</button>
                 {!!validationMessage && <p>{validationMessage}</p>}
-                <div className="grid-avatar">
+                <div aria-label="player_avatar" className="grid-avatar">
                     {avatars.map((code, index) => 
                         <span key={index} onClick={handleSelectAvatar} id={code} className={gameContext.gameData.userData?.avatar === String(code) ? 'selected' : ''}>{String.fromCodePoint(code)}</span>
                     )}
