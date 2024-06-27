@@ -73,25 +73,31 @@ function Login(){
     }
 
     function handleChangeName(event){
-        gameContext.setGameData(previous => {
-            let userData = {...previous.userData};               
-            userData.name = event.target.value;
+        event.preventDefault();
+        const value = event.target.value;
 
+        gameContext.setGameData(previous => {
             return {
                 ...previous,
-                userData: userData
+                userData: {
+                    ...previous.userData,
+                    name: value
+                }
             } 
         });
     }    
     
     function handleSelectAvatar(event){
-        gameContext.setGameData(previous => {
-            let userData = {...previous.userData};               
-            userData.avatar = event.target.id;
+        event.preventDefault();
 
+        const idSelected = event.target.id;
+        gameContext.setGameData(previous => {
             return {
                 ...previous,
-                userData: userData
+                userData: {
+                    ...previous.userData,
+                    avatar: idSelected
+                }
             } 
         });
     }
@@ -109,12 +115,33 @@ function Login(){
     return (
         <div>
             <form>
-                <input aria-label="player_name" placeholder="type player name" name="player" value={gameContext.gameData.userData?.name} onChange={handleChangeName}></input>
-                <button aria-label="submit" type="submit" onClick={submitHandle} disabled={showLoader}>Play</button>
-                {!!validationMessage && <p>{validationMessage}</p>}
-                <div aria-label="player_avatar" className="grid-avatar">
+                <input aria-label="player_name" 
+                    placeholder="type player name" 
+                    name="player" 
+                    value={gameContext.gameData.userData.name} 
+                    onChange={handleChangeName}>
+                </input>
+
+                <button aria-label="submit" 
+                    type="submit" 
+                    onClick={submitHandle} 
+                    disabled={showLoader}
+                >
+                    Play
+                </button>
+                
+                {!!validationMessage && <p aria-label="validation_message">{validationMessage}</p>}
+                
+                <div aria-label="avatars" className="grid-avatar">
                     {avatars.map((code, index) => 
-                        <span key={index} onClick={handleSelectAvatar} id={code} className={gameContext.gameData.userData?.avatar === String(code) ? 'selected' : ''}>{String.fromCodePoint(code)}</span>
+                        <span aria-label="player_avatar" 
+                            key={index} 
+                            onClick={handleSelectAvatar} 
+                            id={code} 
+                            className={gameContext.gameData.userData?.avatar === String(code) ? 'selected' : ''}
+                            >
+                                {String.fromCodePoint(code)}
+                            </span>
                     )}
                 </div>
             </form>
