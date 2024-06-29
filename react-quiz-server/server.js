@@ -86,18 +86,19 @@ io.on('connection', (socket) => {
     });
 
     socket.on('player_ready', () => {
-        const game = Games.getGame(roomId);
-        if (!!game){
-            const player = game.getPlayer(player.id);
-            if (!!player){
-                player.ready = true;
+        const playerGame = Games.getGame(roomId);
+        if (!!playerGame){
+            const currentPlayer = playerGame.getPlayer(player.id);
+            if (!!currentPlayer){
+                currentPlayer.ready = true;
                 socket.to(roomId).emit('partner_ready');
+                socket.emit('player_ready');
+            }
 
-                if (!!game.player1.ready && !!game.player2.ready){
-                    socket.to(roomId).emit('game_data', game);
-                    socket.emit('game_data', game);
-                    //getQuestions(); 
-                }
+            if (!!playerGame.player1.ready && !!playerGame.player2.ready){
+                socket.to(roomId).emit('game_data', playerGame);
+                socket.emit('game_data', playerGame);
+                //getQuestions(); 
             }
         }
     });

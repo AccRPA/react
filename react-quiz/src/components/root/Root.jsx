@@ -72,12 +72,21 @@ function Root(){
             });
         }
 
+        function onGameStart(){
+            gameContext.setGameData(previous => {
+                const gameData = {...previous};
+                gameData.userIsPlaying = true;
+                return gameData;
+            });
+        }
+
         socket.on('users_connected', handleUsersConnected);
         socket.on('disconnect', onDisconnect);
         socket.on('match_partner', onMatchPartner);
         socket.on('users_free', onUsersFree);
         socket.on('partner_disconnected', onPartnerDisconnected);
         socket.on('room_left', onRoomLeft);
+        socket.on('game_data', onGameStart);
 
         return () => {
             socket.off('users_connected', handleUsersConnected);
@@ -86,6 +95,7 @@ function Root(){
             socket.off('users_free', onUsersFree);
             socket.off('partner_disconnected', onPartnerDisconnected);
             socket.off('room_left', onRoomLeft);
+            socket.off('game_data', onGameStart);
         };
     }, []);
 

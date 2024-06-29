@@ -8,6 +8,17 @@ function Game(roomId, player1, player2){
     this.currentQuestion = null;
     this.answers = [];
     this.correctAnswers = [];
+
+    this.getPlayer = function(playerId){        
+        switch(playerId){
+            case this.player1.id:
+                return this.player1;
+            case this.player2.id:
+                return this.player2;
+            default:
+                null;
+        }
+    }
 }
 
 function addGame(roomId, player1, player2){
@@ -23,28 +34,19 @@ function deleteGame(roomId){
 }
 
 function getGame(roomId){
-    if (!gamesRoom.has(roomId)){
+    if (!!gamesRoom.has(roomId)){
         return gamesRoom.get(roomId);
     }
 }
 
-function getPlayer(roomId, playerId){
-    const game = getGame(roomId);
-    if (!!game){
-        switch(playerId){
-            case game.player1.id:
-                return game.player1;
-            case game.player2.id:
-                return game.player2;
-            default:
-                null;
-        }
-    }
+function getGames(){
+    return gamesRoom;
 }
+
 
 export const Games = {
     addGame: addGame,
     deleteGame: deleteGame,
     getGame: getGame,
-    getPlayer: getPlayer,
+    getGames: getGames
 };
