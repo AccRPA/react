@@ -1,13 +1,12 @@
+import { Question } from './question.js';
+
 const gamesRoom = new Map();
 
 function Game(roomId, player1, player2){
     this.roomId = roomId;
     this.player1 = player1;
     this.player2 = player2;
-    this.questionNumber = 1;
-    this.currentQuestion = null;
-    this.answers = [];
-    this.correctAnswers = [];
+    this.questions = null;
 
     this.getPlayer = function(playerId){        
         switch(playerId){
@@ -17,6 +16,17 @@ function Game(roomId, player1, player2){
                 return this.player2;
             default:
                 null;
+        }
+    }
+
+    this.setGameQuestions = function(questions){
+        if (!this.questions){
+            this.questions = [];
+        }
+        
+        let index = 0;
+        for (let q of questions.results){
+            this.questions.push(new Question(q, ++index));
         }
     }
 }
@@ -39,14 +49,13 @@ function getGame(roomId){
     }
 }
 
-function getGames(){
+function getAllGames(){
     return gamesRoom;
 }
-
 
 export const Games = {
     addGame: addGame,
     deleteGame: deleteGame,
     getGame: getGame,
-    getGames: getGames
+    getAllGames: getAllGames
 };

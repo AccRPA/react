@@ -8,14 +8,17 @@ import { socket } from '../../core/socket';
 function Ready(){
     const gameContext = useContext(GameContext);
     const [readyMessage, setReadyMessage] = useState();
+    const [hideStartButton, setHideStartButton] = useState(false);
 
     useEffect(() => {
         function onPlayerIsReady(){
             setReadyMessage('Waiting for your partner to be ready');
+            setHideStartButton(true);
         }
 
         function onPartnerIsReady(){
             setReadyMessage('Your partner is ready and waiting for you');
+            setHideStartButton(false);
         }
 
         socket.on('player_ready', onPlayerIsReady);
@@ -42,7 +45,7 @@ function Ready(){
                 <p>{readyMessage}</p>
             </div>
         }
-        {!readyMessage && <button onClick={handleReady}>Start</button>}
+        {!hideStartButton && <button onClick={handleReady}>Start</button>}
         <LeaveRoom></LeaveRoom>
         <DisconnectButton></DisconnectButton>
     </div>;

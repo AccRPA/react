@@ -72,10 +72,11 @@ function Root(){
             });
         }
 
-        function onGameStart(){
+        function onGameStart(data){
             gameContext.setGameData(previous => {
                 const gameData = {...previous};
                 gameData.userIsPlaying = true;
+                gameData.game.questions = data.questions;
                 return gameData;
             });
         }

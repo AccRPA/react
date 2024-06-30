@@ -96,9 +96,7 @@ io.on('connection', (socket) => {
             }
 
             if (!!playerGame.player1.ready && !!playerGame.player2.ready){
-                socket.to(roomId).emit('game_data', playerGame);
-                socket.emit('game_data', playerGame);
-                //getQuestions(); 
+                setQuestions(playerGame);
             }
         }
     });
@@ -113,6 +111,9 @@ io.on('connection', (socket) => {
             
             // leave the room
             socket.leave(roomId);
+
+            // not playing anymore
+            Games.deleteGame(roomId);
             
             printLog(`disconnect: player ${player.name} left room ${roomId}`);
 
@@ -170,19 +171,28 @@ io.on('connection', (socket) => {
             joinOwnRoom();
         }
     }
+
+    async function setQuestions(playerGame){
+        if (!playerGame.questions){
+            await fetch('https://opentdb.com/api.php?amount=10&difficulty=easy&type=multiple')
+            .then(response => response.json())
+            .then(data => {
+                playerGame.setGameQuestions(data); 
+                socket.to(roomId).emit('game_data', playerGame);
+                socket.emit('game_data', playerGame);
+            })
+            .catch(err => console.log(err));
+        }else{
+            socket.to(roomId).emit('game_data', playerGame);
+            socket.emit('game_data', playerGame);
+        }
+    }
 });
 
 function printLog(message){
     if (log){
         console.log(message);
     }
-}
-
-function getQuestions(){
-    fetch('https://opentdb.com/api.php?amount=10&difficulty=easy&type=multiple')
-    .then(response => response.json())
-    .then(data => console.log(data))
-    .catch(err => console.log(err));
 }
 
 server.listen(4000);
