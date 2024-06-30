@@ -4,4 +4,5 @@ export function Question(data, number){
     this.question = data.question;
     this.correctAnswer = data.correct_answer;
     this.incorrectAnswers = data.incorrect_answers;
+    this.answers = [...this.incorrectAnswers, this.correctAnswer];
 }

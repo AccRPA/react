@@ -11,7 +11,7 @@ function Question(){
             <p>Category {questionData.category}</p>
             <p>{questionData.question}</p>
             
-            <QuestionAnswers answers={[...questionData.incorrectAnswers, questionData.correctAnswer]}></QuestionAnswers>
+            <QuestionAnswers answers={questionData.answers}></QuestionAnswers>
         </div>;
 }
 

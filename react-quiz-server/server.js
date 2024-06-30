@@ -178,14 +178,24 @@ io.on('connection', (socket) => {
             .then(response => response.json())
             .then(data => {
                 playerGame.setGameQuestions(data); 
-                socket.to(roomId).emit('game_data', playerGame);
-                socket.emit('game_data', playerGame);
+                emitQuestions(playerGame.questions);
             })
             .catch(err => console.log(err));
         }else{
-            socket.to(roomId).emit('game_data', playerGame);
-            socket.emit('game_data', playerGame);
+            emitQuestions(playerGame.questions);
         }
+    }
+
+    function emitQuestions(questions){
+        // remove correct answer for clients
+        const questionsClients = questions.map(q => {
+            let temp = {...q};
+            delete temp.correctAnswer;
+            delete temp.incorrectAnswers;
+            return temp;
+        });
+        socket.to(roomId).emit('game_data', questionsClients);
+        socket.emit('game_data', questionsClients);
     }
 });
 
