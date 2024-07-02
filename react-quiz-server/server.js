@@ -187,7 +187,7 @@ io.on('connection', (socket) => {
     }
 
     function emitQuestions(questions){
-        // remove correct answer for clients
+        // remove correct/incorrect answers and keep all of them in one array so the client cannot distinguish them
         const questionsClients = questions.map(q => {
             let temp = {...q};
             delete temp.correctAnswer;

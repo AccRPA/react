@@ -57,6 +57,10 @@ function Root(){
                 gameData.game.gameFinishedReason = 'Your partner left the game';
                 gameData.userIsPlaying = false;
                 gameData.partnerData = null;
+                gameData.userData = {
+                    ...gameData.userData, 
+                    ready: false
+                };
                 return gameData;
             });
             socket.emit('leave_room_due_partner');
@@ -68,11 +72,30 @@ function Root(){
                 gameData.game.gameFinishedReason = 'You left the game';
                 gameData.userIsPlaying = false;
                 gameData.partnerData = null;
+                gameData.userData = {
+                    ...gameData.userData, 
+                    ready: false
+                };
                 return gameData;
             });
         }
 
         function onGameStart(questions){
+            function shuffleArray(answers){
+                const temp = [...answers];
+                for(let i = 0; i < temp.length; i++){
+                    const random = Math.floor(Math.random() * temp.length);
+                    [temp[i], temp[random]] = [temp[random], temp[i]];
+                }
+                return temp;
+            }
+
+            questions = questions.map(q => {
+                return {
+                    ...q,
+                    answers: shuffleArray(q.answers)
+                }
+            });
             gameContext.setGameData(previous => {
                 const gameData = {...previous};
                 gameData.userIsPlaying = true;
