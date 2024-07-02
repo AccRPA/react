@@ -1,3 +1,5 @@
+import { Utils } from '../../common/Utils';
+
 function QuestionAnswers({options, selectedAnswer, disableAnswers}){
     function handleClick(event){
         if (!disableAnswers){
@@ -13,7 +15,7 @@ function QuestionAnswers({options, selectedAnswer, disableAnswers}){
                     value={text} 
                     disabled={disableAnswers}
                 >
-                    {text}
+                    {Utils.decodeHtmlCharacters(text)}
                 </button>
             )}
         </div>;

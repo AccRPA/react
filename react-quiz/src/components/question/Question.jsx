@@ -1,6 +1,7 @@
 import { useContext, useEffect, useState, useRef } from 'react';
 import { GameContext } from '../../core/GameContext';
 import QuestionAnswers from '../question_answers/QuestionAnswers';
+import { Utils } from '../../common/Utils';
 
 function Question(){
     const maxSexconds = 10;
@@ -34,7 +35,7 @@ function Question(){
             Countdown: {time}
             <p>Question {questionData.number}</p>
             <p>Category {questionData.category}</p>
-            <p>{questionData.question}</p>
+            <p>{Utils.decodeHtmlCharacters(questionData.question)}</p>
             
             <QuestionAnswers 
                 options={questionData.answers} 

@@ -108,7 +108,9 @@ io.on('connection', (socket) => {
     });
 
     socket.on('get_response', () => {
-
+        // validate the answer, increment the question number, update player's score
+        // return true/false, number of the question, and a number
+            
     });
 
     socket.on("disconnect", () => {
