@@ -1,10 +1,14 @@
-function QuestionAnswers({answers}){
-    function handleClick(){
-        // event to send the selected answer
+function QuestionAnswers({options, selectedAnswer, disableAnswers}){
+    function handleClick(event){
+        if (!disableAnswers){
+            selectedAnswer(event.target.value);
+        }
     }
     
     return <div>
-            {answers.map((item, index) => <span onClick={handleClick} key={index}>{item}</span>)}
+            {options.map((text, index) => 
+                <button onClick={handleClick} key={index} value={text} disabled={disableAnswers}>{text}</button>)
+            }
         </div>;
 }
 

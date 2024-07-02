@@ -91,12 +91,18 @@ io.on('connection', (socket) => {
             const currentPlayer = playerGame.getPlayer(player.id);
             if (!!currentPlayer){
                 currentPlayer.ready = true;
-                socket.to(roomId).emit('partner_ready');
-                socket.emit('player_ready');
             }
+            
+            printLog(`player_ready: 
+                player1 ${playerGame.player1.ready} 
+                player2 ${playerGame.player2.ready} 
+                and game ${roomId}`);
 
             if (!!playerGame.player1.ready && !!playerGame.player2.ready){
                 setQuestions(playerGame);
+            }else{
+                socket.to(roomId).emit('partner_ready');
+                socket.emit('player_ready');
             }
         }
     });
@@ -156,7 +162,7 @@ io.on('connection', (socket) => {
             
             Games.deleteGame(roomId);
             
-            printLog(`leave: player ${player.name} left room ${roomId}`);
+            printLog(`leave: player ${player.name} left room ${roomId} and deleted game ${roomId}`);
             
             // set the player free
             Players.setPlayerFree(player.id);

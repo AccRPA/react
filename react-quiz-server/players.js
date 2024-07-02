@@ -37,7 +37,7 @@ function setPlayerPlaying(id){
 
 function setPlayerFree(id){
     const player = getPlayer(id);
-    (player && (player.status = statusList.free));
+    (player && (player.status = statusList.free, player.ready = false, player.score = 0));
 }
 
 function getRandomFreePlayer(idToExclude){
