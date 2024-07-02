@@ -7,8 +7,15 @@ function QuestionAnswers({options, selectedAnswer, disableAnswers}){
     
     return <div>
             {options.map((text, index) => 
-                <button onClick={handleClick} key={index} value={text} disabled={disableAnswers}>{text}</button>)
-            }
+                <button 
+                    onClick={handleClick} 
+                    key={index} 
+                    value={text} 
+                    disabled={disableAnswers}
+                >
+                    {text}
+                </button>
+            )}
         </div>;
 }
 
