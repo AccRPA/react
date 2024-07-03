@@ -54,26 +54,20 @@ function Root(){
         }
 
         function onPartnerDisconnected(){
-            gameContext.setGameData(previous => {
-                const gameData = {...previous};
-                gameData.game = new GameCore();
-                gameData.game.gameFinishedReason = 'Your partner left the game';
-                gameData.userIsPlaying = false;
-                gameData.partnerData = null;
-                gameData.userData = {
-                    ...gameData.userData, 
-                    ready: false
-                };
-                return gameData;
-            });
+            resetGame('Your partner left the game');
             socket.emit('leave_room_due_partner');
+
         }
 
         function onRoomLeft(){
+            resetGame('You left the game');
+        }
+
+        function resetGame(message){
             gameContext.setGameData(previous => {
                 const gameData = {...previous};
                 gameData.game = new GameCore();
-                gameData.game.gameFinishedReason = 'You left the game';
+                gameData.game.gameFinishedReason = message;
                 gameData.userIsPlaying = false;
                 gameData.partnerData = null;
                 gameData.userData = {
@@ -108,8 +102,7 @@ function Root(){
             });
         }
 
-        function onGameFinish({isValidAnswer,
-            correctAnswer,
+        function onGameFinish({
             playerScore,
             partnerScore}){
             gameContext.setGameData(previous => {

@@ -11,8 +11,7 @@ function Game(){
     const gameContext = useContext(GameContext);   
 
     useEffect(() => {
-        function onUpdateGame({isValidAnswer,
-                correctAnswer,
+        function onUpdateGame({
                 questionNumber,
                 playerScore,
                 partnerScore}){
@@ -20,7 +19,7 @@ function Game(){
                 const gameData = {...previous};
                 gameData.game.partnerScore = partnerScore;
                 gameData.game.score = playerScore;
-                gameData.game.questionNumber = questionNumber;                
+                gameData.game.questionNumber = questionNumber;
                 return gameData;
             });
         }
