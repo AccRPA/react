@@ -16,7 +16,6 @@ function Game(){
                 questionNumber,
                 playerScore,
                 partnerScore}){
-            console.log(`isValidAnswer: ${isValidAnswer}, correctAnswer: ${correctAnswer}, score: ${playerScore}, partnerScore: ${partnerScore}`);
             gameContext.setGameData(previous => {
                 const gameData = {...previous};
                 gameData.game.partnerScore = partnerScore;
