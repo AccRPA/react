@@ -26,7 +26,8 @@ function Root(){
             gameContext.setGameData(new GameData());
         }
 
-        function onMatchPartner(name, avatar){
+        function onMatchPartner(id, name, avatar){
+            socket.emit('set_partner', id);
             gameContext.setGameData(previous =>{
                 const partnerData = new Player();
                 partnerData.name = name;
@@ -104,6 +105,20 @@ function Root(){
             });
         }
 
+        function onGameFinish({isValidAnswer,
+            correctAnswer,
+            playerScore,
+            partnerScore}){
+            gameContext.setGameData(previous => {
+                const gameData = {...previous};
+                gameData.game.partnerScore = partnerScore;
+                gameData.game.score = playerScore;
+                gameData.game.gameIsFinished  = true;                
+                return gameData;
+            });
+
+        }
+
         socket.on('users_connected', handleUsersConnected);
         socket.on('disconnect', onDisconnect);
         socket.on('match_partner', onMatchPartner);
@@ -111,6 +126,7 @@ function Root(){
         socket.on('partner_disconnected', onPartnerDisconnected);
         socket.on('room_left', onRoomLeft);
         socket.on('game_data', onGameStart);
+        socket.on('game_finished', onGameFinish);
 
         return () => {
             socket.off('users_connected', handleUsersConnected);
@@ -120,6 +136,7 @@ function Root(){
             socket.off('partner_disconnected', onPartnerDisconnected);
             socket.off('room_left', onRoomLeft);
             socket.off('game_data', onGameStart);
+            socket.off('game_finished', onGameFinish);
         };
     }, []);
 

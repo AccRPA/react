@@ -10,6 +10,8 @@ const app = express();
 const server = http.createServer(app);
 // create a server with sockects from node http server
 const io = new Server(server);
+const pointsCorrectAnswer = 5;
+const questionsLimit = 10;
 const log = false;
 
 io.on('connection', (socket) => {
@@ -60,8 +62,8 @@ io.on('connection', (socket) => {
                 Games.addGame(roomId, player, partner);
 
                 // emit events to the players in the room to update their partners
-                socket.emit('match_partner', partner?.name, partner?.avatar);
-                socket.to(roomId).emit('match_partner', player.name, player.avatar);
+                socket.emit('match_partner', partner?.id, partner?.name, partner?.avatar);
+                socket.to(roomId).emit('match_partner', player?.id, player.name, player.avatar);
 
                 printLog(`emitting partner ${player.name} to room ${roomId}`);
             
@@ -72,6 +74,10 @@ io.on('connection', (socket) => {
             }
         }
     });
+
+    socket.on('set_partner', (playerId) => {
+        partner = Players.getPlayer(playerId);
+    })
 
     socket.on('leave_room', () => {
         leaveRoom({emitEvents : true});
@@ -107,10 +113,22 @@ io.on('connection', (socket) => {
         }
     });
 
-    socket.on('get_response', () => {
+    socket.on('game_update', (answer) => {
         // validate the answer, increment the question number, update player's score
-        // return true/false, number of the question, and a number
+        // send notification about the score to everyone in the room
+        const playerGame = Games.getGame(roomId);
+        if (!!playerGame){
+            const currentPlayer = playerGame.getPlayer(player.id);
+            if (!!currentPlayer){
+                currentPlayer.validAnswer = playerGame.isValidAnswer(answer);
+                currentPlayer.sentAnswer = true;
+            }
             
+            if (!!playerGame.player1.sentAnswer && !!playerGame.player2.sentAnswer){
+                printLog(`game_update: questionNumber: ${playerGame.questionNumber}`); 
+                updateGameScore(playerGame);
+            }
+        }
     });
 
     socket.on("disconnect", () => {
@@ -182,7 +200,7 @@ io.on('connection', (socket) => {
 
     async function setQuestions(playerGame){
         if (!playerGame.questions){
-            await fetch('https://opentdb.com/api.php?amount=10&difficulty=easy&type=multiple')
+            await fetch(`https://opentdb.com/api.php?amount=${questionsLimit}&difficulty=easy&type=multiple`)
             .then(response => response.json())
             .then(data => {
                 playerGame.setGameQuestions(data); 
@@ -204,6 +222,50 @@ io.on('connection', (socket) => {
         });
         socket.to(roomId).emit('game_data', questionsClients);
         socket.emit('game_data', questionsClients);
+    }
+    
+    function updateGameScore(playerGame){
+        if (!!playerGame?.player1 && !!playerGame?.player2){
+            
+            playerGame.player1.score += playerGame.player1.validAnswer ? pointsCorrectAnswer : 0;
+            playerGame.player2.score += playerGame.player2.validAnswer ? pointsCorrectAnswer : 0;
+            
+            const currentPlayer = playerGame.getPlayer(player?.id);
+            const partnerPlayer = playerGame.getPlayer(partner?.id);
+            const correctAnswer = playerGame.getCorrectAnswer();
+
+            printLog(`updateGameScore:
+                currentPlayer: ${currentPlayer?.score},
+                partnerPlayer: ${partnerPlayer?.score}`);
+
+            if (playerGame.questionNumber === questionsLimit - 1){
+                socket.to(roomId).emit('game_finished', 
+                    getScoreData(partnerPlayer, currentPlayer, correctAnswer, playerGame));
+                socket.emit('game_finished', 
+                    getScoreData(currentPlayer, partnerPlayer, correctAnswer, playerGame));
+            }else{
+                playerGame.questionNumber = ++playerGame.questionNumber;
+                socket.to(roomId).emit('game_update', 
+                    getScoreData(partnerPlayer, currentPlayer, correctAnswer, playerGame));
+                socket.emit('game_update', 
+                    getScoreData(currentPlayer, partnerPlayer, correctAnswer, playerGame));
+            }
+
+            // reset answers
+            playerGame.player1.resetAnswer();
+            playerGame.player2.resetAnswer();
+        }
+    }
+
+    function getScoreData(player1, player2, correctAnswer, playerGame){
+        const questionNumber = playerGame.questionNumber;
+        return {
+            isValidAnswer: player1?.validAnswer,
+            correctAnswer,
+            questionNumber,
+            playerScore: player1?.score,
+            partnerScore: player2?.score
+        }
     }
 });
 

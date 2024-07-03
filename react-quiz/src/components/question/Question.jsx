@@ -2,6 +2,7 @@ import { useContext, useEffect, useState, useRef } from 'react';
 import { GameContext } from '../../core/GameContext';
 import QuestionAnswers from '../question_answers/QuestionAnswers';
 import { Utils } from '../../common/Utils';
+import { socket } from '../../core/socket';
 
 function Question(){
     const maxSexconds = 10;
@@ -16,9 +17,8 @@ function Question(){
         if (time > 0){
             timeId = setTimeout(() => setTime(previous => --previous), 1000);
         }else{
-            // send socket.io the answer
             setDisableAnswers(true);
-            console.log('send answer to socket.io with answer: ' + userAnswer.current);
+            socket.emit('game_update', userAnswer.current);
         }
 
         return () => {
@@ -26,12 +26,17 @@ function Question(){
         }
     }, [time]);
 
+    useEffect(() => {
+        userAnswer.current = null;
+        setTime(maxSexconds);
+        setDisableAnswers(false);
+    }, [gameContext.gameData.game.questionNumber]);
+
     function selectAnswer(value){
         userAnswer.current = value;
-        console.log(`answer selected: ${value}`);
     }
 
-    return <div>
+    return (!!questionData && <div>
             Countdown: {time}
             <p>Question {questionData.number}</p>
             <p>Category {questionData.category}</p>
@@ -43,7 +48,7 @@ function Question(){
                 disableAnswers={disableAnswers}
             >
             </QuestionAnswers>
-        </div>;
+        </div>);
 }
 
 export default Question;

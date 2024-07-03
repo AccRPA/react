@@ -30,6 +30,14 @@ function Game(roomId, player1, player2){
             this.questions.push(new Question(q, ++index));
         }
     }
+
+    this.isValidAnswer = function(answer){
+        return !!answer && this.getCorrectAnswer() === answer;
+    }
+
+    this.getCorrectAnswer = function(){
+        return this.questions[this.questionNumber].correctAnswer;
+    }
 }
 
 function addGame(roomId, player1, player2){

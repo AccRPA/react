@@ -10,7 +10,14 @@ function Player(id, name, avatar) {
     this.avatar = avatar;
     this.status = statusList.free;
     this.ready = false;
-    this.score = 0
+    this.score = 0;
+    this.validAnswer = false;
+    this.sentAnswer = false;
+
+    this.resetAnswer = function(){
+        this.validAnswer = false;
+        this.sentAnswer = false;
+    }
 }
 
 function addPlayer(id, name, avatar){
@@ -37,7 +44,13 @@ function setPlayerPlaying(id){
 
 function setPlayerFree(id){
     const player = getPlayer(id);
-    (player && (player.status = statusList.free, player.ready = false, player.score = 0));
+    (player && 
+        (player.status = statusList.free, 
+        player.ready = false, 
+        player.score = 0, 
+        player.validAnswer = false,
+        player.sentAnswer = false)
+    );
 }
 
 function getRandomFreePlayer(idToExclude){
