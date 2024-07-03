@@ -8,6 +8,7 @@ import Result from "../result/Result";
 import { socket } from '../../core/socket';
 import { Player } from "../../core/Player";
 import { GameData } from "../../core/GameData";
+import { GameCore } from "../../core/GameCore";
 
 function Root(){
     const gameContext = useContext(GameContext);
@@ -55,6 +56,7 @@ function Root(){
         function onPartnerDisconnected(){
             gameContext.setGameData(previous => {
                 const gameData = {...previous};
+                gameData.game = new GameCore();
                 gameData.game.gameFinishedReason = 'Your partner left the game';
                 gameData.userIsPlaying = false;
                 gameData.partnerData = null;
@@ -70,6 +72,7 @@ function Root(){
         function onRoomLeft(){
             gameContext.setGameData(previous => {
                 const gameData = {...previous};
+                gameData.game = new GameCore();
                 gameData.game.gameFinishedReason = 'You left the game';
                 gameData.userIsPlaying = false;
                 gameData.partnerData = null;
