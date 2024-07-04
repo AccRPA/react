@@ -13,6 +13,8 @@ function Player(id, name, avatar) {
     this.score = 0;
     this.validAnswer = false;
     this.sentAnswer = false;
+    this.requestedNextQuestion = false;
+    this.answers = [];
 
     this.resetAnswer = function(){
         this.validAnswer = false;

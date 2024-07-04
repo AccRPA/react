@@ -18,7 +18,7 @@ function Question(){
             timeId = setTimeout(() => setTime(previous => --previous), 1000);
         }else{
             setDisableAnswers(true);
-            socket.emit('game_update', userAnswer.current);
+            socket.emit('validate_answer', userAnswer.current);
         }
 
         return () => {

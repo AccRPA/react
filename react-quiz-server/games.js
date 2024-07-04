@@ -9,6 +9,8 @@ function Game(roomId, player1, player2){
     this.questions = null;
     this.questionNumber = 0;
 
+    // save all the player1 and player2 answers and if they are valid.
+
     this.getPlayer = function(playerId){        
         switch(playerId){
             case this.player1.id:

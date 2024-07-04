@@ -12,7 +12,7 @@ const server = http.createServer(app);
 const io = new Server(server);
 const pointsCorrectAnswer = 5;
 const questionsLimit = 10;
-const log = false;
+const log = true;
 
 io.on('connection', (socket) => {
     
@@ -113,9 +113,8 @@ io.on('connection', (socket) => {
         }
     });
 
-    socket.on('game_update', (answer) => {
-        // validate the answer, increment the question number, update player's score
-        // send notification about the score to everyone in the room
+    socket.on('validate_answer', (answer) => {
+        // validate the answer and update player's score
         const playerGame = Games.getGame(roomId);
         if (!!playerGame){
             const currentPlayer = playerGame.getPlayer(player.id);
@@ -124,9 +123,47 @@ io.on('connection', (socket) => {
                 currentPlayer.sentAnswer = true;
             }
             
-            if (!!playerGame.player1.sentAnswer && !!playerGame.player2.sentAnswer){
-                printLog(`game_update: questionNumber: ${playerGame.questionNumber}`); 
-                updateGameScore(playerGame);
+            if (!!playerGame.player1.sentAnswer && 
+                !!playerGame.player2.sentAnswer){
+            
+                playerGame.player1.score += playerGame.player1.validAnswer ? pointsCorrectAnswer : 0;
+                playerGame.player2.score += playerGame.player2.validAnswer ? pointsCorrectAnswer : 0;
+
+                const currentPlayer = playerGame.getPlayer(player?.id);
+                const partnerPlayer = playerGame.getPlayer(partner?.id);
+                const correctAnswer = playerGame.getCorrectAnswer();
+                const wasTheLaStQuestion = playerGame.questionNumber === questionsLimit - 1;
+
+                printLog(`validate_answer:
+                    currentPlayer: ${currentPlayer?.score},
+                    partnerPlayer: ${partnerPlayer?.score},
+                    questionNumber: ${playerGame.questionNumber},
+                    lastQuestion?: ${wasTheLaStQuestion}`);
+
+                socket.to(roomId).emit(
+                    wasTheLaStQuestion ? 'game_finished' : 'result_question', 
+                    getValidateAnswerResponse(partnerPlayer, currentPlayer, correctAnswer));
+                
+                socket.emit(
+                    wasTheLaStQuestion ? 'game_finished' : 'result_question',  
+                    getValidateAnswerResponse(currentPlayer, partnerPlayer, correctAnswer));
+            }
+        }
+    });
+
+    socket.on('next_question', () => {
+        // increment the question number
+        const playerGame = Games.getGame(roomId);
+        if (!!playerGame){
+            const currentPlayer = playerGame.getPlayer(player.id);
+            if (!!currentPlayer){
+                currentPlayer.requestedNextQuestion = true;
+                currentPlayer.resetAnswer();
+            }
+            
+            if (!!playerGame.player1.requestedNextQuestion && 
+                !!playerGame.player2.requestedNextQuestion){
+                getNextQuestion(playerGame);
             }
         }
     });
@@ -224,46 +261,22 @@ io.on('connection', (socket) => {
         socket.emit('game_data', questionsClients);
     }
     
-    function updateGameScore(playerGame){
-        if (!!playerGame?.player1 && !!playerGame?.player2){
-            
-            playerGame.player1.score += playerGame.player1.validAnswer ? pointsCorrectAnswer : 0;
-            playerGame.player2.score += playerGame.player2.validAnswer ? pointsCorrectAnswer : 0;
-            
-            const currentPlayer = playerGame.getPlayer(player?.id);
-            const partnerPlayer = playerGame.getPlayer(partner?.id);
-            const correctAnswer = playerGame.getCorrectAnswer();
+    function getNextQuestion(playerGame){
+        if (!!playerGame){
+            playerGame.player1.requestedNextQuestion = false; 
+            playerGame.player2.requestedNextQuestion = false;
 
-            printLog(`updateGameScore:
-                currentPlayer: ${currentPlayer?.score},
-                partnerPlayer: ${partnerPlayer?.score}`);
-
-            if (playerGame.questionNumber === questionsLimit - 1){
-                socket.to(roomId).emit('game_finished', 
-                    getScoreData(partnerPlayer, currentPlayer, correctAnswer, playerGame));
-                socket.emit('game_finished', 
-                    getScoreData(currentPlayer, partnerPlayer, correctAnswer, playerGame));
-            }else{
-                playerGame.questionNumber = ++playerGame.questionNumber;
-                socket.to(roomId).emit('game_update', 
-                    getScoreData(partnerPlayer, currentPlayer, correctAnswer, playerGame));
-                socket.emit('game_update', 
-                    getScoreData(currentPlayer, partnerPlayer, correctAnswer, playerGame));
-            }
-
-            // reset answers
-            playerGame.player1.resetAnswer();
-            playerGame.player2.resetAnswer();
+            playerGame.questionNumber = ++playerGame.questionNumber;
+            socket.to(roomId).emit('next_question', playerGame.questionNumber);
+            socket.emit('next_question', playerGame.questionNumber);
         }
     }
 
-    function getScoreData(player1, player2, correctAnswer, playerGame){
-        const questionNumber = playerGame.questionNumber;
+    function getValidateAnswerResponse(player1, player2, correctAnswer){
         return {
             isValidAnswer: player1?.validAnswer,
             correctAnswer,
-            questionNumber,
-            playerScore: player1?.score,
+            score: player1?.score,
             partnerScore: player2?.score
         }
     }

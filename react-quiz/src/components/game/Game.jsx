@@ -1,6 +1,6 @@
 import DisconnectButton from '../disconnect-button/DisconnectButton';
 import User from '../user/User';
-import { useContext, useEffect } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { GameContext } from '../../core/GameContext';
 import Question from '../question/Question';
 import LeaveRoom from '../leave-room/LeaveRoom';
@@ -8,26 +8,48 @@ import Score from '../score/Score';
 import { socket } from '../../core/socket';
 
 function Game(){
-    const gameContext = useContext(GameContext);   
+    const gameContext = useContext(GameContext); 
+    const [result, setResult] = useState();  
 
     useEffect(() => {
         function onUpdateGame({
-                questionNumber,
-                playerScore,
+                isValidAnswer,
+                correctAnswer,
+                score,
                 partnerScore}){
             gameContext.setGameData(previous => {
                 const gameData = {...previous};
                 gameData.game.partnerScore = partnerScore;
-                gameData.game.score = playerScore;
+                gameData.game.score = score;
+                return gameData;
+            });
+
+            setResult({
+                isValidAnswer,
+                correctAnswer
+            });
+
+            setTimeout(() => {
+                socket.emit('next_question');
+            },2000);
+        }
+
+        function onNextQuestion(questionNumber){
+            console.log(`questionNumber: ${questionNumber}`);
+            setResult(null);
+            gameContext.setGameData(previous => {
+                const gameData = {...previous};
                 gameData.game.questionNumber = questionNumber;
                 return gameData;
             });
         }
 
-        socket.on('game_update', onUpdateGame);
-
+        socket.on('result_question', onUpdateGame);
+        socket.on('next_question', onNextQuestion);
+        
         return () => {
-            socket.off('game_update', onUpdateGame);
+            socket.off('result_question', onUpdateGame);
+            socket.off('next_question', onNextQuestion);
         }
     }, []);
 
@@ -39,6 +61,8 @@ function Game(){
             <p>and: </p>
             <User data={gameContext.gameData.partnerData}></User>
             <Score score={gameContext.gameData.game.partnerScore}></Score>
+
+            {!!result && <p>The answer was: {result.isValidAnswer ? 'correct': 'wrong'}</p>}
 
             {!!gameContext.gameData?.game?.questions && <Question></Question>}
 

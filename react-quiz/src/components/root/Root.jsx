@@ -103,12 +103,14 @@ function Root(){
         }
 
         function onGameFinish({
-            playerScore,
+            isValidAnswer,
+            correctAnswer,
+            score,
             partnerScore}){
             gameContext.setGameData(previous => {
                 const gameData = {...previous};
                 gameData.game.partnerScore = partnerScore;
-                gameData.game.score = playerScore;
+                gameData.game.score = score;
                 gameData.game.gameIsFinished  = true;                
                 return gameData;
             });
