@@ -102,19 +102,13 @@ function Root(){
             });
         }
 
-        function onGameFinish({
-            isValidAnswer,
-            correctAnswer,
-            score,
-            partnerScore}){
+        function onGameFinish(){
             gameContext.setGameData(previous => {
                 const gameData = {...previous};
-                gameData.game.partnerScore = partnerScore;
-                gameData.game.score = score;
                 gameData.game.gameIsFinished  = true;                
                 return gameData;
             });
-
+            socket.emit('game_result_request');
         }
 
         socket.on('users_connected', handleUsersConnected);

@@ -12,7 +12,7 @@ const server = http.createServer(app);
 const io = new Server(server);
 const pointsCorrectAnswer = 5;
 const questionsLimit = 10;
-const log = true;
+const log = false;
 
 io.on('connection', (socket) => {
     
@@ -113,7 +113,7 @@ io.on('connection', (socket) => {
         }
     });
 
-    socket.on('validate_answer', (answer) => {
+    socket.on('validate_answer_request', (answer) => {
         // validate the answer and update player's score
         const playerGame = Games.getGame(roomId);
         if (!!playerGame){
@@ -132,26 +132,22 @@ io.on('connection', (socket) => {
                 const currentPlayer = playerGame.getPlayer(player?.id);
                 const partnerPlayer = playerGame.getPlayer(partner?.id);
                 const correctAnswer = playerGame.getCorrectAnswer();
-                const wasTheLaStQuestion = playerGame.questionNumber === questionsLimit - 1;
 
                 printLog(`validate_answer:
                     currentPlayer: ${currentPlayer?.score},
                     partnerPlayer: ${partnerPlayer?.score},
-                    questionNumber: ${playerGame.questionNumber},
-                    lastQuestion?: ${wasTheLaStQuestion}`);
+                    questionNumber: ${playerGame.questionNumber}`);
 
-                socket.to(roomId).emit(
-                    wasTheLaStQuestion ? 'game_finished' : 'result_question', 
+                socket.to(roomId).emit('validate_answer_response', 
                     getValidateAnswerResponse(partnerPlayer, currentPlayer, correctAnswer));
                 
-                socket.emit(
-                    wasTheLaStQuestion ? 'game_finished' : 'result_question',  
+                socket.emit('validate_answer_response',  
                     getValidateAnswerResponse(currentPlayer, partnerPlayer, correctAnswer));
             }
         }
     });
 
-    socket.on('next_question', () => {
+    socket.on('next_question_request', () => {
         // increment the question number
         const playerGame = Games.getGame(roomId);
         if (!!playerGame){
@@ -166,6 +162,11 @@ io.on('connection', (socket) => {
                 getNextQuestion(playerGame);
             }
         }
+    });
+
+    socket.on('game_result_request', () => {
+        socket.to(roomId).emit('game_result_response');            
+        socket.emit('game_result_response');  
     });
 
     socket.on("disconnect", () => {
@@ -266,9 +267,15 @@ io.on('connection', (socket) => {
             playerGame.player1.requestedNextQuestion = false; 
             playerGame.player2.requestedNextQuestion = false;
 
-            playerGame.questionNumber = ++playerGame.questionNumber;
-            socket.to(roomId).emit('next_question', playerGame.questionNumber);
-            socket.emit('next_question', playerGame.questionNumber);
+            const wasTheLaStQuestion = playerGame.questionNumber === questionsLimit - 1;
+            if (wasTheLaStQuestion){
+                socket.to(roomId).emit('game_finished');            
+                socket.emit('game_finished');                
+            }else{
+                playerGame.questionNumber = ++playerGame.questionNumber;
+                socket.to(roomId).emit('next_question_response', playerGame.questionNumber);
+                socket.emit('next_question_response', playerGame.questionNumber);
+            }
         }
     }
 

@@ -12,7 +12,7 @@ function Game(){
     const [result, setResult] = useState();  
 
     useEffect(() => {
-        function onUpdateGame({
+        function onValidateAnswer({
                 isValidAnswer,
                 correctAnswer,
                 score,
@@ -30,7 +30,7 @@ function Game(){
             });
 
             setTimeout(() => {
-                socket.emit('next_question');
+                socket.emit('next_question_request');
             },2000);
         }
 
@@ -44,12 +44,12 @@ function Game(){
             });
         }
 
-        socket.on('result_question', onUpdateGame);
-        socket.on('next_question', onNextQuestion);
+        socket.on('validate_answer_response', onValidateAnswer);
+        socket.on('next_question_response', onNextQuestion);
         
         return () => {
-            socket.off('result_question', onUpdateGame);
-            socket.off('next_question', onNextQuestion);
+            socket.off('validate_answer_response', onValidateAnswer);
+            socket.off('next_question_response', onNextQuestion);
         }
     }, []);
 
