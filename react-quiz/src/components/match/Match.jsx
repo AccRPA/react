@@ -9,13 +9,6 @@ function Match(){
     
     socket.emit('get_total_free_players');
 
-    if (gameContext.gameData.userIsConnected && 
-        !gameContext.gameData.userIsPlaying &&
-        !gameContext.gameData.game.gameFinishedReason && 
-        gameContext.gameData.totalUsersFree > 0){
-            socket.emit('find_match');
-    }
-
     function onFindPartner(){
         socket.emit('find_match');
     }
@@ -25,12 +18,10 @@ function Match(){
                 { !!gameContext.gameData.game.gameFinishedReason && 
                     <div>
                         <p>{gameContext.gameData.game.gameFinishedReason}</p> 
-                        <button onClick={onFindPartner}>Find partner</button>
                     </div>
                 }
-                { !gameContext.gameData.game.gameFinishedReason && 
-                    <p>We'll find you a partner automatically or you can play solo.</p> 
-                }
+                <p>Now others users can request to play with you or you can find a partner or you can play solo</p> 
+                <button onClick={onFindPartner}>Find partner</button>
                 <DisconnectButton></DisconnectButton>
                 <ConnectedUsers></ConnectedUsers>
             </div>;
