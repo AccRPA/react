@@ -10,7 +10,10 @@ function Result(){
     const gameContext = useContext(GameContext);   
 
     useEffect(() => {
-        function onGameResult(){
+        function onGameResult({questions, answers, partnerAnswers}){
+            console.log(questions);
+            console.log(answers);
+            console.log(partnerAnswers);
             console.log('displying game results');
         }
 

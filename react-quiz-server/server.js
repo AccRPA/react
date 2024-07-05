@@ -121,6 +121,7 @@ io.on('connection', (socket) => {
             if (!!currentPlayer){
                 currentPlayer.validAnswer = playerGame.isValidAnswer(answer);
                 currentPlayer.sentAnswer = true;
+                currentPlayer.addAnswer(answer, currentPlayer.validAnswer);
             }
             
             if (!!playerGame.player1.sentAnswer && 
@@ -165,8 +166,22 @@ io.on('connection', (socket) => {
     });
 
     socket.on('game_result_request', () => {
-        socket.to(roomId).emit('game_result_response');            
-        socket.emit('game_result_response');  
+        const playerGame = Games.getGame(roomId);
+        if (!!playerGame){
+            const currentPlayer = playerGame.getPlayer(player?.id);
+            const partnerPlayer = playerGame.getPlayer(partner?.id);
+
+            socket.to(roomId).emit('game_result_response', {
+                questions: playerGame.questions,
+                answers: partnerPlayer?.answers,
+                partnerAnswers: currentPlayer?.answers
+            });            
+            socket.emit('game_result_response', {
+                questions: playerGame.questions,
+                answers: currentPlayer?.answers,
+                partnerAnswers: partnerPlayer?.answers
+            }) 
+        }
     });
 
     socket.on("disconnect", () => {

@@ -14,11 +14,29 @@ function Player(id, name, avatar) {
     this.validAnswer = false;
     this.sentAnswer = false;
     this.requestedNextQuestion = false;
+
+    // save all the answers and if they were valid.
     this.answers = [];
 
     this.resetAnswer = function(){
         this.validAnswer = false;
         this.sentAnswer = false;
+    }
+
+    this.resetPlayer = function (){
+        this.resetAnswer();
+        this.score = 0;
+        this.requestedNextQuestion = false;
+        this.ready = false;
+        this.status = statusList.free;
+        this.answers = [];
+    }
+
+    this.addAnswer = function(answer, valid){
+        this.answers.push({
+            answer,
+            valid
+        })
     }
 }
 
@@ -46,13 +64,7 @@ function setPlayerPlaying(id){
 
 function setPlayerFree(id){
     const player = getPlayer(id);
-    (player && 
-        (player.status = statusList.free, 
-        player.ready = false, 
-        player.score = 0, 
-        player.validAnswer = false,
-        player.sentAnswer = false)
-    );
+    (player && player.resetPlayer());
 }
 
 function getRandomFreePlayer(idToExclude){

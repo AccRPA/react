@@ -35,7 +35,6 @@ function Game(){
         }
 
         function onNextQuestion(questionNumber){
-            console.log(`questionNumber: ${questionNumber}`);
             setResult(null);
             gameContext.setGameData(previous => {
                 const gameData = {...previous};
