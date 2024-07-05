@@ -37,6 +37,15 @@ io.on('connection', (socket) => {
         emitTotalFreePlayers();  
     });
 
+    socket.on('play_solo', () => {
+        Players.setPlayerPlayingSolo(player.id);
+        Games.addGame(roomId, player, null);
+
+        emitTotalFreePlayers();
+
+        socket.emit('match_solo');
+    });
+
     socket.on('find_match', () => {
         if (!!player?.id && !partner){
             // find a free player to play
@@ -100,11 +109,12 @@ io.on('connection', (socket) => {
             }
             
             printLog(`player_ready: 
-                player1 ${playerGame.player1.ready} 
-                player2 ${playerGame.player2.ready} 
+                player1 ${playerGame.player1?.ready} 
+                player2 ${playerGame.player2?.ready} 
                 and game ${roomId}`);
 
-            if (!!playerGame.player1.ready && !!playerGame.player2.ready){
+            if ((!!playerGame.player1?.ready && !!playerGame.player2?.ready) || 
+                !!currentPlayer?.playingSolo){
                 setQuestions(playerGame);
             }else{
                 socket.to(roomId).emit('partner_ready');
@@ -124,15 +134,15 @@ io.on('connection', (socket) => {
                 currentPlayer.addAnswer(answer, currentPlayer.validAnswer);
             }
             
-            if (!!playerGame.player1.sentAnswer && 
-                !!playerGame.player2.sentAnswer){
-            
-                playerGame.player1.score += playerGame.player1.validAnswer ? pointsCorrectAnswer : 0;
-                playerGame.player2.score += playerGame.player2.validAnswer ? pointsCorrectAnswer : 0;
+            if ((!!playerGame.player1?.sentAnswer && 
+                !!playerGame.player2?.sentAnswer) ||
+                !!currentPlayer?.playingSolo){
 
-                const currentPlayer = playerGame.getPlayer(player?.id);
                 const partnerPlayer = playerGame.getPlayer(partner?.id);
                 const correctAnswer = playerGame.getCorrectAnswer();
+
+                (!!playerGame.player1 && (playerGame.player1.score += playerGame.player1.validAnswer ? pointsCorrectAnswer : 0));
+                (!!playerGame.player2 && (playerGame.player2.score += playerGame.player2.validAnswer ? pointsCorrectAnswer : 0));
 
                 printLog(`validate_answer:
                     currentPlayer: ${currentPlayer?.score},
@@ -158,8 +168,9 @@ io.on('connection', (socket) => {
                 currentPlayer.resetAnswer();
             }
             
-            if (!!playerGame.player1.requestedNextQuestion && 
-                !!playerGame.player2.requestedNextQuestion){
+            if ((!!playerGame.player1?.requestedNextQuestion && 
+                !!playerGame.player2?.requestedNextQuestion) || 
+                !!currentPlayer.playingSolo){
                 getNextQuestion(playerGame);
             }
         }
@@ -279,8 +290,9 @@ io.on('connection', (socket) => {
     
     function getNextQuestion(playerGame){
         if (!!playerGame){
-            playerGame.player1.requestedNextQuestion = false; 
-            playerGame.player2.requestedNextQuestion = false;
+            
+            (!!playerGame.player1 && (playerGame.player1.requestedNextQuestion = false)); 
+            (!!playerGame.player2 && (playerGame.player2.requestedNextQuestion = false));
 
             const wasTheLaStQuestion = playerGame.questionNumber === questionsLimit - 1;
             if (wasTheLaStQuestion){

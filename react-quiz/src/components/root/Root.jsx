@@ -37,10 +37,22 @@ function Root(){
                 const gameData = {
                     ...previous,
                     partnerData: partnerData
-                }
+                };
                 gameData.game.gameFinishedReason = '';
                 return gameData;
             });
+        }
+
+        function onMatchSolo(){
+            gameContext.setGameData(previous => {
+                const gameData = {
+                    ...previous,
+                    playingSolo: true,
+                };
+                gameData.game.gameFinishedReason = '';
+                return gameData;
+            });
+            socket.emit('player_ready');
         }
 
         
@@ -69,6 +81,7 @@ function Root(){
                 gameData.game = new GameCore();
                 gameData.game.gameFinishedReason = message;
                 gameData.userIsPlaying = false;
+                gameData.playingSolo = false;
                 gameData.partnerData = null;
                 gameData.userData = {
                     ...gameData.userData, 
@@ -114,6 +127,7 @@ function Root(){
         socket.on('users_connected', handleUsersConnected);
         socket.on('disconnect', onDisconnect);
         socket.on('match_partner', onMatchPartner);
+        socket.on('match_solo', onMatchSolo);
         socket.on('users_free', onUsersFree);
         socket.on('partner_disconnected', onPartnerDisconnected);
         socket.on('room_left', onRoomLeft);
@@ -124,6 +138,7 @@ function Root(){
             socket.off('users_connected', handleUsersConnected);
             socket.off('disconnect', onDisconnect);
             socket.off('match_partner', onMatchPartner);
+            socket.off('match_solo', onMatchSolo);
             socket.off('users_free', onUsersFree);
             socket.off('partner_disconnected', onPartnerDisconnected);
             socket.off('room_left', onRoomLeft);

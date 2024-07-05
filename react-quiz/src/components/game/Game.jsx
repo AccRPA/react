@@ -58,8 +58,8 @@ function Game(){
             <User data={gameContext.gameData.userData}></User>
             <Score score={gameContext.gameData.game.score}></Score>
             <p>and: </p>
-            <User data={gameContext.gameData.partnerData}></User>
-            <Score score={gameContext.gameData.game.partnerScore}></Score>
+            {!!gameContext.gameData.partnerData && <User data={gameContext.gameData.partnerData}></User>}
+            {!!gameContext.gameData.partnerData && <Score score={gameContext.gameData.game.partnerScore}></Score>}
 
             {!!result && <p>The answer was: {result.isValidAnswer ? 'correct': 'wrong'}</p>}
 

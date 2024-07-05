@@ -14,6 +14,7 @@ function Player(id, name, avatar) {
     this.validAnswer = false;
     this.sentAnswer = false;
     this.requestedNextQuestion = false;
+    this.playingSolo = false;
 
     // save all the answers and if they were valid.
     this.answers = [];
@@ -30,6 +31,7 @@ function Player(id, name, avatar) {
         this.ready = false;
         this.status = statusList.free;
         this.answers = [];
+        this.playingSolo = false;
     }
 
     this.addAnswer = function(answer, valid){
@@ -59,7 +61,12 @@ function getPlayer(id){
 
 function setPlayerPlaying(id){
     const player = getPlayer(id);
-    (player && (player.status = statusList.playing));
+    (player && (player.status = statusList.playing, player.playingSolo = false));
+}
+
+function setPlayerPlayingSolo(id){
+    const player = getPlayer(id);
+    (player && (player.status = statusList.playing, player.playingSolo = true));
 }
 
 function setPlayerFree(id){
@@ -93,4 +100,5 @@ export let Players = {
     totalFreePlayers: totalFreePlayers,
     setPlayerPlaying: setPlayerPlaying,
     setPlayerFree: setPlayerFree,
+    setPlayerPlayingSolo: setPlayerPlayingSolo
 }

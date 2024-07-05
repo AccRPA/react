@@ -11,9 +11,9 @@ function Game(roomId, player1, player2){
 
     this.getPlayer = function(playerId){        
         switch(playerId){
-            case this.player1.id:
+            case this.player1?.id:
                 return this.player1;
-            case this.player2.id:
+            case this.player2?.id:
                 return this.player2;
             default:
                 null;
