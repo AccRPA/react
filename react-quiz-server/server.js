@@ -281,8 +281,12 @@ io.on('connection', (socket) => {
             await fetch(`https://opentdb.com/api.php?amount=${questionsLimit}&difficulty=easy&type=multiple`)
             .then(response => response.json())
             .then(data => {
-                playerGame.setGameQuestions(data); 
-                emitQuestions(playerGame.questions);
+                if (data.response_code === 0){
+                    playerGame.setGameQuestions(data); 
+                    emitQuestions(playerGame.questions);
+                }else{
+                    emitError(1, 'Error getting questions, please try again');
+                }
             })
             .catch(err => console.log(err));
         }else{
@@ -328,6 +332,15 @@ io.on('connection', (socket) => {
             score: player1?.score,
             partnerScore: player2?.score
         }
+    }
+
+    function emitError(code, message){
+        const errorModel = {
+            code,
+            message 
+        }
+        socket.emit('error', errorModel);
+        socket.to(roomId).emit('error', errorModel);
     }
 });
 

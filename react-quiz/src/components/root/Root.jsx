@@ -124,6 +124,10 @@ function Root(){
             socket.emit('game_result_request');
         }
 
+        function onError({code, message}){
+            console.log(`Error ${code}: ${message}`);
+        }
+        
         socket.on('users_connected', handleUsersConnected);
         socket.on('disconnect', onDisconnect);
         socket.on('match_partner', onMatchPartner);
@@ -133,7 +137,8 @@ function Root(){
         socket.on('room_left', onRoomLeft);
         socket.on('game_data', onGameStart);
         socket.on('game_finished', onGameFinish);
-
+        socket.on('error', onError);
+        
         return () => {
             socket.off('users_connected', handleUsersConnected);
             socket.off('disconnect', onDisconnect);
@@ -144,6 +149,7 @@ function Root(){
             socket.off('room_left', onRoomLeft);
             socket.off('game_data', onGameStart);
             socket.off('game_finished', onGameFinish);
+            socket.off('error', onError);
         };
     }, []);
 
