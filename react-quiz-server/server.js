@@ -141,8 +141,8 @@ io.on('connection', (socket) => {
                 const partnerPlayer = playerGame.getPlayer(partner?.id);
                 const correctAnswer = playerGame.getCorrectAnswer();
 
-                (!!playerGame.player1 && (playerGame.player1.score += playerGame.player1.validAnswer ? pointsCorrectAnswer : 0));
-                (!!playerGame.player2 && (playerGame.player2.score += playerGame.player2.validAnswer ? pointsCorrectAnswer : 0));
+                if (!!playerGame.player1) playerGame.player1.score += playerGame.player1.validAnswer ? pointsCorrectAnswer : 0;
+                if (!!playerGame.player2) playerGame.player2.score += playerGame.player2.validAnswer ? pointsCorrectAnswer : 0;
 
                 printLog(`validate_answer:
                     currentPlayer: ${currentPlayer?.score},
@@ -202,13 +202,20 @@ io.on('connection', (socket) => {
             // leave the room
             socket.leave(roomId);
 
-            // not playing anymore
-            Games.deleteGame(roomId);
+            // only delete the game and communicate to the partner if the game has not finished
+            // otherwise only leave the player, so the partner can still see the results of the game
+            const playerGame = Games.getGame(roomId);
+            if (!playerGame?.isFinished){
+                // not playing anymore
+                Games.deleteGame(roomId);
+            }
             
             printLog(`disconnect: player ${player.name} left room ${roomId}`);
 
-            // inform the room members about the disconnection so they will leave the room as well
-            io.to(roomId).emit('partner_disconnected');
+            if (!playerGame?.isFinished){
+                // inform the room members about the disconnection so they will leave the room as well
+                io.to(roomId).emit('partner_disconnected');
+            }
 
             // inform about the total amount of users currently connected
             socket.broadcast.emit('users_connected', Players.totalPlayers());
@@ -242,9 +249,14 @@ io.on('connection', (socket) => {
             partner = null;
 
             // leave the room
-            socket.leave(roomId);
-            
-            Games.deleteGame(roomId);
+            socket.leave(roomId);          
+
+            // only delete the game and communicate to the partner if the game has not finished
+            // otherwise only leave the player, so the partner can still see the results of the game
+            const playerGame = Games.getGame(roomId);
+            if (!playerGame?.isFinished){
+                Games.deleteGame(roomId);
+            }
             
             printLog(`leave: player ${player.name} left room ${roomId} and deleted game ${roomId}`);
             
@@ -254,7 +266,9 @@ io.on('connection', (socket) => {
             player.id = uuidv4();
                         
             if (!!emitEvents){
-                socket.to(roomId).emit('partner_disconnected');
+                if (!playerGame?.isFinished){
+                    socket.to(roomId).emit('partner_disconnected');
+                }
                 socket.emit('room_left');
             }
             
@@ -278,7 +292,7 @@ io.on('connection', (socket) => {
 
     function emitQuestions(questions){
         // remove correct/incorrect answers and keep all of them in one array so the client cannot distinguish them
-        const questionsClients = questions.map(q => {
+        const questionsClients = questions?.map(q => {
             let temp = {...q};
             delete temp.correctAnswer;
             delete temp.incorrectAnswers;
@@ -291,11 +305,12 @@ io.on('connection', (socket) => {
     function getNextQuestion(playerGame){
         if (!!playerGame){
             
-            (!!playerGame.player1 && (playerGame.player1.requestedNextQuestion = false)); 
-            (!!playerGame.player2 && (playerGame.player2.requestedNextQuestion = false));
+            if (!!playerGame.player1) playerGame.player1.requestedNextQuestion = false;
+            if (!!playerGame.player2) playerGame.player2.requestedNextQuestion = false;
 
             const wasTheLaStQuestion = playerGame.questionNumber === questionsLimit - 1;
             if (wasTheLaStQuestion){
+                playerGame.isFinished = true;
                 socket.to(roomId).emit('game_finished');            
                 socket.emit('game_finished');                
             }else{

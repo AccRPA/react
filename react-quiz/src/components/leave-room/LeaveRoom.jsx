@@ -4,7 +4,7 @@ function LeaveRoom(){
     const onLeaveRoom = () => {
         socket.emit('leave_room');
     }
-    return <button onClick={onLeaveRoom}>Leave room</button>;
+    return <button onClick={onLeaveRoom}>Leave game</button>;
 }
 
 export default LeaveRoom;

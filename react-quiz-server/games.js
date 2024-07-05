@@ -8,6 +8,7 @@ function Game(roomId, player1, player2){
     this.player2 = player2;
     this.questions = null;
     this.questionNumber = 0;
+    this.isFinished = false;
 
     this.getPlayer = function(playerId){        
         switch(playerId){
@@ -20,13 +21,13 @@ function Game(roomId, player1, player2){
         }
     }
 
-    this.setGameQuestions = function(questions){
+    this.setGameQuestions = function(questionsList){
         if (!this.questions){
             this.questions = [];
         }
         
         let index = 0;
-        for (let q of questions.results){
+        for (let q of questionsList?.results){
             this.questions.push(new Question(q, ++index));
         }
     }
