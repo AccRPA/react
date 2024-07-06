@@ -1,5 +1,81 @@
+:root{
+  --color_light: #7A47FA;
+  --color_dark: #4F23EA;
+  --color_medium: #5C46D4;
+  --color_font_light: #FFFFFF;
+  --color_font_stand: #FFEB4E;
+  --color_font_dark: #422B0D;
+  --color_light_stand: #B7E641;
+  --color_dark_stand: #78BA27;
+  --color_answer_light: #FEFEFF;
+  --color_answer_dark: #DCE9FF;
+  --color_danger: #FD7A30;
+}
+
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+}
+
+body {
+  height: 100vh;
+  width: 100vw;
+  color: var(--color_font);
+  background: linear-gradient(var(--color_light), var(--color_dark));
+}
+
+button {
+  color: var(--color_font_light);
+  padding: 10px 25px;
+  text-align: center;
+  font-size: 1.5rem;
+  outline: none;
+  border: 0;
+  cursor: pointer;
+  border-radius: 5px;
+  border: 1.5px solid var(--color_dark);
+  -webkit-box-shadow: 0px 0px 6px 1px rgba(0,0,0,0.5);
+  -moz-box-shadow: 0px 0px 6px 1px rgba(0,0,0,0.5);
+  box-shadow: 0px 0px 6px 1px rgba(0,0,0,0.5);
+}
+
+button.primary {
+  background: linear-gradient(var(--color_light_stand), var(--color_dark_stand));
+}
+
+button.secondary {
+  background: linear-gradient(var(--color_light_stand), var(--color_dark_stand));
+}
+
+.card {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  background-color: var(--color_medium);
+  border-radius: 5px;
+  -webkit-box-shadow: 0px 0px 6px 1px rgba(0,0,0,0.5);
+  -moz-box-shadow: 0px 0px 6px 1px rgba(0,0,0,0.5);
+  box-shadow: 0px 0px 6px 1px rgba(0,0,0,0.5);
+  padding: 25px;
+}
+
+input {
+  padding: 15px;
+  border-radius: 5px;
+  text-shadow: none;
+  outline: none;
+  border: none;
+  width: 100%;
+  margin: 10px 0px;
+  font-size: 1rem;
+  color: var(--color_dark);
+  margin: 10px 0px 10px 0px;
+}
+
+.validation-message{
+  color: var(--color_danger);
+  margin: 5px 0px;
+  height: 20px
 }

@@ -113,37 +113,43 @@ function Login(){
     }
 
     return (
-        <div>
+        <div className="card">
             <form>
+                <h1>WELCOME TO QUIZ GAME</h1>
+                <h5>Enter your name and choose an avatar</h5>
                 <input aria-label="player_name" 
-                    placeholder="type player name" 
+                    placeholder="Enter name" 
                     name="player" 
                     value={gameContext.gameData.userData.name} 
                     onChange={handleChangeName}>
                 </input>
-
-                <button aria-label="submit" 
-                    type="submit" 
-                    onClick={submitHandle} 
-                    disabled={showLoader}
-                >
-                    Play
-                </button>
                 
-                {!!validationMessage && <p aria-label="validation_message">{validationMessage}</p>}
                 
-                <div aria-label="avatars" className="grid-avatar">
-                    {avatars.map((code, index) => 
-                        <span aria-label="player_avatar" 
+                <div class="avatar-container">
+                    <div aria-label="avatars" className="grid-avatar">
+                        {avatars.map((code, index) => 
+                            <span aria-label="player_avatar" 
                             key={index} 
                             onClick={handleSelectAvatar} 
                             id={code} 
                             className={gameContext.gameData.userData?.avatar === String(code) ? 'selected' : ''}
                             >
-                                {String.fromCodePoint(code)}
-                            </span>
-                    )}
+                                    {String.fromCodePoint(code)}
+                                </span>
+                        )}
+                    </div>
                 </div>
+
+                <p class="validation-message" aria-label="validation_message">{validationMessage}</p>
+
+                <button aria-label="submit" 
+                    type="submit" 
+                    onClick={submitHandle} 
+                    className='primary'
+                    disabled={showLoader}
+                >
+                    Play
+                </button>
             </form>
         </div>);
 

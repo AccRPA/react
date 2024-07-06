@@ -1,19 +1,52 @@
+.avatar-container{
+    width: 100%;
+    height: clamp(18vh, calc(100vh - 300px), 35vh);
+    overflow-y: auto;
+    overflow-x: hidden;
+    scrollbar-width: thin;
+    margin: 0px 0px 20px 0px;
+    background: white;
+    border-radius: 5px;
+}
 
 .grid-avatar {
     display: grid;
-    grid-template-columns: repeat(10, 1fr);
+    grid-template-columns: repeat(4, 1fr);
     grid-template-rows: auto;
-    gap: 0.5rem;
-    width: 50%;
+    gap: 0.2rem;
+    padding: 5px;
 }
 
 .grid-avatar span {
     cursor: pointer;
     font-size: 2.5rem;
-    padding: 5px 10px;
-    border-radius: 10px;
+    padding: 5px 5px;
+    border-radius: 5px;
 }
 
 .grid-avatar span.selected {
-    background-color: pink;
+    background-color: var(--color_answer_dark);
+}
+
+form {
+    color: var(--color_font_light);
+    text-align: center;
+    max-width: 330px;
+    height: fit-content;
+    overflow: hidden;
+}
+
+form h1{
+    font-size: clamp(1.9vw, 21px, 8vw);
+    margin: 0px 0px 20px 0px;
+}
+
+form h5{
+    font-size: clamp(1vw, 15px, 4vw);
+    font-weight: 400;
+    margin-bottom: 10px;
+}
+
+form button{
+    width: 100%;
 }
