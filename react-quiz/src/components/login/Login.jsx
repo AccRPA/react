@@ -125,7 +125,7 @@ function Login(){
                 </input>
                 
                 
-                <div class="avatar-container">
+                <div className="avatar-container">
                     <div aria-label="avatars" className="grid-avatar">
                         {avatars.map((code, index) => 
                             <span aria-label="player_avatar" 
@@ -140,7 +140,7 @@ function Login(){
                     </div>
                 </div>
 
-                <p class="validation-message" aria-label="validation_message">{validationMessage}</p>
+                <p className="validation-message" aria-label="validation_message">{validationMessage}</p>
 
                 <button aria-label="submit" 
                     type="submit" 
