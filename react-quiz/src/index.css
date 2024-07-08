@@ -5,6 +5,7 @@
   --color_font_light: #FFFFFF;
   --color_font_stand: #FFEB4E;
   --color_font_dark: #422B0D;
+  --color_font_pale: #c7bce3;
   --color_light_stand: #B7E641;
   --color_dark_stand: #78BA27;
   --color_answer_light: #FEFEFF;
@@ -16,17 +17,20 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  font-size: 1rem;
+  font-weight: 400;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 
 body {
   height: 100vh;
   width: 100vw;
-  color: var(--color_font);
+  color: var(--color_font_light);
   background: linear-gradient(var(--color_light), var(--color_dark));
 }
 
 button {
-  color: var(--color_font_light);
+  color: var(--color_font_dark);
   padding: 10px 25px;
   text-align: center;
   font-size: 1.5rem;
@@ -41,11 +45,35 @@ button {
 }
 
 button.primary {
+  color: var(--color_font_light);
   background: linear-gradient(var(--color_light_stand), var(--color_dark_stand));
 }
 
 button.secondary {
-  background: linear-gradient(var(--color_light_stand), var(--color_dark_stand));
+  color: var(--color_font_dark);
+  background: linear-gradient(var(--color_answer_light), var(--color_answer_dark));
+}
+
+button.flat {
+  color: var(--color_font_light);
+  padding: 5px 10px;
+  text-align: center;
+  font-size: 1rem;
+  outline: none;
+  border: 0;
+  cursor: pointer;
+  border-radius: 0;
+  border: none;
+  background-color: transparent;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+}
+
+button:disabled {
+  color: var(--color_font_pale);
+  cursor: not-allowed;
+  background: linear-gradient(var(--color_answer_light), var(--color_answer_dark)) !important;
 }
 
 .card {
@@ -59,6 +87,17 @@ button.secondary {
   -moz-box-shadow: 0px 0px 6px 1px rgba(0,0,0,0.5);
   box-shadow: 0px 0px 6px 1px rgba(0,0,0,0.5);
   padding: 25px;
+}
+
+.card p {
+  margin-bottom: 20px;
+}
+
+.card .button-group{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
 }
 
 input {
@@ -79,3 +118,47 @@ input {
   margin: 5px 0px;
   height: 20px
 }
+
+.title {
+  padding: 5px 10px;
+  font-size: 1.5rem;
+}
+
+.text-pale {
+  color: var(--color_font_pale) !important;
+}
+
+.top-center {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  transform: translate(-50%, 0%);
+}
+
+.top-right {
+  position: absolute;
+  right:0;
+  top: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.top-left{
+  position: absolute;
+  left:0;
+  top: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.padding {
+  padding: 5px 10px;
+}
+
+.flex-column {
+  flex-direction: column;
+  align-items: flex-start;
+}
+

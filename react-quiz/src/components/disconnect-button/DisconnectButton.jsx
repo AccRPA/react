@@ -5,7 +5,7 @@ function DisconnectButton(){
         socket.disconnect();
     }
 
-    return <button onClick={disconnect}>Disconnect</button>;
+    return <button className="flat text-pale" onClick={disconnect}>Disconnect</button>;
 }
 
 export default DisconnectButton;

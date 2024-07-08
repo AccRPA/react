@@ -6,6 +6,7 @@ import Question from '../question/Question';
 import LeaveRoom from '../leave-room/LeaveRoom';
 import Score from '../score/Score';
 import { socket } from '../../core/socket';
+import AppTitle from '../app-title/AppTitle';
 
 function Game(){
     const gameContext = useContext(GameContext); 
@@ -53,21 +54,29 @@ function Game(){
     }, []);
 
 
-    return <div>
-            <p>Game between</p>
-            <User data={gameContext.gameData.userData}></User>
-            <Score score={gameContext.gameData.game.score}></Score>
-            <p>and: </p>
-            {!!gameContext.gameData.partnerData && <User data={gameContext.gameData.partnerData}></User>}
-            {!!gameContext.gameData.partnerData && <Score score={gameContext.gameData.game.partnerScore}></Score>}
+    return <>
+            <AppTitle></AppTitle>
+            <div>
+                <div>
+                    <User data={gameContext.gameData.userData}></User>
+                    <Score score={gameContext.gameData.game.score}></Score>
+                </div>
 
-            {!!result && <p>The answer was: {result.isValidAnswer ? 'correct': 'wrong'}</p>}
+                <div>
+                    {!!gameContext.gameData.partnerData && <User data={gameContext.gameData.partnerData}></User>}
+                    {!!gameContext.gameData.partnerData && <Score score={gameContext.gameData.game.partnerScore}></Score>}
+                </div>
+                
+                {!!result && <p>The answer was: {result.isValidAnswer ? 'correct': 'wrong'}</p>}
+                
+                {!!gameContext.gameData?.game?.questions && <div className='card'><Question></Question></div>}
 
-            {!!gameContext.gameData?.game?.questions && <Question></Question>}
-
-            <LeaveRoom></LeaveRoom>
-            <DisconnectButton></DisconnectButton>
-        </div>;
+            </div>
+            <div className="top-right">
+                <LeaveRoom></LeaveRoom>
+                <DisconnectButton></DisconnectButton>
+            </div>
+        </>;    
 }
 
 export default Game;

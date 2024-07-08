@@ -5,7 +5,7 @@ function PlaySolo(){
         socket.emit('play_solo');
     }
 
-    return <button onClick={handlePlaySolo}>Play solo</button>
+    return <button className="primary" onClick={handlePlaySolo}>Play solo</button>
 }
 
 export default PlaySolo;

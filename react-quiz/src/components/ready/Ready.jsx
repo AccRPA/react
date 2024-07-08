@@ -4,6 +4,7 @@ import { GameContext } from '../../core/GameContext';
 import { useContext, useEffect, useState } from 'react';
 import User from '../user/User';
 import { socket } from '../../core/socket';
+import AppTitle from '../app-title/AppTitle';
 
 function Ready(){
     const gameContext = useContext(GameContext);
@@ -51,22 +52,25 @@ function Ready(){
         socket.emit('player_ready');
     };
 
-    return <div>
-        {
-            !!gameContext.gameData.partnerData && 
+    return <>
+            <AppTitle></AppTitle>
             <div>
-                <p>Game ready for: </p>
-                <User data={gameContext.gameData.userData}></User>
-                <p>width: </p>
-                <User data={gameContext.gameData.partnerData}></User>
-                <div>Hit Start when you are ready</div>
-                <p>{readyMessage}</p>
+                {
+                    !!gameContext.gameData.partnerData && 
+                    <div>
+                        <p>Game ready for: </p>
+                        <User data={gameContext.gameData.userData}></User>
+                        <p>width: </p>
+                        <User data={gameContext.gameData.partnerData}></User>
+                        <div>Hit Start when you are ready</div>
+                        <p>{readyMessage}</p>
+                    </div>
+                }
+                {!hideStartButton && <button onClick={handleReady}>Start</button>}
+                <LeaveRoom></LeaveRoom>
             </div>
-        }
-        {!hideStartButton && <button onClick={handleReady}>Start</button>}
-        <LeaveRoom></LeaveRoom>
-        <DisconnectButton></DisconnectButton>
-    </div>;
+            <DisconnectButton></DisconnectButton>
+        </>;
 }
 
 export default Ready;

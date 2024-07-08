@@ -1,6 +1,9 @@
+import './User.css';
+
 function User({data}){
-    return <div>
-            {(!!data?.avatar && String.fromCodePoint(data.avatar))} {data?.name}
+    return <div className="user">
+            {(!!data?.avatar && <span className="avatar">{String.fromCodePoint(data.avatar)}</span>)} 
+            <span className="name">{data?.name}</span>
         </div>;
 }
 

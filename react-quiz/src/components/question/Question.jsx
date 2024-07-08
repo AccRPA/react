@@ -45,6 +45,7 @@ function Question(){
             <QuestionAnswers 
                 options={questionData.answers} 
                 selectedAnswer={selectAnswer} 
+                answer={userAnswer.current}
                 disableAnswers={disableAnswers}
             >
             </QuestionAnswers>
