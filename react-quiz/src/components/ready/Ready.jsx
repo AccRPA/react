@@ -1,10 +1,8 @@
-import DisconnectButton from '../disconnect-button/DisconnectButton';
-import LeaveRoom from '../leave-room/LeaveRoom';
 import { GameContext } from '../../core/GameContext';
 import { useContext, useEffect, useState } from 'react';
 import User from '../user/User';
 import { socket } from '../../core/socket';
-import AppTitle from '../app-title/AppTitle';
+import Header from '../header/Header';
 
 function Ready(){
     const gameContext = useContext(GameContext);
@@ -53,7 +51,11 @@ function Ready(){
     };
 
     return <>
-            <AppTitle></AppTitle>
+            <Header showConnections={true} 
+                showTitle={true} 
+                showLeaveButton={true} 
+                showDisconnectButton={true}>                    
+            </Header>
             <div>
                 {
                     !!gameContext.gameData.partnerData && 
@@ -67,9 +69,7 @@ function Ready(){
                     </div>
                 }
                 {!hideStartButton && <button onClick={handleReady}>Start</button>}
-                <LeaveRoom></LeaveRoom>
             </div>
-            <DisconnectButton></DisconnectButton>
         </>;
 }
 

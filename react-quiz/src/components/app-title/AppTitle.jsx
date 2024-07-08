@@ -1,3 +1,3 @@
 export default function AppTitle(){
-    return <div className="title top-center">Quiz Game!</div>;
+    return <div className="title">Quiz Game!</div>;
 }

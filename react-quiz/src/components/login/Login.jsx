@@ -113,7 +113,7 @@ function Login(){
     }
 
     return (
-        <div className="card">
+        <div className="login-card">
             <form>
                 <h1>WELCOME TO QUIZ GAME</h1>
                 <h5>Enter your name and choose an avatar</h5>

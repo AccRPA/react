@@ -1,0 +1,17 @@
+.header {
+    display: grid;
+    grid-template-columns: 0.5fr 1fr 0.5fr;
+    align-items: baseline;
+}
+
+.header .connections {
+    text-align: left;
+}
+
+.header .title {
+    text-align: center;
+}
+
+.header .leave {
+    text-align: right;
+}

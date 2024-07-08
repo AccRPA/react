@@ -1,5 +1,7 @@
+import './Score.css';
+
 function Score({score}){
-    return <div>Score: {score}</div>;
+    return <div className="score">{score}</div>;
 }
 
 export default Score;

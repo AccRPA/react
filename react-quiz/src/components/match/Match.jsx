@@ -1,12 +1,9 @@
 import { GameContext } from '../../core/GameContext';
 import { useContext } from 'react';
 import { socket } from '../../core/socket';
-import ConnectedUsers from '../connected-users/ConnectedUsers';
-import DisconnectButton from '../disconnect-button/DisconnectButton';
 import PlaySolo from '../play-solo/PlaySolo';
 import FindPartner from '../find-partner/FindPartner';
-import FreeUsers from '../free-users/FreeUsers';
-import AppTitle from '../app-title/AppTitle';
+import Header from '../header/Header';
 
 function Match(){
     const gameContext = useContext(GameContext);
@@ -14,7 +11,11 @@ function Match(){
     socket.emit('get_total_free_players');
 
     return <>
-            <AppTitle></AppTitle>
+            <Header showConnections={true} 
+                showTitle={true} 
+                showLeaveButton={false} 
+                showDisconnectButton={true}>                    
+            </Header>
             <div className="card">
                 { !!gameContext.gameData.game.gameFinishedReason && 
                     <div>
@@ -26,13 +27,6 @@ function Match(){
                     <FindPartner></FindPartner>
                     <PlaySolo></PlaySolo>
                 </div>
-            </div>
-            <div className="padding top-left flex-column">
-                <FreeUsers></FreeUsers>
-                <ConnectedUsers></ConnectedUsers>
-            </div>
-            <div className="top-right">
-                <DisconnectButton></DisconnectButton>
             </div>
         </>;
 }

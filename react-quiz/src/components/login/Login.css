@@ -28,6 +28,19 @@
     background-color: var(--color_answer_dark);
 }
 
+.login-card {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    background-color: var(--color_medium);
+    border-radius: 5px;
+    -webkit-box-shadow: 0px 0px 6px 1px rgba(0,0,0,0.5);
+    -moz-box-shadow: 0px 0px 6px 1px rgba(0,0,0,0.5);
+    box-shadow: 0px 0px 6px 1px rgba(0,0,0,0.5);
+    padding: 25px;
+} 
+
 form {
     color: var(--color_font_light);
     text-align: center;
@@ -50,4 +63,23 @@ form h5{
 
 form button{
     width: 100%;
+}
+
+input {
+    padding: 15px;
+    border-radius: 5px;
+    text-shadow: none;
+    outline: none;
+    border: none;
+    width: 100%;
+    margin: 10px 0px;
+    font-size: 1rem;
+    color: var(--color_dark);
+    margin: 10px 0px 10px 0px;
+}
+
+.validation-message{
+    color: var(--color_danger);
+    margin: 5px 0px;
+    height: 20px
 }

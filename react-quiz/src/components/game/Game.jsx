@@ -1,12 +1,11 @@
-import DisconnectButton from '../disconnect-button/DisconnectButton';
+
+import './Game.css';
 import User from '../user/User';
 import { useContext, useEffect, useState } from 'react';
 import { GameContext } from '../../core/GameContext';
 import Question from '../question/Question';
-import LeaveRoom from '../leave-room/LeaveRoom';
-import Score from '../score/Score';
 import { socket } from '../../core/socket';
-import AppTitle from '../app-title/AppTitle';
+import Header from '../header/Header';
 
 function Game(){
     const gameContext = useContext(GameContext); 
@@ -55,26 +54,27 @@ function Game(){
 
 
     return <>
-            <AppTitle></AppTitle>
-            <div>
-                <div>
-                    <User data={gameContext.gameData.userData}></User>
-                    <Score score={gameContext.gameData.game.score}></Score>
+            <Header showConnections={false} 
+                showTitle={true} 
+                showLeaveButton={true} 
+                showDisconnectButton={true}>                    
+            </Header>
+            <div className="game-container">
+                <div className='users'>
+                    <div>
+                        <User data={gameContext.gameData.userData}></User>
+                    </div>
+                    
+                    <div>
+                        {!!gameContext.gameData.partnerData && <User data={gameContext.gameData.partnerData}></User>}
+                        {!!gameContext.gameData.partnerData && <Score score={gameContext.gameData.game.partnerScore}></Score>}
+                    </div>
                 </div>
 
-                <div>
-                    {!!gameContext.gameData.partnerData && <User data={gameContext.gameData.partnerData}></User>}
-                    {!!gameContext.gameData.partnerData && <Score score={gameContext.gameData.game.partnerScore}></Score>}
-                </div>
-                
                 {!!result && <p>The answer was: {result.isValidAnswer ? 'correct': 'wrong'}</p>}
                 
-                {!!gameContext.gameData?.game?.questions && <div className='card'><Question></Question></div>}
+                {!!gameContext.gameData?.game?.questions && <Question></Question>}
 
-            </div>
-            <div className="top-right">
-                <LeaveRoom></LeaveRoom>
-                <DisconnectButton></DisconnectButton>
             </div>
         </>;    
 }

@@ -1,3 +1,4 @@
+import './Question.css';
 import { useContext, useEffect, useState, useRef } from 'react';
 import { GameContext } from '../../core/GameContext';
 import QuestionAnswers from '../question_answers/QuestionAnswers';
@@ -18,7 +19,7 @@ function Question(){
             timeId = setTimeout(() => setTime(previous => --previous), 1000);
         }else{
             setDisableAnswers(true);
-            socket.emit('validate_answer_request', userAnswer.current);
+            //socket.emit('validate_answer_request', userAnswer.current);
         }
 
         return () => {
@@ -36,11 +37,13 @@ function Question(){
         userAnswer.current = value;
     }
 
-    return (!!questionData && <div>
-            Countdown: {time}
-            <p>Question {questionData.number}</p>
-            <p>Category {questionData.category}</p>
-            <p>{Utils.decodeHtmlCharacters(questionData.question)}</p>
+    return (!!questionData && <div className='card-question'>
+            <span className='clock'>{time}</span>
+            <div className='question-info'>
+                <p>Question {questionData.number}/10</p>
+                <p>{questionData.category}</p>
+            </div>
+            <p className='question'>{Utils.decodeHtmlCharacters(questionData.question)}</p>
             
             <QuestionAnswers 
                 options={questionData.answers} 
