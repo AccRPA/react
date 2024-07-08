@@ -5,6 +5,7 @@ import User from '../user/User';
 import LeaveRoom from '../leave-room/LeaveRoom';
 import Score from '../score/Score';
 import { socket } from '../../core/socket';
+import Header from '../header/Header';
 
 function Result(){
     const gameContext = useContext(GameContext);   
@@ -25,16 +26,15 @@ function Result(){
     });
 
     return <div>
-        <p>Game finished! Result:</p>
-        <User data={gameContext.gameData.userData}></User>
-        <Score score={gameContext.gameData.game.score}></Score>
-        <p>and: </p>
-        {!!gameContext.gameData.partnerData &&  <User data={gameContext.gameData.partnerData}></User>}
-        {!!gameContext.gameData.partnerData &&  <Score score={gameContext.gameData.game.partnerScore}></Score>}
-
-        <LeaveRoom></LeaveRoom>
-        <DisconnectButton></DisconnectButton>
-    </div>;
+            <Header showConnections={false} 
+                showTitle={true} 
+                showLeaveButton={true} 
+                showDisconnectButton={true}>                    
+            </Header>
+            <p>Game finished! Result:</p>
+            <User data={gameContext.gameData.userData}></User>
+            {!!gameContext.gameData.partnerData &&  <User data={gameContext.gameData.partnerData}></User>}
+        </div>;
 }
 
 export default Result;

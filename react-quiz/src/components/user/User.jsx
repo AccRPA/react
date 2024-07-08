@@ -3,14 +3,15 @@ import { useContext } from 'react';
 import { GameContext } from '../../core/GameContext';
 import Score from '../score/Score';
 
-function User({data}){
+function User({data, showScore, switchOrder}){
     const gameContext = useContext(GameContext); 
-
-    return <div className="user">
+    const switchClass = switchOrder ? 'switch' : '';
+    
+    return <div className={`user ${switchClass}`}>
             {(!!data?.avatar && <span className="avatar">{String.fromCodePoint(data.avatar)}</span>)} 
-            <div>
+            <div className={switchClass}>
                 <span className="name">{data?.name}</span>
-                <Score score={gameContext.gameData.game.score}></Score>
+                {showScore && <Score score={gameContext.gameData.game.score}></Score>}
             </div>
         </div>;
 }

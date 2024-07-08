@@ -61,14 +61,14 @@ function Ready(){
                     !!gameContext.gameData.partnerData && 
                     <div>
                         <p>Game ready for: </p>
-                        <User data={gameContext.gameData.userData}></User>
+                        <User data={gameContext.gameData.userData} showScore={false}></User>
                         <p>width: </p>
-                        <User data={gameContext.gameData.partnerData}></User>
+                        <User data={gameContext.gameData.partnerData} showScore={false}></User>
                         <div>Hit Start when you are ready</div>
                         <p>{readyMessage}</p>
                     </div>
                 }
-                {!hideStartButton && <button onClick={handleReady}>Start</button>}
+                {!hideStartButton && <button className='primary' onClick={handleReady}>Start</button>}
             </div>
         </>;
 }

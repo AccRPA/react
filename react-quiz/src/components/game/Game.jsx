@@ -62,12 +62,13 @@ function Game(){
             <div className="game-container">
                 <div className='users'>
                     <div>
-                        <User data={gameContext.gameData.userData}></User>
+                        <User data={gameContext.gameData.userData} showScore={true}></User>
                     </div>
                     
                     <div>
-                        {!!gameContext.gameData.partnerData && <User data={gameContext.gameData.partnerData}></User>}
-                        {!!gameContext.gameData.partnerData && <Score score={gameContext.gameData.game.partnerScore}></Score>}
+                        {!!gameContext.gameData.partnerData && 
+                            <User data={gameContext.gameData.partnerData} showScore={true} switchOrder={true}></User>
+                        }
                     </div>
                 </div>
 
