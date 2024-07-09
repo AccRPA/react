@@ -61,7 +61,7 @@ function Ready(){
                     !!gameContext.gameData.partnerData && 
                     <div>
                         <p>Game ready for: </p>
-                        <User data={gameContext.gameData.userData} showScore={false}></User>
+                        <User data={gameContext.gameData.userData} showScore={false} showYou={true}></User>
                         <p>width: </p>
                         <User data={gameContext.gameData.partnerData} showScore={false}></User>
                         <div>Hit Start when you are ready</div>

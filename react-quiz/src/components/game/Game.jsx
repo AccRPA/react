@@ -62,7 +62,7 @@ function Game(){
             <div className="game-container">
                 <div className='users'>
                     <div>
-                        <User data={gameContext.gameData.userData} showScore={true}></User>
+                        <User data={gameContext.gameData.userData} showScore={true} showYou={true}></User>
                     </div>
                     
                     <div>
@@ -72,7 +72,7 @@ function Game(){
                     </div>
                 </div>
 
-                {!!result && <p>The answer was: {result.isValidAnswer ? 'correct': 'wrong'}</p>}
+                {!!result && <p className='modal'>The answer was: {result.isValidAnswer ? 'correct': 'wrong'}</p>}
                 
                 {!!gameContext.gameData?.game?.questions && <Question></Question>}
 

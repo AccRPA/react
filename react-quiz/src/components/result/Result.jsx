@@ -32,7 +32,7 @@ function Result(){
                 showDisconnectButton={true}>                    
             </Header>
             <p>Game finished! Result:</p>
-            <User data={gameContext.gameData.userData}></User>
+            <User data={gameContext.gameData.userData} showScore={true} showYou={true}></User>
             {!!gameContext.gameData.partnerData &&  <User data={gameContext.gameData.partnerData}></User>}
         </div>;
 }

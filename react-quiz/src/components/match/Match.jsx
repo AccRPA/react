@@ -4,6 +4,7 @@ import { socket } from '../../core/socket';
 import PlaySolo from '../play-solo/PlaySolo';
 import FindPartner from '../find-partner/FindPartner';
 import Header from '../header/Header';
+import User from '../user/User';
 
 function Match(){
     const gameContext = useContext(GameContext);
@@ -16,6 +17,8 @@ function Match(){
                 showLeaveButton={false} 
                 showDisconnectButton={true}>                    
             </Header>
+
+            <User data={gameContext.gameData.userData} showScore={false} showYou={true}></User>
             <div className="card">
                 { !!gameContext.gameData.game.gameFinishedReason && 
                     <div>

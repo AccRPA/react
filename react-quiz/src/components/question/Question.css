@@ -4,9 +4,12 @@
     -webkit-box-shadow: 0px 0px 6px 1px rgba(0,0,0,0.5);
     -moz-box-shadow: 0px 0px 6px 1px rgba(0,0,0,0.5);
     box-shadow: 0px 0px 6px 1px rgba(0,0,0,0.5);
-    padding: 0px 25px 25px 25px;
     width: 100%;
     position: relative;
+}
+
+.question-container {
+    padding: 0px 25px 25px 25px;
 }
 
 .card-question .question-info {
@@ -26,16 +29,13 @@
 }
 
 .card-question .clock{
-    position: absolute;
-    top: -50px;
-    left: 50%;
-    transform: translate(-50%, 0);
-    padding: 10px 55px;
     font-size: 1.5rem;
     background: var(--color_font_stand);
     color: var(--color_light);
-    border-radius: 5px 5px 0px 0px;
-    -webkit-box-shadow: 0px 0px 6px 1px rgba(0,0,0,0.5);
-    -moz-box-shadow: 0px 0px 6px 1px rgba(0,0,0,0.5);
-    box-shadow: 0px 0px 6px 1px rgba(0,0,0,0.5);
+    -webkit-box-shadow: 0px 0px 6px 1px rgba(0, 0, 0, 0.5);
+    -moz-box-shadow: 0px 0px 6px 1px rgba(0, 0, 0, 0.5);
+    box-shadow: 0px 0px 6px 1px rgba(0, 0, 0, 0.5);
+    width: 100%;
+    display: block;
+    text-align: center;
 }

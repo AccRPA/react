@@ -39,19 +39,21 @@ function Question(){
 
     return (!!questionData && <div className='card-question'>
             <span className='clock'>{time}</span>
-            <div className='question-info'>
-                <p>Question {questionData.number}/10</p>
-                <p>{questionData.category}</p>
+            <div className='question-container'>
+                <div className='question-info'>
+                    <p>Question {questionData.number}/10</p>
+                    <p>{questionData.category}</p>
+                </div>
+                <p className='question'>{Utils.decodeHtmlCharacters(questionData.question)}</p>
+                
+                <QuestionAnswers 
+                    options={questionData.answers} 
+                    selectedAnswer={selectAnswer} 
+                    answer={userAnswer.current}
+                    disableAnswers={disableAnswers}
+                >
+                </QuestionAnswers>
             </div>
-            <p className='question'>{Utils.decodeHtmlCharacters(questionData.question)}</p>
-            
-            <QuestionAnswers 
-                options={questionData.answers} 
-                selectedAnswer={selectAnswer} 
-                answer={userAnswer.current}
-                disableAnswers={disableAnswers}
-            >
-            </QuestionAnswers>
         </div>);
 }
 

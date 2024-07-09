@@ -110,7 +110,14 @@ button:disabled {
   color: var(--color_font_pale) !important;
 }
 
-.flex-column {
-  flex-direction: column;
-  align-items: flex-start;
+.modal {
+  position: absolute;
+  top: 15%;
+  left: 50%;
+  transform: translate(-50%, -15%);
+  z-index: 10;
+  background: yellow;
+  color: black;
+  padding: 25px;
+  border-radius: 5px;
 }
