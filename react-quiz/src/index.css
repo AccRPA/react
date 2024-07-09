@@ -27,7 +27,7 @@ body {
   width: 100vw;
   color: var(--color_font_light);
   background: linear-gradient(var(--color_light), var(--color_dark));
-  padding: 15px;
+  padding: 5px 15px;
 }
 
 button {

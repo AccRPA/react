@@ -4,7 +4,7 @@
     align-items: center;
     width: clamp(30vw, 45rem, 90vw);
     height: 80vh;
-    padding: 45px 0px;
+    justify-content: center;
     margin: auto;
     gap: 4rem;
 }

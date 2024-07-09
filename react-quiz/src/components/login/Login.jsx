@@ -140,7 +140,7 @@ function Login(){
                     </div>
                 </div>
 
-                <p className="validation-message" aria-label="validation_message">{validationMessage}</p>
+                {!!validationMessage && <p className="validation-message" aria-label="validation_message">{validationMessage}</p>}
 
                 <button aria-label="submit" 
                     type="submit" 

@@ -80,6 +80,13 @@ input {
 
 .validation-message{
     color: var(--color_danger);
-    margin: 5px 0px;
-    height: 20px
+    position: absolute;
+    background: var(--color_font_light);
+    padding: 5px;
+    border-radius: 5px;
+    top: 55px;
+    left: 50%;
+    transform: translate(-50%, 0%);
+    width: 84%;
+    box-shadow: 0px 0px 6px 1px rgba(0, 0, 0, 0.5);
 }
