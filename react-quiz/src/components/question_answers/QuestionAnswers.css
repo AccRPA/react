@@ -2,5 +2,18 @@
     grid-template-rows: 1fr;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 1rem;
+    gap: clamp(5px, 1rem, 3vw);
+}
+
+.answers .answer-button {
+    font-size: clamp(2vw, 1.8rem, 2.5vw);
+}
+
+@media (max-width: 576px) {
+    .answers{
+        grid-template-rows: 1fr 1fr;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: clamp(5px, 1rem, 3vw);
+    }
 }

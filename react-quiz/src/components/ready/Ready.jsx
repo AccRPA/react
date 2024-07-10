@@ -65,7 +65,7 @@ function Ready(){
                     }
                 </div>
                 <div className="game-content">
-                    <div className="card-content">
+                    <div className="card-content small">
                         { !!readyMessage && 
                             <div className='highlight'>
                                 <p>{readyMessage}</p> 

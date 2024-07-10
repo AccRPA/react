@@ -9,13 +9,13 @@
 .user .avatar {
     border: 2px solid var(--color_font_light);
     border-radius: 50%;
-    font-size: 3rem;
+    font-size: clamp(2vw, 3rem, 10vw);
     padding: 0px 8px;
     background: var(--color_font_light);;
 }
 
 .user .name {
-    font-size: 1.5rem;
+    font-size: clamp(2vw, 1.5rem, 4vw);
 }
 
 .user.switch .avatar{

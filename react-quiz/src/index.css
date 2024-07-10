@@ -89,10 +89,22 @@ body {
   padding: 25px;
 }
 
+.card-content p {
+  font-size: 1.2rem;
+}
+
 .card-content .button-group {
   display: flex;
   justify-content: space-evenly;
   align-items: center;
+}
+
+.card-content.small {
+  width: 60%;
+}
+
+.card-content.small {
+  width: 60%;
 }
 
 button {
@@ -199,4 +211,10 @@ button:disabled {
   text-align: center;
   padding: 5px;
   border-radius: 5px 5px 0px 0px;
+}
+
+@media (max-width: 576px) {
+  .card-content.small {
+    width: 100%;
+  }
 }

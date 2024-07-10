@@ -23,13 +23,13 @@ function Match(){
                     <User data={gameContext.gameData.userData} showScore={false} showYou={true}></User>
                 </div>
                 <div className="game-content">
-                    <div className="card-content">
+                    <div className="card-content small">
                         { !!gameContext.gameData.game.gameFinishedReason && 
                             <div className='highlight'>
                                 <p>{gameContext.gameData.game.gameFinishedReason}</p> 
                             </div>
                         }
-                        <p>Now others users can request to play with you or you can find a partner or you can play solo</p> 
+                        <p>Now others users can request you to play with them. You can also find a partner or play solo.</p> 
                         <div className="button-group">
                             <FindPartner></FindPartner>
                             <PlaySolo></PlaySolo>
