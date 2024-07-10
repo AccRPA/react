@@ -61,7 +61,7 @@ function Ready(){
                     <User data={gameContext.gameData.userData} showScore={false} showYou={true}></User>
                     {
                     !!gameContext.gameData.partnerData && 
-                        <User data={gameContext.gameData.partnerData} showScore={false}></User>
+                        <User data={gameContext.gameData.partnerData} showScore={false} switchOrder={true}></User>
                     }
                 </div>
                 <div className="game-content">
@@ -71,6 +71,10 @@ function Ready(){
                                 <p>{readyMessage}</p> 
                             </div>
                         }
+                        { hideStartButton && 
+                            <div>You can wait or leave the game and find a partner again.</div>
+                        }
+                        
                         {!hideStartButton && 
                             <>
                                 <p>All set! Hit Start when you are ready to play.</p>

@@ -7,7 +7,8 @@ import Header from '../header/Header';
 
 function Game(){
     const gameContext = useContext(GameContext); 
-    const [result, setResult] = useState();  
+    const [result, setResult] = useState();
+    const [waiting, setWaiting] = useState();
 
     useEffect(() => {
         function onValidateAnswer({
@@ -15,7 +16,6 @@ function Game(){
                 correctAnswer,
                 score,
                 partnerScore}){
-            console.log(`updating score: ${score} - ${partnerScore}`);
             gameContext.setGameData(previous => {
                 const gameData = {...previous};
                 gameData.game.partnerScore = partnerScore;
@@ -23,6 +23,7 @@ function Game(){
                 return gameData;
             });
 
+            setWaiting(false);
             setResult({
                 isValidAnswer,
                 correctAnswer
@@ -52,6 +53,10 @@ function Game(){
     }, []);
 
 
+    function handleWaiting(value){
+        setWaiting(value);
+    }
+    
     return <div className="root-container">
             <Header showConnections={false} 
                 showTitle={true} 
@@ -81,10 +86,11 @@ function Game(){
                         }
                     </div>
                 </div>
+                {!!waiting && !result && <p className='modal'>Waiting for partner to answer</p>}
                 {!!result && <p className='modal'>The answer was: {result.isValidAnswer ? 'correct': 'wrong'}</p>}
                 
                 <div className="game-content">
-                    {!!gameContext.gameData?.game?.questions && <Question></Question>}
+                    {!!gameContext.gameData?.game?.questions && <Question waiting={handleWaiting}></Question>}
                 </div>
             </div>
         </div>;    

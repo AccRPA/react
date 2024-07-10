@@ -5,7 +5,7 @@ import QuestionAnswers from '../question_answers/QuestionAnswers';
 import { Utils } from '../../common/Utils';
 import { socket } from '../../core/socket';
 
-function Question(){
+function Question({waiting}){
     const maxSexconds = 10;
     const gameContext = useContext(GameContext);
     const questionData = gameContext.gameData.game.getQuestion();
@@ -19,6 +19,7 @@ function Question(){
             timeId = setTimeout(() => setTime(previous => --previous), 1000);
         }else{
             setDisableAnswers(true);
+            waiting(true);
             socket.emit('validate_answer_request', userAnswer.current);
         }
 

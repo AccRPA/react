@@ -119,7 +119,8 @@ function Login(){
                 <h5>Enter your name and choose an avatar</h5>
                 <input aria-label="player_name" 
                     placeholder="Enter name" 
-                    name="player" 
+                    name="player"
+                    maxLength={10}
                     value={gameContext.gameData.userData.name} 
                     onChange={handleChangeName}>
                 </input>
