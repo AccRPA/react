@@ -1,11 +1,13 @@
 .header {
     display: grid;
-    grid-template-columns: 0.5fr 1fr 0.5fr;
+    grid-template-columns: 1fr 1fr 1fr;
     align-items: center;
+    flex: 0;
 }
 
 .header .connections {
     text-align: left;
+    margin: 0px 1rem;
 }
 
 .header .title {

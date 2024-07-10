@@ -1,5 +1,3 @@
-
-import './Game.css';
 import User from '../user/User';
 import { useContext, useEffect, useState } from 'react';
 import { GameContext } from '../../core/GameContext';
@@ -17,6 +15,7 @@ function Game(){
                 correctAnswer,
                 score,
                 partnerScore}){
+            console.log(`updating score: ${score} - ${partnerScore}`);
             gameContext.setGameData(previous => {
                 const gameData = {...previous};
                 gameData.game.partnerScore = partnerScore;
@@ -53,31 +52,42 @@ function Game(){
     }, []);
 
 
-    return <>
+    return <div className="root-container">
             <Header showConnections={false} 
                 showTitle={true} 
                 showLeaveButton={true} 
                 showDisconnectButton={true}>                    
             </Header>
+
             <div className="game-container">
                 <div className='users'>
                     <div>
-                        <User data={gameContext.gameData.userData} showScore={true} showYou={true}></User>
+                        <User 
+                            data={gameContext.gameData.userData} 
+                            score={gameContext.gameData.game.score} 
+                            showScore={true} 
+                            showYou={true}>
+                        </User>
                     </div>
                     
                     <div>
                         {!!gameContext.gameData.partnerData && 
-                            <User data={gameContext.gameData.partnerData} showScore={true} switchOrder={true}></User>
+                            <User 
+                                data={gameContext.gameData.partnerData} 
+                                score={gameContext.gameData.game.partnerScore} 
+                                showScore={true} 
+                                switchOrder={true}>
+                            </User>
                         }
                     </div>
                 </div>
-
                 {!!result && <p className='modal'>The answer was: {result.isValidAnswer ? 'correct': 'wrong'}</p>}
                 
-                {!!gameContext.gameData?.game?.questions && <Question></Question>}
-
+                <div className="game-content">
+                    {!!gameContext.gameData?.game?.questions && <Question></Question>}
+                </div>
             </div>
-        </>;    
+        </div>;    
 }
 
 export default Game;

@@ -11,27 +11,33 @@ function Match(){
     
     socket.emit('get_total_free_players');
 
-    return <>
+    return <div className="root-container">
             <Header showConnections={true} 
                 showTitle={true} 
                 showLeaveButton={false} 
                 showDisconnectButton={true}>                    
             </Header>
 
-            <User data={gameContext.gameData.userData} showScore={false} showYou={true}></User>
-            <div className="card">
-                { !!gameContext.gameData.game.gameFinishedReason && 
-                    <div>
-                        <p>{gameContext.gameData.game.gameFinishedReason}</p> 
+            <div className="game-container">
+                <div className='users'>
+                    <User data={gameContext.gameData.userData} showScore={false} showYou={true}></User>
+                </div>
+                <div className="game-content">
+                    <div className="card-content">
+                        { !!gameContext.gameData.game.gameFinishedReason && 
+                            <div className='highlight'>
+                                <p>{gameContext.gameData.game.gameFinishedReason}</p> 
+                            </div>
+                        }
+                        <p>Now others users can request to play with you or you can find a partner or you can play solo</p> 
+                        <div className="button-group">
+                            <FindPartner></FindPartner>
+                            <PlaySolo></PlaySolo>
+                        </div>
                     </div>
-                }
-                <p>Now others users can request to play with you or you can find a partner or you can play solo</p> 
-                <div className="button-group">
-                    <FindPartner></FindPartner>
-                    <PlaySolo></PlaySolo>
                 </div>
             </div>
-        </>;
+        </div>;
 }
 
 export default Match;

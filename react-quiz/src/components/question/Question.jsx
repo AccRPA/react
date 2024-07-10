@@ -37,12 +37,12 @@ function Question(){
         userAnswer.current = value;
     }
 
-    return (!!questionData && <div className='card-question'>
-            <span className='clock'>{time}</span>
+    return (!!questionData && <div className='card-content'>
+            <span className='highlight'>{time}</span>
             <div className='question-container'>
                 <div className='question-info'>
                     <p>Question {questionData.number}/10</p>
-                    <p>{questionData.category}</p>
+                    <p>{Utils.decodeHtmlCharacters(questionData.category)}</p>
                 </div>
                 <p className='question'>{Utils.decodeHtmlCharacters(questionData.question)}</p>
                 

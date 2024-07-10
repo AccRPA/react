@@ -50,27 +50,39 @@ function Ready(){
         socket.emit('player_ready');
     };
 
-    return <>
+    return <div className="root-container">
             <Header showConnections={true} 
                 showTitle={true} 
                 showLeaveButton={true} 
                 showDisconnectButton={true}>                    
             </Header>
-            <div>
-                {
+            <div className="game-container">
+                <div className='users'>
+                    <User data={gameContext.gameData.userData} showScore={false} showYou={true}></User>
+                    {
                     !!gameContext.gameData.partnerData && 
-                    <div>
-                        <p>Game ready for: </p>
-                        <User data={gameContext.gameData.userData} showScore={false} showYou={true}></User>
-                        <p>width: </p>
                         <User data={gameContext.gameData.partnerData} showScore={false}></User>
-                        <div>Hit Start when you are ready</div>
-                        <p>{readyMessage}</p>
+                    }
+                </div>
+                <div className="game-content">
+                    <div className="card-content">
+                        { !!readyMessage && 
+                            <div className='highlight'>
+                                <p>{readyMessage}</p> 
+                            </div>
+                        }
+                        {!hideStartButton && 
+                            <>
+                                <p>Game ready. Hit Start when you are ready</p>
+                                <div className="button-group">
+                                    <button className='primary' onClick={handleReady}>Start</button>
+                                </div>
+                            </>
+                        }
                     </div>
-                }
-                {!hideStartButton && <button className='primary' onClick={handleReady}>Start</button>}
+                </div>
             </div>
-        </>;
+        </div>;
 }
 
 export default Ready;
