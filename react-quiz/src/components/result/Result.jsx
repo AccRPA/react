@@ -74,7 +74,7 @@ function Result(){
                                 <div>
                                     {gameResult.questions[page].number}
                                     {Utils.decodeHtmlCharacters(gameResult.questions[page].category)}
-                                    {Utils.decodeHtmlCharactersg(gameResult.questions[page].question)}
+                                    {Utils.decodeHtmlCharacters(gameResult.questions[page].question)}
                                     {Utils.decodeHtmlCharacters(gameResult.questions[page].correctAnswer)}
                                 </div>
                                 <div>
