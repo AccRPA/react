@@ -73,7 +73,7 @@ function Ready(){
                         }
                         {!hideStartButton && 
                             <>
-                                <p>Game ready. Hit Start when you are ready</p>
+                                <p>All set! Hit Start when you are ready to play.</p>
                                 <div className="button-group">
                                     <button className='primary' onClick={handleReady}>Start</button>
                                 </div>

@@ -10,6 +10,7 @@ export default function Header({showConnections, showTitle, showLeaveButton, sho
             <div className='connections'>
                 {showConnections && <>
                     <FreeUsers></FreeUsers>
+                    <span className="show-lg">/</span>
                     <ConnectedUsers></ConnectedUsers>            
                 </>
                 }
