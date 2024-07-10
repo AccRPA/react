@@ -29,7 +29,7 @@ function Game(){
             });
 
             setTimeout(() => {
-                //socket.emit('next_question_request');
+                socket.emit('next_question_request');
             },2000);
         }
 
