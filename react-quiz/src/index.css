@@ -216,6 +216,69 @@ button:disabled {
 .show-xs, show-lg, .show-xl {
   display: none;
 }
+
+.result-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.result-container .result-item {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.result-container .result-item .result-player {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.result-container .result-item .result-player .correct {
+  color: var(--color_light_stand);
+}
+
+.result-container .result-item .result-player .wrong {
+  color: var(--color_danger);
+}
+
+.result-container .result-item .result-answer{
+  color: var(--color_font_stand);
+}
+
+.result-highlight {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.button-group-result{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+}
+
+.result-container .result-item svg{
+  width: 24px;
+  height: 24px;
+}
+
+@media (max-width: 576px){
+  .result-container .result-item svg{
+      width: 16px;
+      height: 16px;
+  }
+}
+
 @media (max-width: 576px) {
   .card-content.small {
     width: 100%;
@@ -230,7 +293,7 @@ button:disabled {
   }
 }
 
-@media (min-width: 576px) and (max-width: 992px){
+@media (min-width: 577px) and (max-width: 992px){
   .hide-lg {
     display: none;
   }
@@ -248,7 +311,7 @@ button:disabled {
   }
 }
 
-@media (min-width: 992px) and (max-width: 1200px) {
+@media (min-width: 993px) and (max-width: 1200px) {
   .hide-xl {
     display: none;
   }
@@ -266,7 +329,7 @@ button:disabled {
   }
 }
 
-@media (min-width: 1200px) {
+@media (min-width: 1201px) {
   .show-xl{
     display: inherit;
   }
@@ -277,5 +340,51 @@ button:disabled {
 
   .show-xs {
     display: none;
+  }
+}
+
+@media (max-width: 992px) {
+  .score {
+    font-size: 1.5rem !important;
+  }
+
+  .card-content > * {
+    padding: 15px;
+  }
+
+  .card-content p, button, .highlight {
+    font-size: 1rem !important;
+  }
+
+  .highlight {
+    padding: 5px;
+  }
+  
+  .question-container {
+    padding: 15px;
+  }
+
+  .question-container .question-info p {
+    font-size: 0.6rem !important;
+  }
+
+  .question-container .question {
+    padding-top: 0.8rem;
+  }
+
+  .root-container{
+    gap: 0.8rem;
+  }
+
+  .game-container {
+    gap: 0.5rem;
+  }
+
+  .game-container .game-content{
+    justify-content: center;
+  }
+
+  .card-content .button-group {
+    padding-top: 0px;
   }
 }

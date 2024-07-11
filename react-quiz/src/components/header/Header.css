@@ -41,9 +41,6 @@
         flex-direction: row;
         gap: 5px;
     }
-    .header .leave  button.flat {
-        padding: 10px !important;
-    }
 
     .header .leave {
         padding: calc(1rem - 10px) !important
