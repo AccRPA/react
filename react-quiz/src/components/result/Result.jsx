@@ -47,6 +47,7 @@ function Result(){
             <Header showConnections={false} 
                 showTitle={true} 
                 showLeaveButton={true} 
+                switchLeaveButtonToReplay={true}
                 showDisconnectButton={true}>                    
             </Header>
             <div className="game-container">

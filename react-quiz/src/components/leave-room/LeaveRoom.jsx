@@ -1,13 +1,13 @@
 import { socket } from '../../core/socket';
-import { SignTurnSlightLeft } from 'react-bootstrap-icons';
+import { ArrowClockwise, SignTurnSlightLeft } from 'react-bootstrap-icons';
 
-function LeaveRoom(){    
+function LeaveRoom({replayButton}){    
     const onLeaveRoom = () => {
         socket.emit('leave_room');
     }
-    return <button className="flat text-pale " onClick={onLeaveRoom} title="Leave game">
-            <SignTurnSlightLeft className="show-lg"/>
-            <span className="hide-xs hide-lg">Leave game</span>
+    return <button className="flat text-pale " onClick={onLeaveRoom} title={replayButton ? "Play again" : "Leave game"}>
+            {replayButton ? <ArrowClockwise className='show-lg'/> : <SignTurnSlightLeft className="show-lg"/>}
+            <span className="hide-xs hide-lg">{replayButton ? "Play again" : "Leave game"}</span>
         </button>;
 }
 

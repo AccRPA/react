@@ -5,7 +5,7 @@ import AppTitle from "../app-title/AppTitle";
 import FreeUsers from '../free-users/FreeUsers';
 import ConnectedUsers from '../connected-users/ConnectedUsers';
 
-export default function Header({showConnections, showTitle, showLeaveButton, showDisconnectButton}) {
+export default function Header({showConnections, showTitle, showLeaveButton, switchLeaveButtonToReplay, showDisconnectButton}) {
     return <div className="header">        
             <div className='connections'>
                 {showConnections && <>
@@ -21,7 +21,7 @@ export default function Header({showConnections, showTitle, showLeaveButton, sho
             </div>
 
             <div className='leave'>
-                {showLeaveButton && <LeaveRoom></LeaveRoom>}
+                {showLeaveButton && <LeaveRoom replayButton={switchLeaveButtonToReplay}></LeaveRoom>}
                 {showDisconnectButton && <DisconnectButton></DisconnectButton>}
             </div>
         </div>;
