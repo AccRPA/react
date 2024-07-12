@@ -11,5 +11,8 @@
 .question-container .question {
     font-size: clamp(2vw, 1.8rem, 4vw);
     padding: clamp(2vw, 25px, 4vw) 0px 25px 0px;
-    text-align: center;
+    height: clamp(65px, 20vh, 200px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
