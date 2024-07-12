@@ -188,15 +188,35 @@ button:disabled {
 }
 
 .modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 10;
+  overflow: hidden;
+}
+
+.modal-backdrop{
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0,0,0,0.5);
+}
+
+.modal-container {
   position: absolute;
   top: 15%;
   left: 50%;
   transform: translate(-50%, -15%);
-  z-index: 10;
-  background: yellow;
-  color: black;
-  padding: 25px;
+  color: var(--color_font_light);
   border-radius: 5px;
+  z-index: 11;
+  width: min(200px, 50%);
+}
+
+.modal .modal-container svg{
+  width: 24px;
+  height: 24px;
 }
 
 .highlight{
@@ -230,6 +250,7 @@ button:disabled {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  gap: 0.4rem;
 }
 
 .result-container .result-item .result-player {
@@ -240,11 +261,11 @@ button:disabled {
   gap: 0.5rem;
 }
 
-.result-container .result-item .result-player .correct {
+.correct {
   color: var(--color_light_stand);
 }
 
-.result-container .result-item .result-player .wrong {
+.wrong {
   color: var(--color_danger);
 }
 

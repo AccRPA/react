@@ -4,6 +4,8 @@ import { GameContext } from '../../core/GameContext';
 import Question from '../question/Question';
 import { socket } from '../../core/socket';
 import Header from '../header/Header';
+import Modal from '../modal/Modal';
+import { EmojiFrown, EmojiSmile } from 'react-bootstrap-icons';
 
 function Game(){
     const gameContext = useContext(GameContext); 
@@ -86,8 +88,24 @@ function Game(){
                         }
                     </div>
                 </div>
-                {!!waiting && !result && <p className='modal'>Waiting for partner to answer</p>}
-                {!!result && <p className='modal'>The answer was: {result.isValidAnswer ? 'correct': 'wrong'}</p>}
+                {!!waiting && !result && 
+                    <Modal showBackdrop={false}>
+                        <div className='card-content'>
+                            <div className='question-container'>Waiting for partner to answer</div>
+                        </div>
+                    </Modal>
+                }
+                {!!result && 
+                    <Modal showBackdrop={true}>
+                        <div className='card-content'>
+                            <div className='highlight'>{result.isValidAnswer ? 'Correct': 'Wrong'}</div>
+                            <div>{result.isValidAnswer ? 
+                                <EmojiSmile className='correct'></EmojiSmile> : 
+                                <EmojiFrown className='wrong'></EmojiFrown> }
+                            </div>
+                        </div>
+                    </Modal>
+                }
                 
                 <div className="game-content">
                     {!!gameContext.gameData?.game?.questions && <Question waiting={handleWaiting}></Question>}
