@@ -19,7 +19,9 @@ function Question({waiting}){
             timeId = setTimeout(() => setTime(previous => --previous), 1000);
         }else{
             setDisableAnswers(true);
-            waiting(true);
+            if (!!gameContext.gameData.partnerData){
+                waiting(true);
+            }
             socket.emit('validate_answer_request', userAnswer.current);
         }
 
@@ -39,7 +41,9 @@ function Question({waiting}){
     }
 
     return (!!questionData && <div className='card-content'>
-            <span className='highlight'>{time}</span>
+            <div className='progress-bar' style={{'--width': time}}>
+                <span>{time}</span>
+            </div>
             <div className='question-container'>
                 <div className='question-info'>
                     <p>Question {questionData.number}/10</p>

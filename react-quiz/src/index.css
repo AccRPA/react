@@ -373,11 +373,11 @@ button:disabled {
     padding: 15px;
   }
 
-  .card-content p, button, .highlight {
+  .card-content p, button, .highlight, .progress-bar {
     font-size: 1rem !important;
   }
 
-  .highlight {
+  .highlight, .progress-bar {
     padding: 5px;
   }
   
