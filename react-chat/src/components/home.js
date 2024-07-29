@@ -1,16 +1,22 @@
-import { chatRooms } from "../rooms";
+import { useContext } from "react";
+import { UserContext } from "../userContext";
 import { Link } from 'react-router-dom';
 
 function Home() {
+    const userContext = useContext(UserContext);
+
+    function handleChange(event){
+        const name = event.target.value;
+        userContext.setUserName(name);
+    }
+
     return <>
-            <h2>Choose a Chat Room</h2>
-            <ul className="chat-room-list">
-                {chatRooms.map((room) => (
-                    <li key={room.id}>
-                        <Link to={`/room/${room.id}`}>{room.title}</Link>
-                    </li>
-                ))}
-            </ul>
+            <label>Enter a username</label>
+            <input type="text" value={userContext.userName} onChange={handleChange}/>
+
+            { userContext.userName?.length > 3 && 
+                <Link to={'/lobby'}>Enter</Link> 
+            }
         </>;
 }
 
