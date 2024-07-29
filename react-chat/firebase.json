@@ -1,0 +1,11 @@
+{
+  "hosting": {
+    "site": "chat-rooms-react",
+    "public": "build",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ]
+  }
+}
