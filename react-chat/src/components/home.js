@@ -14,7 +14,7 @@ function Home() {
             <label>Enter a username</label>
             <input type="text" value={userContext.userName} onChange={handleChange}/>
 
-            { userContext.userName?.length > 3 && 
+            { userContext.userName?.length > 0 && 
                 <Link to={'/lobby'}>Enter</Link> 
             }
         </>;

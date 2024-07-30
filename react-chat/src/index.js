@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
-import { firebase } from './firebase';
+import { firebase } from './services/firebase';
 
 firebase.automaticDataCollectionEnabled = false;
 

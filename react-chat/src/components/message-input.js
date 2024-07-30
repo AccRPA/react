@@ -1,5 +1,5 @@
 import React from 'react';
-import { sendMessage } from '../firebase';
+import { sendMessage } from '../services/firebase';
 import { useContext } from "react";
 import { UserContext } from "../userContext";
 

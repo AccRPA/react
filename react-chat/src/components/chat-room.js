@@ -1,4 +1,4 @@
-import { Link, useParams } from 'react-router-dom';
+import { Link, redirect, useParams } from 'react-router-dom';
 import { chatRooms } from '../rooms';
 import { MessageInput } from './message-input';
 import { MessageList } from './message-list';
@@ -7,7 +7,7 @@ function ChatRoom() {
     const params = useParams();
     const room = chatRooms.find((x) => x.id === params.id);
     if (!room) {
-        // TODO: 404
+        redirect('/error');
     }
 
     return (
