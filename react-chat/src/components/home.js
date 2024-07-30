@@ -10,14 +10,15 @@ function Home() {
         userContext.setUserName(name);
     }
 
-    return <>
-            <label>Enter a username</label>
-            <input type="text" value={userContext.userName} onChange={handleChange}/>
+    return <div className="container">
+            <div className="home">
+                <h2>Simple chat</h2>
+                <label>Enter a username</label>
+                <input type="text" value={userContext.userName} onChange={handleChange}/>
 
-            { userContext.userName?.length > 0 && 
-                <Link to={'/lobby'}>Enter</Link> 
-            }
-        </>;
+                <Link to={'/lobby'} className={`button ${userContext.userName?.length === 0 ? 'button disabled-link' : ''}` }>Enter</Link>
+            </div>
+        </div>;
 }
 
 export { Home };

@@ -1,4 +1,3 @@
-import './App.css';
 import { UserContext } from './userContext';
 import { useState, useContext } from 'react';
 import { RoutesApp } from './components/routes-app';

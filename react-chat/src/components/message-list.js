@@ -31,7 +31,7 @@ function MessageList({ roomId }) {
 function Message({ message, isOwnMessage }) {
     const { user, text } = message;
     return (
-        <li className={['message', isOwnMessage && 'own-message'].join(' ')}>
+        <li className={['message', isOwnMessage ? 'left' : 'right'].join(' ')}>
             <h4 className="sender">{isOwnMessage ? 'You' : user}</h4>
             <div>{text}</div>
         </li>

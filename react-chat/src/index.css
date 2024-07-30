@@ -1,5 +1,90 @@
+:root {
+    --color-blue: rgb(15, 105, 189);
+    --color-white: whitesmoke;
+    --color-grey-light: gainsboro;
+    --color-grey-dark: grey;    
+    --border-radius: 0.5rem;
+}
+
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+body {
+    background-color:  var(--color-white);
+    font-size: 1.2rem;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    padding: 1rem;
+    height: 100vh;
+    width: 100vw;
+    color: var(--color-grey-dark);
+}
+
+.home {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 1.5rem;
+    border-radius: var(--border-radius);
+    background-color: var(--color-white);
+}
+
+.buttons-group {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1rem;
+}
+
+.lobby, .chat-room {
+    padding: 1rem;
+    font-size: 1rem;
+}
+
+.lobby-content, .chat-content {
+    padding: 1rem 0;
+}
+
+a {
+    text-decoration: none;
+    color:black;
+}
+
+input {
+    padding: 0.5rem;
+    outline: none;
+    border: 1px solid var(--color-grey-light);
+    border-radius: var(--border-radius);
+}
+
+.button, button {
+    padding: 0.5rem 1rem;
+    outline: none;
+    border: 1px solid var(--color-grey-light);
+    border-radius: var(--border-radius);
+    background-color: var(--color-blue);
+    color: var(--color-white);
+    font-style: normal;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.disabled-link, button:disabled {
+    user-select: none;
+    pointer-events: none;
+    background-color: var(--color-white);
+    color: var(--color-grey-dark);
+}
 
 .chat-room-list {
+    margin-top: 2rem;
     display: flex;
     flex-wrap: wrap;
     gap: 8px;
@@ -7,21 +92,108 @@
 
 .chat-room-list li {
     height: 100px;
-    background: var(--color-gray);
+    background: var(--color-grey-light);
     flex: 1 1 calc(50% - 4px);
     border-radius: var(--border-radius);
     display: flex;
     justify-content: center;
     align-items: center;
+    font-size: clamp(1.2rem, 4vw, 3rem);
+    cursor: pointer;
+}
+
+.chat-room-list li a {
+    color: black;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.chat-room-list li:hover{
+    background-color: var(--color-blue);
+    color: var(--color-white);
+}
+
+.chat-room-list li:hover a{
+    color: var(--color-white);
 }
 
 .messages-container {
+    margin-top: 1rem;
     width: 100%;
-    padding: 16px;
-    flex-grow: 1;
-    border: 1px solid var(--color-gray);
+    border: 1px solid var(--color-grey-light);
     border-radius: var(--border-radius);
     overflow: hidden;
     display: flex;
     flex-direction: column;
+    align-items: end;
+}
+
+.message-list-container {
+    height: 50vh;
+    width: 100%;
+    overflow: auto;
+    border-bottom: 1px solid var(--color-grey-light);
+}
+
+.message-input-container {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 0.2rem;
+    flex-wrap: wrap;
+    padding: 0.5rem 1rem;
+}
+
+.message-list li {
+    list-style: none;
+    padding: 0.5rem 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-end;
+    gap: 0.5rem;
+}
+
+.message.right{
+    align-items: flex-end;
+}
+
+.message.left{
+    align-items: flex-start;
+}
+
+.message > h4 {    
+    color: var(--color-grey-dark);
+}
+
+.message > div {
+    width: fit-content;
+    padding: 0.5rem;
+    background-color: var(--color-blue);
+    color: white;
+    border-radius: var(--border-radius);
+    position: relative;
+}
+
+.message.right > div::before {
+    content: '';
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;    
+    border-bottom: 5px solid var(--color-blue);
+    position: absolute;
+    top: -5px;
+    right: 8px;
+}
+
+.message.left > div::before {
+    content: '';
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;    
+    border-bottom: 5px solid var(--color-blue);
+    position: absolute;
+    top: -5px;
+    left: 8px;
 }
