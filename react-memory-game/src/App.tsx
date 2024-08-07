@@ -33,12 +33,14 @@ function App() {
       const [card2] = visibleCards;
 
       // if the values are different wait 2sec before hide them
-      if(card.value !== card2.value){        
-        setTimeout(() => {
+      if(card.value !== card2.value){
+        // pass the current value of reRender and set it again after 2sec, to rerender after setting the visibility      
+        setTimeout((reRender: boolean) => {
           card.visible = false;
           card2.visible = false;
           // use the previous value to rerender
-          setReRenderState(previous => !previous);
+          // this is the same as previous => !previous because it will take the value before changing the visibility
+          setReRenderState(reRender); 
         }, 2000);
       }else{
           card.checked = true;
