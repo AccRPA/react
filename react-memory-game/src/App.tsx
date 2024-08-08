@@ -2,11 +2,13 @@ import { Card } from './Card';
 import { CardDeck } from './CardDeck';
 import CardItem from './components/CardItem';
 import './App.css';
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 
 function App() {
   const cards: Array<Card> = CardDeck.getShuffledCardDeck(1, 5);
+  // this state is just to force the rerendering
   const [reRender, setReRenderState] = useState(false);
+  const timeout = useRef(0);
 
   const checkCard = (card: Card) => {
     return () => { 
@@ -26,8 +28,15 @@ function App() {
 
       // at first, there were no cards visible
       if (visibleCards?.length == 0){
-          return;
+        // if no other card is selected hide the current one after 2 sec
+        timeout.current = setTimeout((reRender: boolean) => {
+          card.visible = false;
+          setReRenderState(reRender); 
+        }, 2000);
+        return;
       }
+
+      clearTimeout(timeout.current);
 
       // take the other card visible
       const [card2] = visibleCards;
