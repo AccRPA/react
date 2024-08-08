@@ -5,63 +5,70 @@ import './App.css';
 import { useRef, useState } from 'react';
 
 function App() {
+  const visibleTime = 1500;
   const cards: Array<Card> = CardDeck.getShuffledCardDeck(1, 5);
+  const visibleAmountCards = cards.filter(card => !!card.visible && !card.checked)?.length || 0;
+  
   // this state is just to force the rerendering
   const [reRender, setReRenderState] = useState(false);
   const timeout = useRef(0);
 
-  const checkCard = (card: Card) => {
-    return () => { 
-      if (card.visible){
-        return;
-      }
-    
-      const visibleCards = cards.filter(card => !!card.visible && !card.checked);
-      
-      // click on more cards will not do anything
-      if (visibleCards?.length == 2){
-          return;
-      }
-
+  /** 
+   * this method will update the current card 
+   * and re-render the parent and therefore the children will get the changes
+   * the children don't have state
+   */ 
+  const updateCard = (card: Card): any => {
+    return () => {
+      // make the current card visible
       card.visible = true;
-      setReRenderState(!reRender);
+      // re-render the parent component
+      setReRenderState(!reRender); 
 
-      // at first, there were no cards visible
-      if (visibleCards?.length == 0){
-        // if no other card is selected hide the current one after 2 sec
+      // if no other card is selected hide the current one after visibleTime
+      if (visibleAmountCards == 0){
         timeout.current = setTimeout((reRender: boolean) => {
           card.visible = false;
           setReRenderState(reRender); 
-        }, 2000);
-        return;
-      }
-
-      clearTimeout(timeout.current);
-
-      // take the other card visible
-      const [card2] = visibleCards;
-
-      // if the values are different wait 2sec before hide them
-      if(card.value !== card2.value){
-        // pass the current value of reRender and set it again after 2sec, to rerender after setting the visibility      
-        setTimeout((reRender: boolean) => {
-          card.visible = false;
-          card2.visible = false;
-          // use the previous value to rerender
-          // this is the same as previous => !previous because it will take the value before changing the visibility
-          setReRenderState(reRender); 
-        }, 2000);
+        }, visibleTime);
       }else{
-          card.checked = true;
-          card2.checked = true;
-          setReRenderState(!reRender);
-      } 
-    }  
+        checkCards();
+      }
+    };
+  }
+
+  /**
+   * this method will compare two cards
+   * if they have the same value they will be mark as checked
+   */
+  const checkCards = () => {
+    clearTimeout(timeout.current);
+
+    // take both visible cards
+    const [card1, card2] = cards.filter(card => !!card.visible && !card.checked);
+
+    // if the values are different wait visibleTime before hide them
+    if(card1.value !== card2.value){
+      
+      // pass the current value of reRender and set it again after visibleTime, to re-render after setting the visibility      
+      setTimeout((reRender: boolean) => {
+        card1.visible = false;
+        card2.visible = false;
+        // use the previous value to rerender
+        // this is the same as previous => !previous because it will take the value before changing the visibility
+        setReRenderState(reRender); 
+      }, visibleTime);
+    
+    }else{
+        card1.checked = true;
+        card2.checked = true;
+        setReRenderState(!reRender);
+    }
   }
 
   return (
     <div className='card-container'>
-      { cards.map((card, index) => <CardItem card={card} key={index} checkCard={checkCard(card)}></CardItem>) }
+      { cards.map((card, index) => <CardItem card={card} key={index} visibleCards={visibleAmountCards} updateCard={updateCard(card)}></CardItem>) }
     </div>
   )
 }
