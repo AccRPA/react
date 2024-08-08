@@ -18,14 +18,36 @@ body {
 }
 
 .card {
-    width: 50px;
+    width: 100px;
     height: 100px;
     background-color: blueviolet;
     color: white;
     cursor: pointer;
-    display: flex;
+    display: grid;
     align-items: center;
     justify-content: center;
-    flex-direction: column;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr;
+}
+
+.back, .front {
+    grid-column-start: 1;
+    grid-column-end: 2;
+    grid-row-start: 1;
+    grid-row-end: 2;
+    text-align: center;
+}
+
+.front {
+    z-index: -1;
+}
+
+.card.visible .front, .card.checked .front{
+    z-index: 2
+}
+
+.card.visible .back, .card.checked .back{
+    visibility: hidden;
+    display: none;
 }
 

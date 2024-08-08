@@ -7,14 +7,12 @@ interface Props {
 }
 
 function CardItem({card, checkCard}: Props): JSX.Element{
-    return <>
-            <div className={`card ${card.visible}`} onClick={checkCard}>
+    return <div onClick={checkCard} className={`card ${card.visible ? 'visible' : 'hidden'} ${card.checked ? 'checked' : ''}`}>
+            <div className='back'>Back</div>
+            <div className='front'>
                 <div>{card.value}</div>
-                <div>{card.visible ? 'Visible' : 'hidden'}</div>
-                <div>{card.checked ? 'Checked' : 'normal'}</div>
             </div>
-            {/* <div className={`card back`} onClick={handleClick}>Back</div> */}
-        </>;
+        </div>;
 }
 
 export default CardItem;
