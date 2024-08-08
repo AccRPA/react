@@ -1,5 +1,5 @@
 import { JSX } from 'react';
-import { Card } from "../Card";
+import { Card } from "../models/Card";
 
 interface Props {
     card: Card;

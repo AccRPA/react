@@ -1,4 +1,4 @@
-import { Card } from "./Card";
+import { Card } from "../models/Card";
 
 export class CardDeck {
     private static _cardDeck: Array<Card>;

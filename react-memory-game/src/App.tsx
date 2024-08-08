@@ -1,5 +1,5 @@
-import { Card } from './Card';
-import { CardDeck } from './CardDeck';
+import { Card } from './models/Card';
+import { CardDeck } from './services/CardDeck';
 import CardItem from './components/CardItem';
 import './App.css';
 import { useRef, useState } from 'react';
