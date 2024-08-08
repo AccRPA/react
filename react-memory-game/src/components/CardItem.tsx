@@ -26,7 +26,7 @@ function CardItem({card, visibleCards, updateCard}: Props): JSX.Element{
 
     return <div onClick={handleClick} 
                 className={`card ${card.visible ? 'visible' : 'hidden'} ${card.checked ? 'checked' : ''}`}>
-                <div className='back'>Back</div>
+                <div className='back'></div>
                 <div className='front'>
                     <div>{card.value}</div>
                 </div>

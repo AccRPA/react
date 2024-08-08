@@ -5,6 +5,7 @@
 body {
     padding: 0;
     margin: 0;
+    background-color: #f7f7f7;
 }
 
 .card-container {
@@ -19,35 +20,74 @@ body {
 
 .card {
     width: 100px;
-    height: 100px;
-    background-color: blueviolet;
-    color: white;
+    height: 150px;
+    background-color: white;
+    color: black;
+    font-size: 2.5rem;
+    border-radius: 0.5rem;
     cursor: pointer;
     display: grid;
     align-items: center;
     justify-content: center;
     grid-template-columns: 1fr;
     grid-template-rows: 1fr;
+    transform-style: preserve-3d;
+    transition: all 0.5s ease-in-out;
+
+    -webkit-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.5);
+    -moz-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.5);
+    box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.5);
+
 }
 
 .back, .front {
     grid-column-start: 1;
-    grid-column-end: 2;
     grid-row-start: 1;
-    grid-row-end: 2;
     text-align: center;
+    backface-visibility: hidden;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 0.5rem;
+    position: relative;
 }
 
 .front {
-    z-index: -1;
+    transform: rotateY(180deg);
 }
 
-.card.visible .front, .card.checked .front{
-    z-index: 2
+.back {
+    /* --s: 20px;
+    --c1: #ffffff;
+    --c2: #d12929;
+    --c3: #ffffff;
+    
+    --c:#0000 48%,var(--c1) 0 52%,#0000 0;
+    background:
+        linear-gradient(-45deg,var(--c)),linear-gradient( 45deg,var(--c)),
+        repeating-conic-gradient(from 45deg,var(--c2) 0 25%,var(--c3) 0 50%);
+    background-size: var(--s) var(--s); */
+    background: url('./assets/cardBackMedium.png') repeat ;
 }
 
-.card.visible .back, .card.checked .back{
-    visibility: hidden;
-    display: none;
+.back::before {
+    content: '';
+    border: 1px solid white;
+    width: 90%;
+    height: 93%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 0.5rem;
 }
 
+.card.visible {
+    transform: rotateY(180deg);
+}
+
+.card.checked {
+    background-color: green;
+}
