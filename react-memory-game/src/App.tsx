@@ -3,6 +3,7 @@ import { CardDeck } from './CardDeck';
 import CardItem from './components/CardItem';
 import './App.css';
 import { useRef, useState } from 'react';
+import Confetti from './components/Confetti';
 
 function App() {
   const visibleTime = 1500;
@@ -11,6 +12,7 @@ function App() {
   
   // this state is just to force the rerendering
   const [reRender, setReRenderState] = useState(false);
+  const [showConfetti, setShowConfetti] = useState(false);
   const timeout = useRef(0);
 
   /** 
@@ -63,13 +65,22 @@ function App() {
         card1.checked = true;
         card2.checked = true;
         setReRenderState(!reRender);
+        setTimeout(() => {
+          setShowConfetti(true);
+          setTimeout(() => {
+            setShowConfetti(false);
+          }, 0);
+        }, 400);
     }
   }
 
   return (
-    <div className='card-container'>
-      { cards.map((card, index) => <CardItem card={card} key={index} visibleCards={visibleAmountCards} updateCard={updateCard(card)}></CardItem>) }
-    </div>
+    <>
+      <div className='card-container'>
+        { cards.map((card, index) => <CardItem card={card} key={index} visibleCards={visibleAmountCards} updateCard={updateCard(card)}></CardItem>) }
+      </div>
+      <Confetti showConfetti={showConfetti}></Confetti>
+    </>
   )
 }
 
