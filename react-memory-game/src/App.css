@@ -17,18 +17,27 @@ body {
 }
 
 .card-container {
-    display: grid;
-    grid-template-rows: repeat(2, auto);
-    grid-template-columns: repeat(5, auto);
+    display: grid;    
+    gap: 1rem;
+    max-width: 700px;
+    width: 100%;
+    height: calc(300px + 5rem);
+    padding: 25px;
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
     justify-content: center;
     align-items: center;
     margin: auto;
-    gap: 1.5rem;
+}
+
+@media (max-width: 490px) and (max-height: 914px) {
+    .card-container { 
+        height: 100%;
+    }
 }
 
 .card {
-    width: 100px;
-    height: 150px;
+    height: 100%;
+    max-height: 150px;
     background-color: white;
     color: black;
     font-size: 2.5rem;
@@ -64,19 +73,10 @@ body {
 
 .front {
     transform: rotateY(180deg);
+    color: #1d93ec;
 }
 
 .back {
-    /* --s: 20px;
-    --c1: #ffffff;
-    --c2: #d12929;
-    --c3: #ffffff;
-    
-    --c:#0000 48%,var(--c1) 0 52%,#0000 0;
-    background:
-        linear-gradient(-45deg,var(--c)),linear-gradient( 45deg,var(--c)),
-        repeating-conic-gradient(from 45deg,var(--c2) 0 25%,var(--c3) 0 50%);
-    background-size: var(--s) var(--s); */
     background: url('./assets/cardBackMedium.png') repeat ;
 }
 
@@ -94,7 +94,7 @@ body {
 
 .front::before {
     content: '';
-    border: 1px solid black;
+    border: 1px solid #55acee;
     width: 90%;
     height: 93%;
     position: absolute;
