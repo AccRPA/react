@@ -9,9 +9,9 @@ import Modal from './components/Modal';
 import { ModalAction } from './models/ModalAction.enum';
 
 function App() {
-  const visibleTime = 1500;
   const cards: Array<Card> = CardDeck.getShuffledCardDeck(1, 5);
   const visibleAmountCards = cards.filter(card => !!card.visible && !card.checked)?.length || 0;
+  const visibleTime = 1500;
   
   // this state is just to force the rerendering
   const [reRender, setReRenderState] = useState(false);
@@ -21,8 +21,7 @@ function App() {
 
   const handleModalClick = (value: ModalAction) => {
     setShowConfetti(ConfettiType.NONE);
-    setShowModal(false);
-    console.log(value);
+    setShowModal(false);    
   };
 
   /** 
@@ -87,9 +86,10 @@ function App() {
   function startStopConfetti(type: ConfettiType){
     setTimeout(() => {
       setShowConfetti(type);
-      setTimeout(() => 
-        setShowConfetti(ConfettiType.NONE), 
-      0);  
+      setTimeout(
+        () => setShowConfetti(ConfettiType.NONE), 
+        0
+      );  
     }, 400);
   }
 

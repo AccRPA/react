@@ -26,16 +26,17 @@ function Modal({showModal, onClick}: Props){
             BackdropProps={{style: {backgroundColor: 'rgba(200, 200, 200, 0.3)'}}}
         >
             <DialogTitle align="center">
-                <Typography>Game finished</Typography>
-                <Typography>Well done!</Typography>
+                Game finished
             </DialogTitle>
             <DialogContent>
-                <DialogContentText></DialogContentText>
+                <DialogContentText align="center">
+                    Well done!
+                </DialogContentText>
             </DialogContent>
             <DialogActions>
                 <ButtonGroup>
-                    <Button onClick={() => handleClick(ModalAction.HOME)}>Go Home</Button>
-                    <Button onClick={() => handleClick(ModalAction.PLAY)}>Play again</Button>
+                    <Button variant="outlined" onClick={() => handleClick(ModalAction.HOME)}>Go Home</Button>
+                    <Button variant="contained" onClick={() => handleClick(ModalAction.PLAY)}>Play again</Button>
                 </ButtonGroup>
             </DialogActions>
         </Dialog> 
