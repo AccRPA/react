@@ -1,11 +1,15 @@
-import { Box, Button, Container, Drawer, Slider, ToggleButton, ToggleButtonGroup, Typography } from "@mui/material";
-import CloseIcon from '@mui/icons-material/Close';
+import { Alert, Box, Button, Container, Drawer, Slider, ToggleButton, ToggleButtonGroup, Typography } from "@mui/material";
 import { useContext, useState } from "react";
 import { CardDisplayMode } from "../models/enum/CardDisplayMode.enum";
 import { SettingsContext } from "../context/SettingsContext";
 import { SettingsModel } from "../models/Settings.model";
+import CloseIcon from '@mui/icons-material/Close';
 
-function Settings(){
+interface Props {
+    resetGame: Function
+}
+
+function Settings({resetGame}: Props){
     const settingsContext = useContext(SettingsContext);
     const [open, setOpen] = useState(false);
 
@@ -13,23 +17,31 @@ function Settings(){
         setOpen(newOpen);
     };
 
+    const handleNumberOfCards = (_: Event, value: number | number[]) => {
+        const amount = Array.isArray(value) ? value[0] : value;
+        settingsContext.setSettings((previous: SettingsModel) => {
+            return {...previous, cardsAmount: amount};
+        });
+        resetGame();
+    };
+
     const handleDisplayMode = (_: any, value: CardDisplayMode) => {
         settingsContext.setSettings((previous: SettingsModel) => {
             return {...previous, cardDisplayMode: value};
-        })
+        });
     };   
 
     const handleShowEffects = (_: any, value: boolean) => {
         settingsContext.setSettings((previous: SettingsModel) => {
             return {...previous, showFireworks: value};
-        })
+        });
     };   
     
     const handleTimeVisible = (_: Event, value: number | number[]) => {
         const time = Array.isArray(value) ? value[0] : value;
         settingsContext.setSettings((previous: SettingsModel) => {
             return {...previous, cardTimeMsVisible: time};
-        })
+        });
     };
 
     const numberOfCardsMarks = [
@@ -79,7 +91,10 @@ function Settings(){
             <Button  variant="text" onClick={toggleDrawer(false)}>
                 <CloseIcon></CloseIcon>
             </Button>
-            <Box role="presentation">            
+            <Box role="presentation">
+                <Alert severity="warning">
+                    Changing the number of cards will reset the game
+                </Alert>         
                 <Typography>Number of cards</Typography>
                 <Slider
                     aria-label="Number of cards"
@@ -90,6 +105,7 @@ function Settings(){
                     min={4}
                     max={10}
                     valueLabelDisplay="auto"
+                    onChange={handleNumberOfCards}
                     value={settingsContext.settings.cardsAmount}
                 />
             </Box>

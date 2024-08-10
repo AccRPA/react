@@ -23,20 +23,33 @@ function App() {
   const [updateCard] = useCardGame(cards, setCards, setShowConfetti, setShowModal, settings);
   const navigate = useNavigate();
   
-  const handleModalClick = (value: ModalAction) => {
+  const handleModalClick = async (value: ModalAction) => {
     setShowModal(false);
     setShowConfetti(ConfettiType.NONE);
     
-    if (value === ModalAction.PLAY){
-      setCards(CardDeckService.create(settings));
+    if (value === ModalAction.PLAY){      
+      handleResetGame();
     }else{
       navigate('/');
     }
   };
   
+  const handleResetGame = () => {
+    // turn back all the cards
+    setCards((previous: any) => {
+      return previous.map((card: any) => {
+        return {
+          ...card, visible: false
+        }
+      });
+    });
+    // and change the card deck 0.5s after since that is what the animation takes to finish
+    setTimeout(() => setCards(CardDeckService.create(settings)), 500);
+  };
+
   return (
     <SettingsContext.Provider value={{ settings, setSettings }}>
-      <Settings></Settings>
+      <Settings resetGame={handleResetGame}></Settings>
       <CardContainer cards={cards} updateCard={updateCard}></CardContainer>      
       <Confetti confettiType={showConfetti}></Confetti>
       <Modal showModal={showModal} onClick={handleModalClick}></Modal>
