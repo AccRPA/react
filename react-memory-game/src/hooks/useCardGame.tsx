@@ -1,15 +1,17 @@
-import { useRef } from "react";
+import { useContext, useRef } from "react";
 import { CardModel } from "../models/Card.model";
 import { ConfettiType } from "../models/enum/ConfettiType.enum";
+import { SettingsContext } from "../context/SettingsContext";
 
 function useCardGame(
-        cardDeck: Array<CardModel>,     
+        cardDeck: Array<CardModel>,
         setCardDeck: Function,
         setConfetti: Function,
         setModal: Function
     ){
     let initialCardDeck = [...cardDeck];
-    const visibleTime = 1500;
+    const settingsContext = useContext(SettingsContext);
+    const visibleTime = settingsContext.settings.cardTimeMsVisible;
     const timeout = useRef(0);
     
     /** 
@@ -42,7 +44,7 @@ function useCardGame(
                     initialCardDeck = updateCardsInDeck(
                         initialCardDeck,
                         [
-                            new CardModel(card.id, card.value, card.emojiCode, true, card.checked)
+                            new CardModel(card.id, card.value, card.emojiCode, false, card.checked)
                         ]
                     );
                     setCardDeck(initialCardDeck); 
@@ -92,7 +94,7 @@ function useCardGame(
 
             // if the game has finished run fireworks and show modal
             if (initialCardDeck.filter(card => !card.checked)?.length === 0){
-                setModal(true);
+                setTimeout(() => setModal(true), 500);
             }
         }
     };
@@ -113,7 +115,7 @@ function useCardGame(
                 () => setConfetti(ConfettiType.NONE), 
                 0
             );  
-        }, 400);
+        }, 350);
     };
 
     return [updateCard, checkCards];

@@ -2,6 +2,8 @@ import { Button, ButtonGroup, Dialog, DialogActions, DialogContent, DialogConten
 import { ModalAction } from "../models/enum/ModalAction.enum";
 import Confetti from "./Confetti";
 import { ConfettiType } from "../models/enum/ConfettiType.enum";
+import { useContext } from "react";
+import { SettingsContext } from "../context/SettingsContext";
 
 interface Props {
     showModal: boolean,
@@ -9,7 +11,8 @@ interface Props {
 }
 
 function Modal({showModal, onClick}: Props){
-
+    const settingsContext = useContext(SettingsContext);
+    
     const handleClose = () => {
         onClick(ModalAction.PLAY);
     };
@@ -18,7 +21,11 @@ function Modal({showModal, onClick}: Props){
     };
 
     return (<>
-        <Confetti confettiType={showModal ? ConfettiType.FIREWORKS : ConfettiType.NONE}></Confetti>       
+        {
+            settingsContext.settings.showFireworks 
+            ? <Confetti confettiType={showModal ? ConfettiType.FIREWORKS : ConfettiType.NONE}></Confetti>
+            : null
+        }       
         <Dialog 
             onClose={handleClose} 
             open={showModal} 

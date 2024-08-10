@@ -1,16 +1,18 @@
 import { Options } from "canvas-confetti";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import Fireworks from "react-canvas-confetti/dist/presets/fireworks";
 import Pride from "react-canvas-confetti/dist/presets/pride";
 import { TConductorInstance } from "react-canvas-confetti/dist/types";
 import { TCanvasConfettiInstance } from "react-canvas-confetti/dist/types/normalization";
 import { ConfettiType } from "../models/enum/ConfettiType.enum";
+import { SettingsContext } from "../context/SettingsContext";
 
 interface Props {
     confettiType: ConfettiType,
 }
 
 export default ({confettiType}: Props) => {
+    const settingsContext = useContext(SettingsContext);
     const [prideConductor, setPrideConductor] = useState<TConductorInstance>();
     const colors: string[] = ['#FFD700', '#1d93ec', '#FF7373', '#40E0D0'];
 
@@ -37,20 +39,29 @@ export default ({confettiType}: Props) => {
     const handleOptionsPride = (options: Options): Options => {
         return {
             ...options,
-            particleCount: 100,
-            colors: colors
+            particleCount: 80,
+            colors: colors,
+            ticks: 100
         };
     }
 
-    if (confettiType === ConfettiType.PRIDE){
-        prideConductor?.shoot();
-    }
+    if (!settingsContext.settings.showFireworks){
+        return null;
+    
+    }else{
 
-    return (<>
-        { confettiType === ConfettiType.FIREWORKS && 
-            <Fireworks onInit={handleFireworksOnInit} decorateOptions={handleOptionsFireworks}/> 
+        if (confettiType === ConfettiType.PRIDE){
+            prideConductor?.shoot();
         }
-        <Pride onInit={handlePrideOnInit} decorateOptions={handleOptionsPride}></Pride>
-    </>
-)
+    
+        return (
+            settingsContext.settings.showFireworks && 
+            <>
+                { confettiType === ConfettiType.FIREWORKS && 
+                    <Fireworks onInit={handleFireworksOnInit} decorateOptions={handleOptionsFireworks}/> 
+                }
+                <Pride onInit={handlePrideOnInit} decorateOptions={handleOptionsPride}></Pride>
+            </>
+        );    
+    }    
 }
