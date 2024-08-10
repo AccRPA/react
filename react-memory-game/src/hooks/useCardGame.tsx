@@ -1,17 +1,16 @@
-import { useContext, useRef } from "react";
+import { useRef } from "react";
 import { CardModel } from "../models/Card.model";
 import { ConfettiType } from "../models/enum/ConfettiType.enum";
-import { SettingsContext } from "../context/SettingsContext";
+import { SettingsModel } from "../models/Settings.model";
 
 function useCardGame(
         cardDeck: Array<CardModel>,
         setCardDeck: Function,
         setConfetti: Function,
-        setModal: Function
+        setModal: Function,
+        settings: SettingsModel
     ){
     let initialCardDeck = [...cardDeck];
-    const settingsContext = useContext(SettingsContext);
-    const visibleTime = settingsContext.settings.cardTimeMsVisible;
     const timeout = useRef(0);
     
     /** 
@@ -48,7 +47,7 @@ function useCardGame(
                         ]
                     );
                     setCardDeck(initialCardDeck); 
-                }, visibleTime);                
+                }, settings.cardTimeMsVisible * 1000);                
             }else{
                 checkCards();
             }
@@ -78,7 +77,7 @@ function useCardGame(
                     ]
                 );
                 setCardDeck(initialCardDeck); 
-            }, visibleTime);
+            }, settings.cardTimeMsVisible * 1000);
         
         }else{
             // if to card are the same, mark them as checked and show confetti
@@ -118,7 +117,7 @@ function useCardGame(
         }, 350);
     };
 
-    return [updateCard, checkCards];
+    return [ updateCard ];
 }
 
 export default useCardGame;

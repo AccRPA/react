@@ -113,3 +113,7 @@ body {
     background-color: white;
     cursor: default;
 }
+
+.MuiDrawer-paper {
+    padding: 35px;
+}

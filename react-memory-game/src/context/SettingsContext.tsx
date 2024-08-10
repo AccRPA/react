@@ -1,8 +1,10 @@
 import { createContext } from "react";
+import { ContextModel } from "../models/Context.model";
 import { SettingsModel } from "../models/Settings.model";
 
-// a context with an object that has to be initialized with useState
-export const SettingsContext = createContext({
-    settings: new SettingsModel(),
-    setSettings: (_: SettingsModel) => {}
-});
+export const SettingsContext = createContext(
+    new ContextModel(
+        new SettingsModel(), 
+        () => {}
+    )
+);

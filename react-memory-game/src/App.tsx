@@ -9,6 +9,7 @@ import { ModalAction } from './models/enum/ModalAction.enum';
 import { CardDeckService } from './services/CardDeck.service';
 import { useNavigate } from 'react-router-dom';
 import { SettingsContext } from './context/SettingsContext';
+import Settings from './components/Settings';
 
 function App() {
   const settingsContext = useContext(SettingsContext);
@@ -19,9 +20,9 @@ function App() {
   const [showModal, setShowModal] = useState(false);
   const [settings, setSettings] = useState(settingsContext.settings);
 
-  const [updateCard] = useCardGame(cards, setCards, setShowConfetti, setShowModal);
+  const [updateCard] = useCardGame(cards, setCards, setShowConfetti, setShowModal, settings);
   const navigate = useNavigate();
-
+  
   const handleModalClick = (value: ModalAction) => {
     setShowModal(false);
     setShowConfetti(ConfettiType.NONE);
@@ -35,6 +36,7 @@ function App() {
   
   return (
     <SettingsContext.Provider value={{ settings, setSettings }}>
+      <Settings></Settings>
       <CardContainer cards={cards} updateCard={updateCard}></CardContainer>      
       <Confetti confettiType={showConfetti}></Confetti>
       <Modal showModal={showModal} onClick={handleModalClick}></Modal>
