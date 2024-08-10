@@ -1,30 +1,30 @@
 import './App.css';
 import Modal from './components/Modal';
-import CardItem from './components/CardItem';
 import Confetti from './components/Confetti';
 import useCardGame from './hooks/useCardGame';
 import { useState } from 'react';
-import { ConfettiType } from './models/ConfettiType.enum';
-import { ModalAction } from './models/ModalAction.enum';
-import CardDeck from './services/CardDeck';
+import { ConfettiType } from './models/enum/ConfettiType.enum';
+import { ModalAction } from './models/enum/ModalAction.enum';
+import { CardDeckService } from './services/CardDeck.service';
 import { useNavigate } from 'react-router-dom';
 import CardContainer from './components/CardContainer';
+import { SettingsModel } from './models/Settings.model';
 
 function App() {
-  const cardDeck = CardDeck(5);
+  const settings = new SettingsModel();
+  const cardDeck = CardDeckService.create(settings);
   const [cards, setCards] = useState(cardDeck);  
   const [showConfetti, setShowConfetti] = useState(ConfettiType.NONE);
   const [showModal, setShowModal] = useState(false);
-  const navigate = useNavigate();
-
   const [updateCard] = useCardGame(cards, setCards, setShowConfetti, setShowModal);
+  const navigate = useNavigate();
 
   const handleModalClick = (value: ModalAction) => {
     setShowModal(false);
     setShowConfetti(ConfettiType.NONE);
     
     if (value === ModalAction.PLAY){
-      setCards(CardDeck(5));
+      setCards(CardDeckService.create(settings));
     }else{
       navigate('/');
     }

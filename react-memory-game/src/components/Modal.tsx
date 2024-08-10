@@ -1,7 +1,7 @@
 import { Button, ButtonGroup, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Typography } from "@mui/material";
-import { ModalAction } from "../models/ModalAction.enum";
+import { ModalAction } from "../models/enum/ModalAction.enum";
 import Confetti from "./Confetti";
-import { ConfettiType } from "../models/ConfettiType.enum";
+import { ConfettiType } from "../models/enum/ConfettiType.enum";
 
 interface Props {
     showModal: boolean,

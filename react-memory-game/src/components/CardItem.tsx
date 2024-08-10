@@ -1,8 +1,8 @@
 import { JSX } from 'react';
-import { Card } from "../models/Card";
+import { CardModel } from "../models/Card.model";
 
 interface Props {
-    card: Card;
+    card: CardModel;
     updateCard: () => {}
 }
 
@@ -19,9 +19,9 @@ function CardItem({card, updateCard}: Props): JSX.Element{
 
     return <div onClick={handleClick} 
                 className={`card ${card.visible ? 'visible' : 'hidden'} ${card.checked ? 'checked' : ''}`}>
-                <div className='back'></div>
+                <div className='back'>{card.value}</div>
                 <div className='front'>
-                    <div>{card.value}</div>
+                    <div>{card.emojiHtml}</div>
                 </div>
         </div>;
 }

@@ -4,7 +4,7 @@ import Fireworks from "react-canvas-confetti/dist/presets/fireworks";
 import Pride from "react-canvas-confetti/dist/presets/pride";
 import { TConductorInstance } from "react-canvas-confetti/dist/types";
 import { TCanvasConfettiInstance } from "react-canvas-confetti/dist/types/normalization";
-import { ConfettiType } from "../models/ConfettiType.enum";
+import { ConfettiType } from "../models/enum/ConfettiType.enum";
 
 interface Props {
     confettiType: ConfettiType,

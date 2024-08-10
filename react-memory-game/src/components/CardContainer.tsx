@@ -1,8 +1,8 @@
-import { Card } from "../models/Card";
+import { CardModel } from "../models/Card.model";
 import CardItem from "./CardItem";
 
 interface Props {
-    cards: Array<Card>,
+    cards: Array<CardModel>,
     updateCard: Function
 }
 

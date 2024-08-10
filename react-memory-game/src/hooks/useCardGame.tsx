@@ -1,9 +1,9 @@
 import { useRef } from "react";
-import { Card } from "../models/Card";
-import { ConfettiType } from "../models/ConfettiType.enum";
+import { CardModel } from "../models/Card.model";
+import { ConfettiType } from "../models/enum/ConfettiType.enum";
 
 function useCardGame(
-        cardDeck: Array<Card>,     
+        cardDeck: Array<CardModel>,     
         setCardDeck: Function,
         setConfetti: Function,
         setModal: Function
@@ -17,7 +17,7 @@ function useCardGame(
      * and re-render the parent and therefore the children will get the changes
      * the children don't have state
      */ 
-    const updateCard = (card: Card): any => {
+    const updateCard = (card: CardModel): any => {
         return () => {
             const visibleAmountCards = cardDeck.filter(card => !!card.visible && !card.checked)?.length || 0;
             
@@ -29,10 +29,9 @@ function useCardGame(
             // make the current card visible
             initialCardDeck = updateCardsInDeck(
                 initialCardDeck,
-                [{
-                    ...card, 
-                    visible: true
-                }]
+                [
+                    new CardModel(card.id, card.value, card.emojiCode, true, card.checked)
+                ]
             );
             // re-render the parent component
             setCardDeck(initialCardDeck); 
@@ -42,10 +41,9 @@ function useCardGame(
                 timeout.current = setTimeout(() => {
                     initialCardDeck = updateCardsInDeck(
                         initialCardDeck,
-                        [{
-                            ...card, 
-                            visible: false
-                        }]
+                        [
+                            new CardModel(card.id, card.value, card.emojiCode, true, card.checked)
+                        ]
                     );
                     setCardDeck(initialCardDeck); 
                 }, visibleTime);                
@@ -73,14 +71,8 @@ function useCardGame(
                 initialCardDeck = updateCardsInDeck(
                     initialCardDeck,
                     [
-                        {
-                            ...card1, 
-                            visible: false
-                        },
-                        {
-                            ...card2, 
-                            visible: false
-                        },
+                        new CardModel(card1.id, card1.value, card1.emojiCode, false, card1.checked),
+                        new CardModel(card2.id, card2.value, card2.emojiCode, false, card1.checked)
                     ]
                 );
                 setCardDeck(initialCardDeck); 
@@ -91,14 +83,8 @@ function useCardGame(
             initialCardDeck = updateCardsInDeck(
                 initialCardDeck,
                 [
-                    {
-                        ...card1, 
-                        checked: true
-                    },
-                    {
-                        ...card2, 
-                        checked: true
-                    },
+                    new CardModel(card1.id, card1.value, card1.emojiCode, card1.visible, true),
+                    new CardModel(card2.id, card2.value, card2.emojiCode, card2.visible, true)                    
                 ]
             );
             setCardDeck(initialCardDeck); 
@@ -111,7 +97,7 @@ function useCardGame(
         }
     };
 
-    const updateCardsInDeck = (initCardDeck: Array<Card>, updatedCards: Array<Card>): Array<Card> => {
+    const updateCardsInDeck = (initCardDeck: Array<CardModel>, updatedCards: Array<CardModel>): Array<CardModel> => {
         const newCardDeck = [...initCardDeck];
         for(let updatedCard of updatedCards){
             const index = newCardDeck.findIndex(card => card.id === updatedCard.id);
