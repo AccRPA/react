@@ -19,7 +19,7 @@ export default ({confettiType}: Props) => {
         params.conductor.run(
             {
                 speed: 2,
-                delay: 1
+                delay: 0
             }
         );
     };    
@@ -47,7 +47,9 @@ export default ({confettiType}: Props) => {
     }
 
     return (<>
-        { confettiType === ConfettiType.FIREWORKS && <Fireworks onInit={handleFireworksOnInit} decorateOptions={handleOptionsFireworks}/> }
+        { confettiType === ConfettiType.FIREWORKS && 
+            <Fireworks onInit={handleFireworksOnInit} decorateOptions={handleOptionsFireworks}/> 
+        }
         <Pride onInit={handlePrideOnInit} decorateOptions={handleOptionsPride}></Pride>
     </>
 )

@@ -1,25 +1,26 @@
 import { Card } from "../models/Card";
 
-export class CardDeck {
-    private static _cardDeck: Array<Card>;
+function CardDeck(cardAmount: number): Array<Card>{
+    const minNumber = 1;
+    const maxNumber = 9;
+    const cardDeck = [];
 
-    static getShuffledCardDeck(from: number, to: number): Array<Card>{
-        if (!this._cardDeck){
-            const cards: Array<Card> = [];
-    
-            for(let i = from; i <= to; i++){
-                const card = new Card(i);
-                cards.push(card, {...card});
-            }
-    
-            this.shuffleCards(cards);
-        }
-        
-        return this._cardDeck;
+    const getRandomNumber = () => {
+        return Math.floor(Math.random() * (maxNumber - minNumber) + minNumber);
     }
 
-    // Maybe not the best shuffle algorithm but it fulfills its purpose
-    private static shuffleCards(array: Array<Card>): void{
+    const createRandomCard = (cardDeck: Array<Card>):Card => {
+        let randomNumber = getRandomNumber();
+        while (cardDeck.findIndex(card => card.value === randomNumber) !== -1){
+            randomNumber = getRandomNumber();
+        }
+        return new Card(
+            `${randomNumber}a`, 
+            randomNumber
+        );
+    }
+
+    const shuffleCards = (array: Array<Card>): Array<Card> => {
         const shuffledArray = [...array];
         for (let i = 0; i < shuffledArray.length; i++){
             const index1 = Math.floor(Math.random() * (shuffledArray.length - 1));
@@ -28,9 +29,20 @@ export class CardDeck {
             shuffledArray[index1] = shuffledArray[index2];
             shuffledArray[index2] = temp;
         }
-
-        this._cardDeck = shuffledArray;
+        return shuffledArray;
     }
 
-    //const randomIndex = Math.floor(Math.random() * (5 - 1) + 1);
+    for (let i = 0; i < cardAmount; i++){
+        const card = createRandomCard(cardDeck);
+        const pairCard = {
+            ...card, 
+            id: `${card.value}b`
+        };
+        // added twice to have a pair
+        cardDeck.push(card, pairCard);
+    }
+
+    return shuffleCards(cardDeck);
 }
+
+export default CardDeck;

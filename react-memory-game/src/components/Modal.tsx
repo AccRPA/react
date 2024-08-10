@@ -4,8 +4,8 @@ import Confetti from "./Confetti";
 import { ConfettiType } from "../models/ConfettiType.enum";
 
 interface Props {
-    showModal: boolean;
-    onClick: (value: ModalAction) => void;
+    showModal: boolean,
+    onClick: (value: ModalAction) => void
 }
 
 function Modal({showModal, onClick}: Props){
