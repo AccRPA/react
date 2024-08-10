@@ -3,24 +3,17 @@ import { Card } from "../models/Card";
 
 interface Props {
     card: Card;
-    visibleCards: number,
     updateCard: () => {}
 }
 
-function CardItem({card, visibleCards, updateCard}: Props): JSX.Element{
+function CardItem({card, updateCard}: Props): JSX.Element{
+    
     const handleClick = () => {
         // already visible, don't do anything
         if (card.visible){
             return;
         }
 
-        // click on more cards will not do anything
-        if (visibleCards == 2){
-            return;
-        }
-
-        // call update the current card. 
-        // it will make it visible and re-render the parent component and therefore all the children
         updateCard();
     }
 
