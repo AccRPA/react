@@ -22,7 +22,7 @@ function Settings({resetGame}: Props){
         settingsContext.setSettings((previous: SettingsModel) => {
             return {...previous, cardsAmount: amount};
         });
-        resetGame();
+        resetGame(amount);
     };
 
     const handleDisplayMode = (_: any, value: CardDisplayMode) => {

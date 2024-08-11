@@ -1,8 +1,7 @@
 import { CardModel } from "../models/Card.model";
-import { SettingsModel } from "../models/Settings.model";
 import { Emojis } from "../constants/Emojis";
 
-function CreateCardDeck(settings: SettingsModel): Array<CardModel>{
+function CreateCardDeck(cardAmount: number): Array<CardModel>{
     const minNumber = 1;
     const maxNumber = 9;
     const cardDeck = new Array<CardModel>();
@@ -51,7 +50,7 @@ function CreateCardDeck(settings: SettingsModel): Array<CardModel>{
     }
 
     // divide the amount of card by 2, since half of them will be the pairs
-    for (let i = 0; i < settings.cardsAmount / 2; i++){
+    for (let i = 0; i < cardAmount / 2; i++){
         const card = createRandomCard(cardDeck);
         const pairCard = new CardModel(`${card.value}b`, card.value, card.emojiCode);
         // added twice to have a pair

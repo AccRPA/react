@@ -12,9 +12,9 @@ import { SettingsContext } from './context/SettingsContext';
 import Settings from './components/Settings';
 
 function App() {
-  const settingsContext = useContext(SettingsContext);
-  const cardDeck = CardDeckService.create(settingsContext.settings);
-
+  const settingsContext = useContext(SettingsContext);  
+  const cardDeck = CardDeckService.create(settingsContext.settings.cardsAmount);
+  
   const [cards, setCards] = useState(cardDeck);  
   const [showConfetti, setShowConfetti] = useState(ConfettiType.NONE);
   const [showModal, setShowModal] = useState(false);
@@ -23,18 +23,18 @@ function App() {
   const [updateCard] = useCardGame(cards, setCards, setShowConfetti, setShowModal, settings);
   const navigate = useNavigate();
   
-  const handleModalClick = async (value: ModalAction) => {
+  const handleModalClick = (value: ModalAction) => {
     setShowModal(false);
     setShowConfetti(ConfettiType.NONE);
     
     if (value === ModalAction.PLAY){      
-      handleResetGame();
+      handleResetGame(settings.cardsAmount);
     }else{
       navigate('/');
     }
   };
   
-  const handleResetGame = () => {
+  const handleResetGame = (cardAmount: number) => {
     // turn back all the cards
     setCards((previous: any) => {
       return previous.map((card: any) => {
@@ -44,7 +44,7 @@ function App() {
       });
     });
     // and change the card deck 0.5s after since that is what the animation takes to finish
-    setTimeout(() => setCards(CardDeckService.create(settings)), 500);
+    setTimeout(() => setCards(CardDeckService.create(cardAmount)), 500);
   };
 
   return (

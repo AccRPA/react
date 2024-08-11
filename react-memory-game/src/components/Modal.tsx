@@ -12,10 +12,7 @@ interface Props {
 
 function Modal({showModal, onClick}: Props){
     const settingsContext = useContext(SettingsContext);
-    
-    const handleClose = () => {
-        onClick(ModalAction.PLAY);
-    };
+
     const handleClick= (value: ModalAction) => {
         onClick(value);
     };
@@ -27,7 +24,7 @@ function Modal({showModal, onClick}: Props){
             : null
         }       
         <Dialog 
-            onClose={handleClose} 
+            disableEscapeKeyDown={true}
             open={showModal} 
             draggable="false"
             BackdropProps={{style: {backgroundColor: 'rgba(200, 200, 200, 0.3)'}}}
