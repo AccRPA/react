@@ -1,5 +1,5 @@
 import { Dispatch, SetStateAction } from "react";
-import { SettingsModel } from "../models/Settings.model";
+import { SettingsModel } from "./Settings.model";
 
 export class ContextModel {
     public settings: SettingsModel;
