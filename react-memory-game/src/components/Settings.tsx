@@ -66,19 +66,19 @@ function Settings({resetGame}: Props){
     const cardTimeVisibleMarks = [
         {
             value: 1.5,
-            label: '1.5',
+            label: '1.5 sec',
         },
         {
             value: 2,
-            label: '2',
+            label: '2 sec',
         },
         {
             value: 2.5,
-            label: '2.5',
+            label: '2.5 sec',
         },
         {
             value: 3,
-            label: '3',
+            label: '3 sec',
         },
     ];
 

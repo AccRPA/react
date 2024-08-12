@@ -1,18 +1,13 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import App from '../App';
-import Home from './Home';
-import ErrorBoundary from './ErrorBoundary';
-import ErrorPage from './ErrorPage';
+import { BrowserRouter } from 'react-router-dom';
+import LocationProvider from './LocationProvider';
+import RoutesWithAnimation from './RoutesWithAnimation';
 
 function RoutesApp(){
 
     return <BrowserRouter>
-        <Routes>
-            <Route path="/" element={<Home />} ErrorBoundary={ErrorBoundary}/>            
-            <Route path="/game" element={<App />} ErrorBoundary={ErrorBoundary} />            
-            <Route path='/error' element={ <ErrorBoundary /> }/>
-            <Route path='*' element={<ErrorPage code="404"/>}   />
-        </Routes>
+        <LocationProvider>
+            <RoutesWithAnimation />
+        </LocationProvider>        
     </BrowserRouter>
 }
 

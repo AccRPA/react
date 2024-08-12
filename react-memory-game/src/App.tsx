@@ -10,6 +10,8 @@ import { CardDeckService } from './services/CardDeck.service';
 import { useNavigate } from 'react-router-dom';
 import { SettingsContext } from './context/SettingsContext';
 import Settings from './components/Settings';
+import { motion } from 'framer-motion';
+import { RouteVariants } from './constants/RoutesAnimation';
 
 function App() {
   const settingsContext = useContext(SettingsContext);  
@@ -49,8 +51,14 @@ function App() {
 
   return (
     <SettingsContext.Provider value={{ settings, setSettings }}>
-      <Settings resetGame={handleResetGame}></Settings>
-      <CardContainer cards={cards} updateCard={updateCard}></CardContainer>      
+      <motion.div
+      variants={RouteVariants}
+      initial="initial"
+      animate="final">
+        <Settings resetGame={handleResetGame}></Settings>
+        <CardContainer cards={cards} updateCard={updateCard}></CardContainer>      
+
+      </motion.div>
       <Confetti confettiType={showConfetti}></Confetti>
       <Modal showModal={showModal} onClick={handleModalClick}></Modal>
     </SettingsContext.Provider>
