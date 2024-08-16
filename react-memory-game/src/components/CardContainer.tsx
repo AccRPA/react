@@ -3,12 +3,13 @@ import CardItem from "./CardItem";
 
 interface Props {
     cards: Array<CardModel>,
+    cardAmount: number,
     updateCard: Function
 }
 
-function CardContainer({cards, updateCard}: Props){
+function CardContainer({cards, cardAmount, updateCard}: Props){
     return (
-        <div className='card-container'>
+        <div className={`card-container container-${cardAmount}`}>
             { cards.map((card, index) => 
                 <CardItem 
                     card={card} 

@@ -56,7 +56,7 @@ function App() {
       initial="initial"
       animate="final">
         <Settings resetGame={handleResetGame}></Settings>
-        <CardContainer cards={cards} updateCard={updateCard}></CardContainer>      
+        <CardContainer cards={cards} cardAmount={settings.cardsAmount} updateCard={updateCard}></CardContainer>      
 
       </motion.div>
       <Confetti confettiType={showConfetti}></Confetti>

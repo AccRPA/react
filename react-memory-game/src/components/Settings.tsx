@@ -4,6 +4,7 @@ import { CardDisplayMode } from "../models/enum/CardDisplayMode.enum";
 import { SettingsContext } from "../context/SettingsContext";
 import { SettingsModel } from "../models/Settings.model";
 import CloseIcon from '@mui/icons-material/Close';
+import SettingsIcon from '@mui/icons-material/Settings';
 
 interface Props {
     resetGame: Function
@@ -159,8 +160,10 @@ function Settings({resetGame}: Props){
         </Container>        
         );
     return (
-        <>
-            <Button onClick={toggleDrawer(true)}>Open drawer</Button>
+        <>        
+            <Button variant="text">
+                <SettingsIcon onClick={toggleDrawer(true)}></SettingsIcon>
+            </Button>            
             <Drawer open={open} 
                 onClose={toggleDrawer(false)}
                 BackdropProps={{style: {backgroundColor: 'rgba(200, 200, 200, 0.3)'}}}
