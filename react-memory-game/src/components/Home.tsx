@@ -1,16 +1,21 @@
-import { Typography } from "@mui/material";
+import { Box, Button, Typography } from "@mui/material";
 import { motion } from "framer-motion";
-import { Link } from "react-router-dom";
 import { RouteVariants } from "../constants/RoutesAnimation";
+import { useNavigate } from 'react-router-dom';
 
 function Home() {
+    const navigate = useNavigate();
+
     return  <motion.div
                 variants={RouteVariants}
                 initial="initial"
-                animate="final">
-                    <Typography className="title">Memory card game</Typography>
-                    <Typography className="subtitle">find the pairs</Typography>
-                    <Link to={'/game'}>PLAY</Link>
+                animate="final"
+                className="motion-home">
+                    <Box textAlign="center">
+                        <Typography className="title">Memory card game</Typography>
+                        <Typography className="subtitle">Find the pairs!</Typography>
+                    </Box>
+                    <Button variant="contained"  onClick={() => navigate('/game')}>PLAY</Button>
             </motion.div>;
 }
 
