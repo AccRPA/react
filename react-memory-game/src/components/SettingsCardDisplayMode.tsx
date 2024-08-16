@@ -13,7 +13,7 @@ function SettingsCardDisplayMode(){
     };   
     
     return (<Box role="presentation">            
-                <Typography marginBottom={1}>Card display</Typography>
+                <Typography marginBottom={1}>Card view mode</Typography>
                 <ToggleButtonGroup
                     value={settingsContext.settings.cardDisplayMode}
                     exclusive

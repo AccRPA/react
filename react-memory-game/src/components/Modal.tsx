@@ -1,4 +1,4 @@
-import { Button, ButtonGroup, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from "@mui/material";
+import { Box, Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from "@mui/material";
 import { ModalAction } from "../models/enum/ModalAction.enum";
 import Confetti from "./Confetti";
 import { ConfettiType } from "../models/enum/ConfettiType.enum";
@@ -38,10 +38,16 @@ function Modal({showModal, onClick}: Props){
                 </DialogContentText>
             </DialogContent>
             <DialogActions>
-                <ButtonGroup>
-                    <Button variant="outlined" onClick={() => handleClick(ModalAction.HOME)}>Go Home</Button>
+                <Box
+                    display="flex"
+                    alignItems="center"
+                    justifyContent="space-between"
+                    gap={4}
+                    p={2}
+                    >
+                    <Button variant="text" onClick={() => handleClick(ModalAction.HOME)}>Go Home</Button>
                     <Button variant="contained" onClick={() => handleClick(ModalAction.PLAY)}>Play again</Button>
-                </ButtonGroup>
+                </Box>
             </DialogActions>
         </Dialog> 
     </>       

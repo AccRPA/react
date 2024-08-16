@@ -8,8 +8,8 @@ function Home() {
                 variants={RouteVariants}
                 initial="initial"
                 animate="final">
-                    <Typography>Memory card game</Typography>
-                    <Typography>find the pairs</Typography>
+                    <Typography className="title">Memory card game</Typography>
+                    <Typography className="subtitle">find the pairs</Typography>
                     <Link to={'/game'}>PLAY</Link>
             </motion.div>;
 }

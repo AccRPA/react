@@ -2,10 +2,17 @@
     box-sizing: border-box;
 }
 
+:root{
+    --blue-color: #1d93ec;
+}
+
 body {
     padding: 0;
     margin: 0;
     background-color: #f7f7f7;
+    font-family: "Nunito", sans-serif; 
+    font-optical-sizing: auto;
+    font-style: normal;
 }
 
 #root{
@@ -37,11 +44,12 @@ body {
 }
 
 .card {
-    height: calc(min(100vw, 100vh) / 3);
+    aspect-ratio: 0.8;
+    max-height: calc(82vh / 2);
     width: calc(100vw / 6);
     background-color: white;
     color: black;
-    font-size: clamp(min(14vh, 14vw), 90%, 4rem);
+    font-size: clamp(min(22vh, 15vw), 95%, 4rem);
     border-radius: 0.5rem;
     cursor: pointer;
     display: grid;
@@ -59,7 +67,7 @@ body {
 
 
 @media (max-width: 1024px) and (orientation:portrait) {
-    .card {
+    .card-container .card {
         height: calc(80vh / 5) !important;
         width: calc(100vw / 3) !important;
     }
@@ -115,7 +123,7 @@ body {
 
 .front {
     transform: rotateY(180deg);
-    color: #1d93ec;
+    color: var(--blue-color);
 }
 
 .back {
@@ -153,10 +161,6 @@ body {
 .card.checked {
     background-color: white;
     cursor: default;
-}
-
-.MuiDrawer-paper {
-    padding: 1.5rem;
 }
 
 .error-cards {
@@ -206,9 +210,32 @@ body {
 
 .link {
     text-decoration: none;
-    color:#1d93ec;
+    color:var(--blue-color);
 }
 
 .link:active, link:visited, link:focus, link:hover {
-    color: #1d93ec;
+    color: var(--blue-color);
+}
+
+.MuiDrawer-paper {
+    padding: 1.5rem;
+}
+
+.MuiToggleButton-root.Mui-selected {
+    background-color: var(--blue-color) !important;
+    color: #fff !important; 
+}
+
+.MuiSlider-thumbColorPrimary {
+    color: var(--blue-color) !important;
+}
+
+h1, h2 {
+    color: var(--blue-color);
+}
+
+.subtitle {
+    font-family: "PT Sans", sans-serif;
+    font-weight: 400;
+    font-style: normal;
 }

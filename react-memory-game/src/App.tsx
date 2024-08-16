@@ -12,6 +12,8 @@ import { SettingsContext } from './context/SettingsContext';
 import Settings from './components/Settings';
 import { motion } from 'framer-motion';
 import { RouteVariants } from './constants/RoutesAnimation';
+import { Box, Button } from '@mui/material';
+import HomeIcon from '@mui/icons-material/Home';
 
 function App() {
   const settingsContext = useContext(SettingsContext);  
@@ -56,7 +58,12 @@ function App() {
       initial="initial"
       animate="final"
       className='motion-container'>
-        <Settings resetGame={handleResetGame}></Settings>
+        <Box display="flex" justifyContent="space-between" alignItems="center" width="100%">
+          <Settings resetGame={handleResetGame}></Settings>
+          <Button variant="text">
+              <HomeIcon onClick={()=> navigate('/')}></HomeIcon>
+          </Button>  
+        </Box>
         <CardContainer cards={cards} cardAmount={settings.cardsAmount} updateCard={updateCard}></CardContainer>      
       </motion.div>
       <Confetti confettiType={showConfetti}></Confetti>
