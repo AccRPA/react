@@ -54,10 +54,10 @@ function App() {
       <motion.div
       variants={RouteVariants}
       initial="initial"
-      animate="final">
+      animate="final"
+      className='motion-container'>
         <Settings resetGame={handleResetGame}></Settings>
         <CardContainer cards={cards} cardAmount={settings.cardsAmount} updateCard={updateCard}></CardContainer>      
-
       </motion.div>
       <Confetti confettiType={showConfetti}></Confetti>
       <Modal showModal={showModal} onClick={handleModalClick}></Modal>
