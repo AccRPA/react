@@ -1,4 +1,4 @@
-import { Button, ButtonGroup, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Typography } from "@mui/material";
+import { Button, ButtonGroup, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from "@mui/material";
 import { ModalAction } from "../models/enum/ModalAction.enum";
 import Confetti from "./Confetti";
 import { ConfettiType } from "../models/enum/ConfettiType.enum";
