@@ -1,4 +1,4 @@
-import { Button, Container, Drawer } from "@mui/material";
+import { Box, Button, Container, Drawer, Stack } from "@mui/material";
 import { useState } from "react";
 
 import SettingsIcon from '@mui/icons-material/Settings';
@@ -28,15 +28,19 @@ function Settings({resetGame}: Props){
                 onClose={toggleDrawer(false)}
                 BackdropProps={{style: {backgroundColor: 'rgba(200, 200, 200, 0.3)'}}}
             >
-                <Container>
-                    <Button variant="text" onClick={toggleDrawer(false)}>
-                        <CloseIcon></CloseIcon>
-                    </Button>
-                    <SettingsAmountCards resetGame={resetGame}></SettingsAmountCards>
-                    <SettingsTimeCardVisible></SettingsTimeCardVisible>
-                    <SettingsCardDisplayMode></SettingsCardDisplayMode>
-                    <SettingsShowEffect></SettingsShowEffect>
-                </Container>
+                <Box p={1}>
+                    <Stack spacing={3}>
+                        <Box display="flex" justifyContent="flex-end" position="absolute" right={0} top={0}>
+                            <Button variant="text" onClick={toggleDrawer(false)}>
+                                <CloseIcon></CloseIcon>
+                            </Button>
+                        </Box>
+                        <SettingsAmountCards resetGame={resetGame}></SettingsAmountCards>
+                        <SettingsTimeCardVisible></SettingsTimeCardVisible>
+                        <SettingsCardDisplayMode></SettingsCardDisplayMode>
+                        <SettingsShowEffect></SettingsShowEffect>
+                    </Stack>
+                </Box>
             </Drawer>
         </>
     );

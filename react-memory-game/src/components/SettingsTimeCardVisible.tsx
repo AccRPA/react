@@ -37,7 +37,7 @@ function SettingsTimeCardVisible(){
     }
     
     return (<Box role="presentation">            
-                <Typography>Time a card is visible</Typography>
+                <Typography marginBottom={1}>Time a card is visible</Typography>
                 <Slider
                     aria-label="Time a card is visible"
                     defaultValue={settingsContext.settings.cardTimeMsVisible}

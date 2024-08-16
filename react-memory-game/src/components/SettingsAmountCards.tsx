@@ -45,7 +45,7 @@ function SettingsAmountCards ({resetGame}: Props){
             <Alert severity="warning">
                 Changing the number of cards will reset the game
             </Alert>         
-            <Typography>Number of cards</Typography>
+            <Typography marginTop={1} marginBottom={1}>Number of cards</Typography>
             <Slider
                 aria-label="Number of cards"
                 defaultValue={settingsContext.settings.cardsAmount}

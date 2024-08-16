@@ -13,7 +13,7 @@ function SettingsShowEffect(){
     };   
 
     return (<Box role="presentation">            
-                <Typography>Show effects</Typography>
+                <Typography marginBottom={1}>Show effects</Typography>
                 <ToggleButtonGroup
                     value={settingsContext.settings.showFireworks}
                     exclusive

@@ -13,10 +13,11 @@ function SettingsCardDisplayMode(){
     };   
     
     return (<Box role="presentation">            
-                <Typography>Card display</Typography>
+                <Typography marginBottom={1}>Card display</Typography>
                 <ToggleButtonGroup
                     value={settingsContext.settings.cardDisplayMode}
                     exclusive
+                    color="primary"
                     onChange={handleDisplayMode}
                     aria-label="Card display mode"
                 >
