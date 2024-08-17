@@ -39,7 +39,7 @@ function useCardGame(
     
             // if no other card is selected hide the current one after visibleTime
             if (visibleAmountCards == 0){
-                timeout.current = setTimeout(() => {
+                timeout.current = window.setTimeout(() => {
                     initialCardDeck = updateCardsInDeck(
                         initialCardDeck,
                         [

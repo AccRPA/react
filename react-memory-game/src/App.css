@@ -58,7 +58,7 @@ body {
 
 .card {
     aspect-ratio: 0.8;
-    max-height: calc(82vh / 2);
+    max-height: calc(70vh / 2);
     width: calc(100vw / 6);
     background-color: white;
     color: black;
@@ -81,20 +81,20 @@ body {
 
 @media (max-width: 1024px) and (orientation:portrait) {
     .card-container .card {
-        height: calc(80vh / 5) !important;
+        height: calc(70vh / 5) !important;
         width: calc(100vw / 3) !important;
     }
 
     .card-container.container-8 .card {
-        height: calc(80vh / 4) !important; 
+        height: calc(70vh / 4) !important; 
     }
 
     .card-container.container-6 .card {
-        height: calc(80vh / 3.2) !important; 
+        height: calc(70vh / 3.2) !important; 
     }
 
     .card-container.container-4 .card {
-        height: calc(80vh / 3.2) !important;
+        height: calc(70vh / 3.2) !important;
     }
 }
 
