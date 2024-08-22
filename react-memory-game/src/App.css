@@ -3,19 +3,23 @@
 }
 
 :root{
-    --blue-color: #1d93ec;
+    --blue-color-dark: #146BC9;
+    --orange-color: #EA9E2C;
     --grey-color: #999999;
+    --padding-tb: 1rem;
+    --padding-lr: 2rem;
+    --border-radius: 4px;
 }
 
 body {
-    padding: 0;
+    padding: 0.5rem;
     margin: 0;
     /* background-color: #f7f7f7; */
     font-family: "Nunito", sans-serif; 
     font-optical-sizing: auto;
     font-style: normal;
-    background-color: #8EC5FC;
-    background-image: linear-gradient(62deg, #e1f0ff 0%, #f9f3ff 100%);
+    background: rgb(255,255,255);
+    background: linear-gradient(160deg, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 50%, rgba(20,107,201,1) 50%, rgba(20,107,201,1) 100%);
 }
 
 #root{
@@ -23,8 +27,10 @@ body {
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    height: 100vh;
-    width: 100vw;
+    height: calc(100vh - 1rem);
+    width: calc(100vw - 1rem);
+    border: 2px solid #ffffff;
+    padding: 1rem;
 }
 
 .motion-container {
@@ -42,7 +48,7 @@ body {
     align-items: center;
     width: 100vw;
     height: 100vh;
-    gap: 2rem;
+    gap: 0;
 }
 
 .card-container {
@@ -140,7 +146,8 @@ body {
 }
 
 .back {
-    background: url('./assets/cardBackMedium.png') repeat ;
+    background: linear-gradient(50deg, #67ACF6 0%,  #4696F6 100%);
+    color: #ffffff;
 }
 
 .back::before {
@@ -176,7 +183,7 @@ body {
     cursor: default;
 }
 
-.error-cards {
+.dummy-cards {
     display: grid;
     justify-content: center;
     align-items: center;
@@ -185,10 +192,10 @@ body {
     height: clamp(200px, 55vh, calc(min(100vw, 100vh) / 1.2));
 }
 
-.error-cards .card {
+.dummy-cards .card {
     z-index: 0;
-    height: clamp(160px, 50vh, calc(min(100vw, 100vh) / 2.5));
-    width: clamp(110px, 80vw, calc(min(100vw, 100vh) / 4));
+    height: clamp(160px, 38vh, calc(min(100vw, 100vh) / 2.5));
+    width: clamp(100px, 38vw, calc(min(100vw, 100vh) / 3.5));
     max-height: none;
     transition: all 1s ease-in-out;
     cursor: default;
@@ -198,23 +205,35 @@ body {
     font-size: 6rem;
 }
 
-.error-cards .card .front {
+.dummy-cards .card .front {
     transform: none;
 }
 
-.error-cards.animate .card:first-child{
+.dummy-cards.animate .card:first-child{
     transform: rotate(-40deg) translate(-55%, -30%);
     z-index: -1;
 }
 
-.error-cards.animate .card:nth-child(2){
+.dummy-cards.animate .card:nth-child(2){
     transform: translateY(-5%);
     z-index: 0;
 }
 
-.error-cards.animate .card:last-child{
+.dummy-cards.animate .card:last-child{
     transform: rotate(25deg) translate(80%, -20%);
     z-index: 1;
+}
+
+.dummy-cards.cards-home .card {
+    font-size: clamp(16px, min(5vw, 5vh), 2rem);
+}
+
+.dummy-cards.cards-home .card:first-child{
+    transform: rotate(-30deg) translate(-30%, -20%);
+}
+
+.dummy-cards.cards-home .card:last-child{
+    transform: rotate(20deg) translate(40%, -15%);
 }
 
 .error-header h3 {
@@ -223,11 +242,26 @@ body {
 
 .link {
     text-decoration: none;
-    color:var(--blue-color);
+    color:var(--blue-color-dark);
 }
 
 .link:active, link:visited, link:focus, link:hover {
-    color: var(--blue-color);
+    color: var(--blue-color-dark);
+}
+
+.link-button {
+    text-decoration: none;
+    color: #ffffff;
+    background-color: var(--orange-color);
+    padding: 0.6rem 3rem;
+    font-size: 1.2rem;
+    color: #ffffff;
+    font-weight: bold;
+    border-radius: var(--border-radius)
+}
+
+.link-button:hover {
+    background-color: '#c68524'
 }
 
 .MuiDrawer-paper {
@@ -235,27 +269,20 @@ body {
 }
 
 .MuiToggleButton-root.Mui-selected {
-    background-color: var(--blue-color) !important;
+    background-color: var(--blue-color-dark) !important;
     color: #fff !important; 
 }
 
 .MuiSlider-thumbColorPrimary {
-    color: var(--blue-color) !important;
+    color: var(--blue-color-dark) !important;
 }
 
 h1, h2 {
-    color: var(--blue-color);
+    color: var(--blue-color-dark);
 }
 
 .title {
-    font-size: clamp(11px, 10vw, 5rem) !important;
-    color: var(--blue-color);
+    font-size: clamp(12px, min(12vw, 12vh), 5rem) !important;
+    color: var(--blue-color-dark);
     font-weight: bold !important;
-}
-
-.subtitle {
-    font-family: "PT Sans", sans-serif !important;    
-    font-style: normal;
-    font-size: clamp(10px, 6vw, 2rem) !important;
-    color: var(--grey-color) !important;
 }

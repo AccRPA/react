@@ -16,7 +16,6 @@ function CardItem({card, updateCard}: Props): JSX.Element{
         if (card.visible){
             return;
         }
-
         updateCard();
     }
 

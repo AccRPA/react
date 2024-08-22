@@ -24,13 +24,13 @@ function ErrorPage({view}: Props){
                 </h3>
 
             </div>
-            <div className="error-cards" id="errorCards">                
-                <div className="card" id="card1">
+            <div className="dummy-cards" id="errorCards">                
+                <div className="card">
                     <div className="front">
                         { view === ErrorViewMode.NOT_FOUND ? 4 : String.fromCodePoint(0x1f648)}
                     </div>
                 </div>
-                <div className="card" id="card2">
+                <div className="card">
                     <div className="front">
                         { 
                             view === ErrorViewMode.NOT_FOUND ? 
@@ -40,13 +40,13 @@ function ErrorPage({view}: Props){
                         }
                     </div>
                 </div>
-                <div className="card" id="card3">
+                <div className="card">
                     <div className="front">
                         { view === ErrorViewMode.NOT_FOUND ? 4 :  String.fromCodePoint(0x1f64a)}
                     </div>
                 </div>                
             </div>
-            <Link className="link" to ="/">Go Home</Link>
+            <Link className="link-button" to ="/">Go Home</Link>
         </>
     );
 }
