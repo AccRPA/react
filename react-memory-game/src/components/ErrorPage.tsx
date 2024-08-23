@@ -1,12 +1,14 @@
 import { useEffect } from "react";
-import { Link } from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
 import { ErrorViewMode } from "../models/enum/ErrorViewMode.enum";
+import { Button } from "@mui/material";
 
 interface Props {
     view: ErrorViewMode
 }
 
 function ErrorPage({view}: Props){
+    const navigate = useNavigate();
     
     useEffect(() => {
         document.getElementById('errorCards')?.classList.add('animate');
@@ -46,7 +48,7 @@ function ErrorPage({view}: Props){
                     </div>
                 </div>                
             </div>
-            <Link className="link-button" to ="/">Go Home</Link>
+            <Button variant="action" onClick={() => navigate('/')}>Go Home</Button>
         </>
     );
 }

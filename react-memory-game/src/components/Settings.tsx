@@ -22,7 +22,7 @@ function Settings({resetGame}: Props){
     return (
         <>        
             <Button variant="text">
-                <SettingsIcon onClick={toggleDrawer(true)}></SettingsIcon>
+                <SettingsIcon sx={{ fontSize: 25 }} onClick={toggleDrawer(true)}></SettingsIcon>
             </Button>            
             <Drawer open={open} 
                 onClose={toggleDrawer(false)}
@@ -32,7 +32,7 @@ function Settings({resetGame}: Props){
                     <Stack spacing={3}>
                         <Box display="flex" justifyContent="flex-end" position="absolute" right={0} top={0}>
                             <Button variant="text" onClick={toggleDrawer(false)}>
-                                <CloseIcon></CloseIcon>
+                                <CloseIcon sx={{ fontSize: 25 }}></CloseIcon>
                             </Button>
                         </Box>
                         <SettingsAmountCards resetGame={resetGame}></SettingsAmountCards>

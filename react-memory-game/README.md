@@ -1,3 +1,6 @@
-# React + TypeScript + Vite + Firebase
+# Memory Card Game
 
-firebase deploy --only hosting:memory-card-game-fun
+This is an application built with React + TypeScript + Vite + Firebase
+
+Have fun!
+

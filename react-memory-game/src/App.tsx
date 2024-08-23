@@ -61,7 +61,7 @@ function App() {
         <Box display="flex" justifyContent="space-between" alignItems="center" width="100%">
           <Settings resetGame={handleResetGame}></Settings>
           <Button variant="text">
-              <HomeIcon onClick={()=> navigate('/')}></HomeIcon>
+              <HomeIcon sx={{ fontSize: 25 }} onClick={()=> navigate('/')}></HomeIcon>
           </Button>  
         </Box>
         <CardContainer cards={cards} cardAmount={settings.cardsAmount} updateCard={updateCard}></CardContainer>      

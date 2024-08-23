@@ -6,10 +6,13 @@ import { SettingsModel } from "../models/Settings.model";
 
 function SettingsCardDisplayMode(){
     const settingsContext = useContext(SettingsContext);
+    
     const handleDisplayMode = (_: any, value: CardDisplayMode) => {
-        settingsContext.setSettings((previous: SettingsModel) => {
-            return {...previous, cardDisplayMode: value};
-        });
+        if (value !== null){
+            settingsContext.setSettings((previous: SettingsModel) => {
+                return {...previous, cardDisplayMode: value};
+            });
+        }
     };   
     
     return (<Box role="presentation">            

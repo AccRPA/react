@@ -7,9 +7,11 @@ function SettingsShowEffect(){
     const settingsContext = useContext(SettingsContext);
     
     const handleShowEffects = (_: any, value: boolean) => {
-        settingsContext.setSettings((previous: SettingsModel) => {
-            return {...previous, showFireworks: value};
-        });
+        if (value !== null){
+            settingsContext.setSettings((previous: SettingsModel) => {
+                return {...previous, showFireworks: value};
+            });
+        }
     };   
 
     return (<Box role="presentation">            
