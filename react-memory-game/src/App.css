@@ -46,10 +46,11 @@ body {
 }
 
 .motion-home {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
     align-items: center;
+    justify-content: center;
     width: 100%;
     height: 100%;
     gap: 0;
@@ -90,7 +91,7 @@ body {
 .card {
     aspect-ratio: 0.8;
     background-color: white;
-    color: black;
+    color: var(--blue-color-dark);
     font-size: min(22vh, 9vw);
     width: min(25vh, 15vw);
     border-radius: 0.5rem;
@@ -217,22 +218,22 @@ body {
     display: grid;
     justify-content: center;
     align-items: center;
-    grid-template-columns: 1fr;
-    grid-template-rows: 1fr;
-    height: clamp(200px, 55vh, calc(min(100vw, 100vh) / 1.2));
+    grid-template-columns: auto;
+    grid-template-rows: auto;
 }
 
 .dummy-cards .card {
     z-index: 0;
-    height: clamp(140px, 38vh, calc(min(100vw, 100vh) / 3));
-    width: clamp(100px, 38vw, calc(min(100vw, 100vh) / 4));
+    height: clamp(115px, 38vh, calc(min(100vw, 100vh) / 3));
+    width: clamp(90px, 38vw, calc(min(100vw, 100vh) / 4));
     max-height: none;
     transition: all 1s ease-in-out;
     cursor: default;
     /* stack one on top of another */
     grid-row: 1 / 1;
     grid-column: 1 / 1;
-    font-size: 6rem;
+    font-size: min(16vh, 12vw);
+    color: var(--blue-color-dark);
 }
 
 .dummy-cards .card .front {
@@ -264,6 +265,10 @@ body {
 
 .dummy-cards.cards-home .card:last-child{
     transform: rotate(20deg) translate(40%, -15%);
+}
+
+.error-header {
+    text-align: center;
 }
 
 .error-header h3 {

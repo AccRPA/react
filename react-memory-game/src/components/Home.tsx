@@ -33,7 +33,9 @@ function Home() {
                             </div>
                         </div>
                     </Box>
-                    <Button variant="action" onClick={() => navigate('/game')}>PLAY</Button>
+                    <Box display="flex" justifyContent="center" marginBottom="0.5">
+                        <Button variant="action" onClick={() => navigate('/game')}>PLAY</Button>
+                    </Box>
             </motion.div>;
 }
 

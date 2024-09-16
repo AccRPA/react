@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useNavigate } from 'react-router-dom';
 import { ErrorViewMode } from "../models/enum/ErrorViewMode.enum";
-import { Button } from "@mui/material";
+import { Button, Box } from "@mui/material";
 
 interface Props {
     view: ErrorViewMode
@@ -15,7 +15,7 @@ function ErrorPage({view}: Props){
     });
     
     return (
-        <>
+        <div className="motion-home">
             <div className="error-header">
                 <h1>Oops...</h1>
                 <h3>{
@@ -48,8 +48,10 @@ function ErrorPage({view}: Props){
                     </div>
                 </div>                
             </div>
-            <Button variant="action" onClick={() => navigate('/')}>Go Home</Button>
-        </>
+            <Box display="flex" justifyContent="center" marginBottom="0.5">
+                <Button variant="action" onClick={() => navigate('/')}>Go Home</Button>
+            </Box>
+        </div>
     );
 }
 
