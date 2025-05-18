@@ -1,6 +1,6 @@
 # Memory Card Game
 
-This is an application built with React + TypeScript + Vite + Firebase
+This is memory card game built with React + TypeScript + Vite + Firebase
 
-Have fun!
+Play it and have fun!
 
