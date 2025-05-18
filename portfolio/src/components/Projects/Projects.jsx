@@ -3,6 +3,7 @@ import ProjectItem from '../ProjectItem/ProjectItem';
 import NFL_Logos_Name from '../../assets/apps/NFL_Logos_Name.png';
 import Recipe_Finder from '../../assets/apps/Recipe_Finder.png';
 import Note_Keeper from '../../assets/apps/Note_Keeper.png';
+import Memory_Game from '../../assets/apps/Memory_Game.png';
 
 function Projects(){
   return (
@@ -39,6 +40,15 @@ function Projects(){
                   title="Note keeper"
                   techStack="HTML, CSS, Javascript, React"
                   description="Built in React. It uses useEffect, useContext and useRef to handle adding, deleting notes and seeing notes details as well as switching the theme between light and dark."
+                >
+                </ProjectItem>
+                <ProjectItem 
+                  imgUrl={Memory_Game}
+                  url="https://memory-card-game-fun.web.app/"
+                  githubUrl="https://github.com/AccRPA/react/tree/main/react-memory-game"
+                  title="Memory game"
+                  techStack="HTML, CSS, Javascript, React"
+                  description="Built in React + TypeScript + Vite + Firebase. This fun game will test your memory. Go play it and find the pairs!"
                 >
                 </ProjectItem>
               </div>
